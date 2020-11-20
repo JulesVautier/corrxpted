@@ -5,9 +5,6 @@ var canvas = document.getElementById('canvas'),
     // full screen dimensions
     cw = window.innerWidth,
     ch = window.innerHeight,
-    // charArr = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
-    charArr = ['a'],
-    maxCharCount = 100,
     fallingCharArr = [],
     fontSize = 10,
     maxColums = Math.floor(cw / (fontSize)),
@@ -54,10 +51,6 @@ function createTabFromText(initial_text) {
     return tab
 }
 
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
 function Point(x, y) {
     this.x = x;
     this.y = y;
@@ -68,36 +61,26 @@ Point.prototype.die = function () {
 }
 
 function getChar(x, y) {
-    c = 'c'
-    console.log(x, y, c)
-    x = x / fontSize
-    y = y / fontSize
-    console.log(x, y, c)
+    x = Math.floor(x / fontSize)
+    y = Math.floor(y / fontSize)
     if (y >= txt.length)
         return ''
     if (x >= maxColums)
         return ''
-    console.log(x, y, c)
-    var c = txt[y].charAt(x).toUpperCase();
-    console.log(x, y, c)
-    return c
+    return txt[y].charAt(x).toUpperCase();
 }
 
 Point.prototype.draw = function (ctx) {
-
     this.value = getChar(this.x, this.y)
+    this.speed = fontSize + 1
 
-    this.speed = fontSize
-
-
-    ctx2.fillStyle = "rgba(255,255,255,0.8)";
+    ctx2.fillStyle = "rgb(146,2,255)";
     ctx2.font = fontSize + "px san-serif";
     ctx2.fillText(this.value, this.x, this.y);
 
-    ctx.fillStyle = "#0F0";
+    ctx.fillStyle = "#a032e0";
     ctx.font = fontSize + "px san-serif";
     ctx.fillText(this.value, this.x, this.y);
-
 
     this.y += this.speed;
     if (this.y > ch) {
@@ -106,19 +89,14 @@ Point.prototype.draw = function (ctx) {
 }
 
 var update = function () {
-
     ctx.fillStyle = "rgba(0,0,0,0.05)";
     ctx.fillRect(0, 0, cw, ch);
-
     ctx2.clearRect(0, 0, cw, ch);
-
     var i = fallingCharArr.length;
-
     while (i--) {
         fallingCharArr[i].draw(ctx);
         var v = fallingCharArr[i];
     }
-
     requestAnimationFrame(update);
 }
 

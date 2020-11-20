@@ -3,14 +3,15 @@
    "how to change link color." */
 
 body {
-    background-color: black;
-    color: greenyellow;
+    background-color: #000000;
     margin: 0;
 }
+
+.canvas-container {
+}
+
 
 canvas {
     display: block;
     position:absolute;
-    top:0;
-    left:0;
 }
