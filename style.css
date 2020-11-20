@@ -14,16 +14,11 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
-    background-color: antiquewhite;
-
 }
 canvas {
     position: absolute;
     /*background-color: greenyellow;*/
 }
 #musicButton {
-    position:absolute;
-    left:30%;
-    top:40%;
-    background-color: chocolate;
+    z-index: 10;
 }
