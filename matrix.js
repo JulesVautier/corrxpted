@@ -1,22 +1,20 @@
-var canvas = document.getElementById('canvas'),
-    ctx = canvas.getContext('2d'),
+var canvas1 = document.getElementById('canvas1'),
+    ctx = canvas1.getContext('2d'),
     canvas2 = document.getElementById('canvas2'),
     ctx2 = canvas2.getContext('2d'),
     // full screen dimensions
-    cw = window.innerWidth,
-    ch = window.innerHeight,
     fallingCharArr = [],
     fontSize = 10,
     maxColums = Math.floor(cw / (fontSize)),
     lastx = 0,
     lasty = 0
 ;
-canvas.width = canvas2.width = cw;
-canvas.height = canvas2.height = ch;
+var cw = 0, ch = 0;
+
+
 
 var txt = []
-fetch('text.txt')
-    .then(response => response.text()).then(text => txt = createTabFromText(text))
+
 
 function createTabFromText(initial_text) {
     var tab = []
@@ -35,8 +33,7 @@ function createTabFromText(initial_text) {
             tab.push("")
             line = line + 1
             char_count = 0
-        }
-        else if (char_count % maxColums === 0 && char_count !== 0) {
+        } else if (char_count % maxColums === 0 && char_count !== 0) {
             tab.push("")
             line = line + 1
             char_count = 0
@@ -45,9 +42,9 @@ function createTabFromText(initial_text) {
             char_count += 1
         }
     }
-    var last_line_len = tab[tab.length -1].length
+    var last_line_len = tab[tab.length - 1].length
     for (let i = last_line_len; i < maxColums; i++)
-        tab[tab.length -1] += ' '
+        tab[tab.length - 1] += ' '
     return tab
 }
 
@@ -124,5 +121,22 @@ function findScreenCoords(mouseEvent) {
     }
 }
 
+
+
+function init() {
+    var parent = document.getElementById("canvas-container")
+    cw = parent.offsetWidth
+    ch = parent.offsetHeight
+
+    canvas1.width = canvas2.width = cw;
+    canvas1.height = canvas2.height = ch;
+    console.log(cw, ch)
+
+    fetch('text.txt')
+        .then(response => response.text()).then(text => txt = createTabFromText(text))
+}
+
+init()
 canvas2.onmousemove = findScreenCoords;
 update();
+window.addEventListener('resize', init);
