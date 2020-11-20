@@ -5,7 +5,8 @@ var canvas = document.getElementById( 'canvas' ),
     // full screen dimensions
     cw = window.innerWidth,
     ch = window.innerHeight,
-    charArr = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
+    // charArr = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'],
+    charArr = ['a'],
     maxCharCount = 100,
     fallingCharArr = [],
     fontSize = 10,
@@ -37,9 +38,14 @@ Point.prototype.die = function()
     fallingCharArr.splice(fallingCharArr.indexOf(this), 1);
 }
 
+function getChar() {
+    var c = charArr[randomInt(0,charArr.length-1)].toUpperCase();
+    return c
+}
+
 Point.prototype.draw = function(ctx){
 
-    this.value = charArr[randomInt(0,charArr.length-1)].toUpperCase();
+    this.value = getChar()
     this.speed = fontSize
 
 
