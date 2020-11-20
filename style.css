@@ -5,5 +5,12 @@
 body {
     background-color: black;
     color: greenyellow;
-    font-family: C059;
+    margin: 0;
+}
+
+canvas {
+    display: block;
+    position:absolute;
+    top:0;
+    left:0;
 }
