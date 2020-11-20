@@ -9,7 +9,10 @@ var canvas = document.getElementById( 'canvas' ),
     maxCharCount = 100,
     fallingCharArr = [],
     fontSize = 10,
-    maxColums = cw/(fontSize);
+    maxColums = cw/(fontSize),
+    lastx = 0,
+    lasty =0
+;
 canvas.width = canvas2.width = cw;
 canvas.height = canvas2.height = ch;
 
@@ -26,12 +29,18 @@ function Point(x,y)
 {
     this.x = x;
     this.y = y;
+    console.log(x, y)
+}
+
+Point.prototype.die = function()
+{
+    fallingCharArr.splice(fallingCharArr.indexOf(this), 1);
 }
 
 Point.prototype.draw = function(ctx){
 
     this.value = charArr[randomInt(0,charArr.length-1)].toUpperCase();
-    this.speed = randomFloat(1,5);
+    this.speed = randomFloat(0,5);
 
 
     ctx2.fillStyle = "rgba(255,255,255,0.8)";
@@ -47,14 +56,13 @@ Point.prototype.draw = function(ctx){
     this.y += this.speed;
     if(this.y > ch)
     {
-        this.y = randomFloat(-100,0);
-        this.speed = randomFloat(2,5);
+        this.die()
     }
 }
 
-for(var i = 0; i < maxColums ; i++) {
-    fallingCharArr.push(new Point(i*fontSize,randomFloat(-500,0)));
-}
+// for(var i = 0; i < maxColums ; i++) {
+//     fallingCharArr.push(new Point(i*fontSize,randomFloat(-500,0)));
+// }
 
 
 var update = function()
@@ -75,4 +83,26 @@ var update = function()
     requestAnimationFrame(update);
 }
 
+
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+    };
+}
+
+function findScreenCoords(mouseEvent)
+{
+    var pos = getMousePos(canvas2, mouseEvent)
+    pos.y =  Math.floor((pos.y / fontSize) * fontSize)
+    pos.x =  Math.floor((pos.x / fontSize) * fontSize)
+    if (pos.x !== lastx || pos.y !== lasty) {
+        fallingCharArr.push(new Point(pos.x, pos.y));
+        lastx = pos.x
+        lasty = pos.y
+    }
+}
+
+canvas2.onmousemove = findScreenCoords;
 update();
