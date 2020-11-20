@@ -28,5 +28,5 @@ function changeButtonInfos() {
     musicButton.textContent = content.concat("_")
 }
 
-changeButtonInfos()
-window.setInterval(changeButtonInfos,50)
+// changeButtonInfos()
+// window.setInterval(changeButtonInfos,50)
