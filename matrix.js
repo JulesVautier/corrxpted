@@ -40,7 +40,7 @@ Point.prototype.die = function()
 Point.prototype.draw = function(ctx){
 
     this.value = charArr[randomInt(0,charArr.length-1)].toUpperCase();
-    this.speed = randomFloat(0,5);
+    this.speed = fontSize
 
 
     ctx2.fillStyle = "rgba(255,255,255,0.8)";
@@ -92,15 +92,23 @@ function getMousePos(canvas, evt) {
     };
 }
 
+function round_pos(pos) {
+    pos = (pos / fontSize)
+}
+
 function findScreenCoords(mouseEvent)
 {
     var pos = getMousePos(canvas2, mouseEvent)
-    pos.y =  Math.floor((pos.y / fontSize) * fontSize)
-    pos.x =  Math.floor((pos.x / fontSize) * fontSize)
-    if (pos.x !== lastx || pos.y !== lasty) {
-        fallingCharArr.push(new Point(pos.x, pos.y));
-        lastx = pos.x
-        lasty = pos.y
+    pos.y =  Math.floor((pos.y / fontSize))
+    pos.x =  Math.floor((pos.x / fontSize))
+    if (Math.floor(pos.x) !== lastx || Math.floor(pos.y) !== lasty) {
+        fallingCharArr.push(new Point(pos.x * fontSize, pos.y * fontSize));
+        if (Math.floor(pos.x) !== lastx) {
+            lastx = Math.floor(pos.x)
+        }
+        if (Math.floor(pos.y) !== lasty) {
+            lastx = Math.floor(pos.y)
+        }
     }
 }
 
