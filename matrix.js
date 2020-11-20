@@ -1,7 +1,7 @@
-var canvas = document.getElementById( 'canvas' ),
-    ctx = canvas.getContext( '2d' ),
-    canvas2 = document.getElementById( 'canvas2' ),
-    ctx2 = canvas2.getContext( '2d' ),
+var canvas = document.getElementById('canvas'),
+    ctx = canvas.getContext('2d'),
+    canvas2 = document.getElementById('canvas2'),
+    ctx2 = canvas2.getContext('2d'),
     // full screen dimensions
     cw = window.innerWidth,
     ch = window.innerHeight,
@@ -10,74 +10,85 @@ var canvas = document.getElementById( 'canvas' ),
     maxCharCount = 100,
     fallingCharArr = [],
     fontSize = 10,
-    maxColums = cw/(fontSize),
+    maxColums = cw / (fontSize),
     lastx = 0,
-    lasty =0
+    lasty = 0
 ;
 canvas.width = canvas2.width = cw;
 canvas.height = canvas2.height = ch;
 
+var txt = []
+fetch('text.txt')
+    .then(response => response.text()).then(text => txt = createTabFromText(text))
 
-function randomInt( min, max ) {
-    return Math.floor(Math.random() * ( max - min ) + min);
+function createTabFromText(initial_text) {
+    var tab = []
+    var line = 0
+    for (let i = 0; i < initial_text.length; i++) {
+        char = initial_text[i]
+        console.log(char)
+        if (tab.length === 0) {
+            tab.push("")
+        }
+        if (char === '\n') {
+            tab.push("")
+            line = line + 1
+        }
+        console.log(tab)
+        console.log(tab.length)
+        tab[line] += char
+    }
+    console.log(tab)
+    return tab
 }
 
-function randomFloat( min, max ) {
-    return Math.random() * ( max - min ) + min;
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
-function Point(x,y)
-{
+function Point(x, y) {
     this.x = x;
     this.y = y;
     console.log(x, y)
 }
 
-Point.prototype.die = function()
-{
+Point.prototype.die = function () {
     fallingCharArr.splice(fallingCharArr.indexOf(this), 1);
 }
 
-function getChar() {
-    var c = charArr[randomInt(0,charArr.length-1)].toUpperCase();
+function getChar(x, y) {
+    console.log(txt)
+    var c = charArr[randomInt(0, charArr.length - 1)].toUpperCase();
     return c
 }
 
-Point.prototype.draw = function(ctx){
+Point.prototype.draw = function (ctx) {
 
     this.value = getChar()
     this.speed = fontSize
 
 
     ctx2.fillStyle = "rgba(255,255,255,0.8)";
-    ctx2.font = fontSize+"px san-serif";
-    ctx2.fillText(this.value,this.x,this.y);
+    ctx2.font = fontSize + "px san-serif";
+    ctx2.fillText(this.value, this.x, this.y);
 
     ctx.fillStyle = "#0F0";
-    ctx.font = fontSize+"px san-serif";
-    ctx.fillText(this.value,this.x,this.y);
-
+    ctx.font = fontSize + "px san-serif";
+    ctx.fillText(this.value, this.x, this.y);
 
 
     this.y += this.speed;
-    if(this.y > ch)
-    {
+    if (this.y > ch) {
         this.die()
     }
 }
 
-// for(var i = 0; i < maxColums ; i++) {
-//     fallingCharArr.push(new Point(i*fontSize,randomFloat(-500,0)));
-// }
-
-
-var update = function()
-{
+var update = function () {
 
     ctx.fillStyle = "rgba(0,0,0,0.05)";
-    ctx.fillRect(0,0,cw,ch);
+    ctx.fillRect(0, 0, cw, ch);
 
-    ctx2.clearRect(0,0,cw,ch);
+    ctx2.clearRect(0, 0, cw, ch);
 
     var i = fallingCharArr.length;
 
@@ -98,15 +109,10 @@ function getMousePos(canvas, evt) {
     };
 }
 
-function round_pos(pos) {
-    pos = (pos / fontSize)
-}
-
-function findScreenCoords(mouseEvent)
-{
+function findScreenCoords(mouseEvent) {
     var pos = getMousePos(canvas2, mouseEvent)
-    pos.y =  Math.floor((pos.y / fontSize))
-    pos.x =  Math.floor((pos.x / fontSize))
+    pos.y = Math.floor((pos.y / fontSize))
+    pos.x = Math.floor((pos.x / fontSize))
     if (Math.floor(pos.x) !== lastx || Math.floor(pos.y) !== lasty) {
         fallingCharArr.push(new Point(pos.x * fontSize, pos.y * fontSize));
         if (Math.floor(pos.x) !== lastx) {
@@ -118,5 +124,5 @@ function findScreenCoords(mouseEvent)
     }
 }
 
-canvas2.onmousemove = findScreenCoords;
-update();
+// canvas2.onmousemove = findScreenCoords;
+// update();
