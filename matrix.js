@@ -21,13 +21,6 @@ var txt = []
 fetch('text.txt')
     .then(response => response.text()).then(text => txt = createTabFromText(text))
 
-function fill_with_spaces(string, i) {
-    for (i; i < maxColums; i++) {
-        string += ' '
-    }
-}
-
-
 function createTabFromText(initial_text) {
     var tab = []
     var line = 0
@@ -58,7 +51,6 @@ function createTabFromText(initial_text) {
     var last_line_len = tab[tab.length -1].length
     for (let i = last_line_len; i < maxColums; i++)
         tab[tab.length -1] += ' '
-    console.log(tab)
     return tab
 }
 
@@ -69,7 +61,6 @@ function randomInt(min, max) {
 function Point(x, y) {
     this.x = x;
     this.y = y;
-    console.log(x, y)
 }
 
 Point.prototype.die = function () {
@@ -77,14 +68,25 @@ Point.prototype.die = function () {
 }
 
 function getChar(x, y) {
-    console.log(txt)
-    var c = charArr[randomInt(0, charArr.length - 1)].toUpperCase();
+    c = 'c'
+    console.log(x, y, c)
+    x = x / fontSize
+    y = y / fontSize
+    console.log(x, y, c)
+    if (y >= txt.length)
+        return ''
+    if (x >= maxColums)
+        return ''
+    console.log(x, y, c)
+    var c = txt[y].charAt(x).toUpperCase();
+    console.log(x, y, c)
     return c
 }
 
 Point.prototype.draw = function (ctx) {
 
-    this.value = getChar()
+    this.value = getChar(this.x, this.y)
+
     this.speed = fontSize
 
 
@@ -144,5 +146,5 @@ function findScreenCoords(mouseEvent) {
     }
 }
 
-// canvas2.onmousemove = findScreenCoords;
-// update();
+canvas2.onmousemove = findScreenCoords;
+update();
