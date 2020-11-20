@@ -10,7 +10,7 @@ var canvas = document.getElementById('canvas'),
     maxCharCount = 100,
     fallingCharArr = [],
     fontSize = 10,
-    maxColums = cw / (fontSize),
+    maxColums = Math.floor(cw / (fontSize)),
     lastx = 0,
     lasty = 0
 ;
@@ -31,6 +31,7 @@ function fill_with_spaces(string, i) {
 function createTabFromText(initial_text) {
     var tab = []
     var line = 0
+    var char_count = 0
     for (let i = 0; i < initial_text.length; i++) {
         char = initial_text[i]
         if (tab.length === 0) {
@@ -39,12 +40,24 @@ function createTabFromText(initial_text) {
         if (char === '\n') {
             for (var x = tab[line].length; x < maxColums; x++) {
                 tab[line] += ' '
+                char_count += 1
             }
             tab.push("")
             line = line + 1
+            char_count = 0
         }
-        tab[line] += char
+        else if (char_count % maxColums === 0 && char_count !== 0) {
+            tab.push("")
+            line = line + 1
+            char_count = 0
+        } else {
+            tab[line] += char
+            char_count += 1
+        }
     }
+    var last_line_len = tab[tab.length -1].length
+    for (let i = last_line_len; i < maxColums; i++)
+        tab[tab.length -1] += ' '
     console.log(tab)
     return tab
 }
