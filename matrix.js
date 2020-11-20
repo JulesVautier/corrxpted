@@ -21,21 +21,28 @@ var txt = []
 fetch('text.txt')
     .then(response => response.text()).then(text => txt = createTabFromText(text))
 
+function fill_with_spaces(string, i) {
+    for (i; i < maxColums; i++) {
+        string += ' '
+    }
+}
+
+
 function createTabFromText(initial_text) {
     var tab = []
     var line = 0
     for (let i = 0; i < initial_text.length; i++) {
         char = initial_text[i]
-        console.log(char)
         if (tab.length === 0) {
             tab.push("")
         }
         if (char === '\n') {
+            for (var x = tab[line].length; x < maxColums; x++) {
+                tab[line] += ' '
+            }
             tab.push("")
             line = line + 1
         }
-        console.log(tab)
-        console.log(tab.length)
         tab[line] += char
     }
     console.log(tab)
