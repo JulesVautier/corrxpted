@@ -5,22 +5,19 @@ var canvas1 = document.getElementById('canvas1'),
     // full screen dimensions
     fallingCharArr = [],
     fontSize = 10,
-    maxColums = Math.floor(cw / (fontSize)),
+    maxColums,
     lastx = 0,
     lasty = 0
 ;
 var cw = 0, ch = 0;
-
-
-
 var txt = []
-
 
 function createTabFromText(initial_text) {
     var tab = []
     var line = 0
     var char_count = 0
     for (let i = 0; i < initial_text.length; i++) {
+        // console.log(char_count % maxColums, char_count)
         char = initial_text[i]
         if (tab.length === 0) {
             tab.push("")
@@ -53,7 +50,7 @@ function Point(x, y) {
     this.y = y;
 }
 
-Point.prototype.die = function () {
+Point.prototype.suicide = function () {
     fallingCharArr.splice(fallingCharArr.indexOf(this), 1);
 }
 
@@ -69,7 +66,7 @@ function getChar(x, y) {
 
 Point.prototype.draw = function (ctx) {
     this.value = getChar(this.x, this.y)
-    this.speed = fontSize + 1
+    this.speed = fontSize
 
     ctx2.fillStyle = "rgb(146,2,255)";
     ctx2.font = fontSize + "px san-serif";
@@ -81,14 +78,13 @@ Point.prototype.draw = function (ctx) {
 
     this.y += this.speed;
     if (this.y > ch) {
-        this.die()
+        this.suicide()
     }
 }
 
 var update = function () {
     ctx.fillStyle = "rgba(0,0,0,0.05)";
     ctx.fillRect(0, 0, cw, ch);
-    ctx2.clearRect(0, 0, cw, ch);
     var i = fallingCharArr.length;
     while (i--) {
         fallingCharArr[i].draw(ctx);
@@ -122,15 +118,23 @@ function findScreenCoords(mouseEvent) {
 }
 
 
+function initCanvasSize(canvas) {
+    let style = document.defaultView.getComputedStyle(canvas)
+    let top = parseInt(style.top.slice(0, -2))
+    let left = parseInt(style.left.slice(0, -2))
+
+    canvas.height = ch - top
+    canvas.width = cw - left * 2
+    maxColums = Math.floor(canvas.width / (fontSize))
+}
 
 function init() {
     var parent = document.getElementById("canvas-container")
     cw = parent.offsetWidth
     ch = parent.offsetHeight
 
-    canvas1.width = canvas2.width = cw;
-    canvas1.height = canvas2.height = ch;
-    console.log(cw, ch)
+    initCanvasSize(canvas1)
+    initCanvasSize(canvas2)
 
     fetch('text.txt')
         .then(response => response.text()).then(text => txt = createTabFromText(text))

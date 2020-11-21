@@ -10,15 +10,25 @@ body {
 
 }
 
-.canvas-container{
+.canvas-container {
     height: 100%;
     width: 100%;
     position: relative;
+    background-color: #6700de;
 }
+
+/*canvas {*/
+/*    position: absolute;*/
+/*}*/
+
 canvas {
     position: absolute;
-    /*background-color: greenyellow;*/
+    top: 10%;
+    left: 10%;
+    /*transform: translate(-20%, -20%);*/
+    background-color: #00a2d7;
 }
+
 #musicButton {
     z-index: 10;
     color: #a54ee7;
