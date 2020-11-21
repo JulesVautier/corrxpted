@@ -17,15 +17,10 @@ body {
     /*background-color: #6700de;*/
 }
 
-/*canvas {*/
-/*    position: absolute;*/
-/*}*/
-
 canvas {
     position: absolute;
     top: 15%;
-    left: 15%;
-    /*transform: translate(-20%, -20%);*/
+    left: 20%;
     /*background-color: #00a2d7;*/
 }
 
