@@ -42,6 +42,35 @@ function createTabFromText(initial_text) {
     var last_line_len = tab[tab.length - 1].length
     for (let i = last_line_len; i < maxColums; i++)
         tab[tab.length - 1] += ' '
+    return centerText(tab)
+}
+
+function centerText(tab) {
+    for(let lineIndex = 0; lineIndex < tab.length; lineIndex++) {
+        line = tab[lineIndex]
+        console.log(line, line.length)
+        let overSpaces = 0
+        let begginSpaces = 0
+        for (begginSpaces; begginSpaces < line.length && line[begginSpaces] === ' '; begginSpaces ++) {}
+        let endSpaces = line.length - 1
+        for (endSpaces; endSpaces >= 0 && line[endSpaces] === ' '; endSpaces--) {}
+        endSpaces = line.length - endSpaces
+        if (begginSpaces > endSpaces) {
+            overSpaces = Math.floor(begginSpaces - endSpaces) / 2
+            line = line.slice(overSpaces, line.length)
+            while (overSpaces-- >= 0)
+                line += ' '
+        }
+        else if (begginSpaces < endSpaces) {
+            overSpaces = Math.floor(endSpaces - begginSpaces) / 2
+            line = line.slice(0, line.length - overSpaces)
+            while (overSpaces-- >= 0)
+                line = ' ' + line
+        }
+        tab[lineIndex] = line
+        console.log(line, line.length)
+
+    }
     return tab
 }
 

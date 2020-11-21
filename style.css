@@ -14,7 +14,7 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
-    background-color: #6700de;
+    /*background-color: #6700de;*/
 }
 
 /*canvas {*/
@@ -23,10 +23,10 @@ body {
 
 canvas {
     position: absolute;
-    top: 30%;
-    left: 30%;
+    top: 15%;
+    left: 15%;
     /*transform: translate(-20%, -20%);*/
-    background-color: #00a2d7;
+    /*background-color: #00a2d7;*/
 }
 
 #musicButton {
