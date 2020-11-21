@@ -108,7 +108,6 @@ Point.prototype.draw = function (ctx) {
 
     let distanceDone = (this.y - this.initialy) / fontSize
 
-    console.log(distanceDone)
     ctx2.fillStyle = "rgb(146,2,255)";
     ctx2.font = fontSize + "px san-serif";
     ctx2.fillText(this.value, this.x, this.y);
