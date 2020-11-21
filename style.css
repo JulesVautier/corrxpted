@@ -23,8 +23,8 @@ body {
 
 canvas {
     position: absolute;
-    top: 10%;
-    left: 10%;
+    top: 30%;
+    left: 30%;
     /*transform: translate(-20%, -20%);*/
     background-color: #00a2d7;
 }

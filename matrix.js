@@ -55,8 +55,12 @@ Point.prototype.suicide = function () {
 }
 
 function getChar(x, y) {
-    x = Math.floor(x / fontSize)
-    y = Math.floor(y / fontSize)
+    if (y < 0)
+        y = 0
+    if (x < 0)
+        x = 0
+    x = Math.round(x / fontSize)
+    y = Math.round(y / fontSize)
     if (y >= txt.length)
         return ''
     if (x >= maxColums)
