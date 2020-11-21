@@ -12,6 +12,10 @@ var canvas1 = document.getElementById('canvas1'),
 var cw = 0, ch = 0;
 var txt = []
 
+function randomInt( min, max ) {
+    return Math.round(Math.random() * ( max - min ) + min);
+}
+
 function createTabFromText(initial_text) {
     var tab = []
     var line = 0
@@ -72,7 +76,10 @@ function centerText(tab) {
 }
 
 function Point(x, y, canvas) {
+    this.maxLenght = randomInt(6, 40)
     this.canvas = canvas
+    this.initialx = x;
+    this.initialy = y;
     this.x = x;
     this.y = y;
 }
@@ -99,6 +106,9 @@ Point.prototype.draw = function (ctx) {
     this.value = getChar(this.x, this.y)
     this.speed = fontSize
 
+    let distanceDone = (this.y - this.initialy) / fontSize
+
+    console.log(distanceDone)
     ctx2.fillStyle = "rgb(146,2,255)";
     ctx2.font = fontSize + "px san-serif";
     ctx2.fillText(this.value, this.x, this.y);
@@ -108,7 +118,9 @@ Point.prototype.draw = function (ctx) {
     ctx.fillText(this.value, this.x, this.y);
 
     this.y += this.speed;
-    console.log(canvas1.height)
+    if (distanceDone > this.maxLenght) {
+        this.suicide()
+    }
     if (this.y > canvas1.height) {
         this.suicide()
     }
