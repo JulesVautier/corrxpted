@@ -48,7 +48,6 @@ function createTabFromText(initial_text) {
 function centerText(tab) {
     for(let lineIndex = 0; lineIndex < tab.length; lineIndex++) {
         line = tab[lineIndex]
-        console.log(line, line.length)
         let overSpaces = 0
         let begginSpaces = 0
         for (begginSpaces; begginSpaces < line.length && line[begginSpaces] === ' '; begginSpaces ++) {}
@@ -68,13 +67,12 @@ function centerText(tab) {
                 line = ' ' + line
         }
         tab[lineIndex] = line
-        console.log(line, line.length)
-
     }
     return tab
 }
 
-function Point(x, y) {
+function Point(x, y, canvas) {
+    this.canvas = canvas
     this.x = x;
     this.y = y;
 }
@@ -110,7 +108,8 @@ Point.prototype.draw = function (ctx) {
     ctx.fillText(this.value, this.x, this.y);
 
     this.y += this.speed;
-    if (this.y > ch) {
+    console.log(canvas1.height)
+    if (this.y > canvas1.height) {
         this.suicide()
     }
 }
@@ -140,7 +139,7 @@ function findScreenCoords(mouseEvent) {
     pos.y = Math.floor((pos.y / fontSize))
     pos.x = Math.floor((pos.x / fontSize))
     if (Math.floor(pos.x) !== lastx || Math.floor(pos.y) !== lasty) {
-        fallingCharArr.push(new Point(pos.x * fontSize, pos.y * fontSize));
+        fallingCharArr.push(new Point(pos.x * fontSize, pos.y * fontSize, canvas1));
         if (Math.floor(pos.x) !== lastx) {
             lastx = Math.floor(pos.x)
         }
@@ -153,10 +152,8 @@ function findScreenCoords(mouseEvent) {
 
 function initCanvasSize(canvas) {
     let style = document.defaultView.getComputedStyle(canvas)
-    let top = parseInt(style.top.slice(0, -2))
     let left = parseInt(style.left.slice(0, -2))
 
-    canvas.height = ch - top
     canvas.width = cw - left * 2
     maxColums = Math.floor(canvas.width / (fontSize))
 }
@@ -170,7 +167,11 @@ function init() {
     initCanvasSize(canvas2)
 
     fetch('text.txt')
-        .then(response => response.text()).then(text => txt = createTabFromText(text))
+        .then(response => response.text()).then(text => {
+            txt = createTabFromText(text)
+            canvas1.height = fontSize * txt.length + 400
+            canvas2.height = fontSize * txt.length + 400
+    })
 }
 
 init()
