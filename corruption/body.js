@@ -1,23 +1,55 @@
 var canvas1 = document.getElementById('canvas1'),
     ctx = canvas1.getContext('2d')
 ;
+function randomInt( min, max ) {
+    return Math.floor(Math.random() * ( max - min ) + min);
+}
+
+function randomFloat( min, max ) {
+    return Math.random() * ( max - min ) + min;
+}
 
 class Corumption {
-    constructor(x, y, color, size) {
+    constructor(x, y, color, size, speed, fertility) {
         this.x = x
         this.y = y
         this.color = color
         this.size = size
+        this.fertility = fertility
+        this.speed = speed
         this.exist()
     }
 
     exist() {
+        if (this.size < 0)
+            return this.die()
+        console.log('exist', this.x, this.y, this.size)
         ctx.fillStyle = "rgba(255,0,0)";
         ctx.fillStyle = this.color;
         ctx.beginPath();
+        console.log(this.x, this.y, this.size)
         ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
         ctx.fill();
-        console.log(this.x, this.y)
+    }
+
+    duplicate() {
+
+    }
+
+    live() {
+        this.size = this.size - randomFloat(0, 1)
+        let angle = this.getAngle()
+        this.y=this.speed*Math.cos(angle) + this.y
+        this.x=this.speed*Math.sin(angle) + this.x
+        this.exist()
+    }
+
+    die() {
+        corruptions.splice(corruptions.indexOf(this), 1);
+    }
+
+    getAngle() {
+        return 160
     }
 }
 
@@ -45,12 +77,21 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 10))
+    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 10, 1, 1))
+}
+
+var update = function () {
+    var i = corruptions.length;
+    while (i--) {
+        corruptions[i].live();
+    }
+    requestAnimationFrame(update);
 }
 
 function init() {
     setCanvasSize(canvas1)
     canvas1.onclick = createCorruption;
+    update()
 }
 
 init()

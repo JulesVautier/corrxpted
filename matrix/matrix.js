@@ -244,9 +244,9 @@ function init() {
     setCanvasWidth(canvas2)
     canvas2.onmousemove = findScreenCoords;
     canvas2.ontouchmove = findScreenCoords;
-    update();
     window.addEventListener('resize', init);
     setInterval(chooseText, 30000)
+    update();
 }
 
 init()
