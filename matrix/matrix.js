@@ -70,6 +70,14 @@ Point.prototype.draw = function (ctx) {
 }
 
 
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+    };
+}
+
 function findScreenCoords(mouseEvent) {
     var pos = getMousePos(canvas2, mouseEvent)
     pos.y = Math.floor((pos.y / fontSize))
@@ -182,15 +190,6 @@ var update = function () {
         var v = fallingCharArr[i];
     }
     requestAnimationFrame(update);
-}
-
-
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
-    };
 }
 
 async function initTexts() {
