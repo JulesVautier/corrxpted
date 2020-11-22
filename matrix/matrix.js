@@ -52,14 +52,17 @@ Point.prototype.draw = function (ctx) {
 
     let distanceDone = (this.y - this.initialy) / fontSize
 
-    ctx2.fillText(" ", this.x, this.y);
+    ctx2.font = fontSize + "px san-serif";
+    ctx.font = fontSize + "px san-serif";
+
+    ctx2.fillStyle = "rgb(0,0,0)";
+    let charWidth = ctx2.measureText('A').width;
+    ctx2.fillRect(this.x, this.y, charWidth, parseInt(ctx2.font, 10));
 
     ctx2.fillStyle = "rgb(146,2,255)";
-    ctx2.font = fontSize + "px san-serif";
     ctx2.fillText(this.value, this.x, this.y);
 
     ctx.fillStyle = "#ececec";
-    ctx.font = fontSize + "px san-serif";
     ctx.fillText(this.value, this.x, this.y);
 
     this.y += this.speed;
@@ -189,6 +192,8 @@ async function initTexts() {
     for (const text of texts) {
         await text.getText()
     }
+    setCanvasHeight(canvas1)
+    setCanvasHeight(canvas2)
     chooseText()
 }
 
@@ -196,13 +201,12 @@ function chooseText() {
     if (chooseText.counter === undefined)
         chooseText.counter = 0
     selectedText = texts[chooseText.counter % texts.length]
-    setCanvasHeight(canvas1)
-    setCanvasHeight(canvas2)
     chooseText.counter++
 }
 
 function setCanvasHeight(canvas) {
-    canvas.height = fontSize * selectedText.tab.length + 400
+    let maxLenght = Math.max(0,...texts.map(s=>s.tab.length));
+    canvas.height = fontSize * maxLenght + 400
 }
 
 function setCanvasWidth(canvas) {
@@ -225,4 +229,4 @@ init()
 canvas2.onmousemove = findScreenCoords;
 update();
 window.addEventListener('resize', init);
-// setInterval(chooseText, 1000)
+setInterval(chooseText, 1000)
