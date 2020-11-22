@@ -17,17 +17,17 @@ class Corumption {
         this.size = size
         this.fertility = fertility
         this.speed = speed
+        this.setAngle()
         this.exist()
     }
 
     exist() {
         if (this.size < 1)
             return this.die()
-        console.log('exist', this.x, this.y, this.size)
         ctx.fillStyle = "rgba(255,0,0)";
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        console.log(this.x, this.y, this.size)
+        console.log(this.angle, this.size)
         ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
         ctx.fill();
     }
@@ -38,9 +38,9 @@ class Corumption {
 
     live() {
         this.size = this.size - randomFloat(0, this.size / 20)
-        let angle = this.getAngle()
-        this.y=this.speed*Math.cos(angle) + this.y
-        this.x=this.speed*Math.sin(angle) + this.x
+        this.setAngle()
+        this.y=this.speed*Math.cos(this.angle) + this.y
+        this.x=this.speed*Math.sin(this.angle) + this.x
         this.exist()
     }
 
@@ -48,8 +48,12 @@ class Corumption {
         corruptions.splice(corruptions.indexOf(this), 1);
     }
 
-    getAngle() {
-        return 160
+    setAngle() {
+        if (this.angle === undefined) {
+            this.angle = randomInt(0, 360)
+        } else {
+            this.angle += randomFloat(-0.1, +0.1)
+        }
     }
 }
 
