@@ -63,7 +63,10 @@ class Corumption {
         corruptions.splice(corruptions.indexOf(this), 1);
         if (corruptions.length < 50) {
             let newFertility = randomFloat(1, this.initialsize / 2)
-            corruptions.push(new Corumption(this.initialx, this.initialy, this.color, this.initialsize + 1, this.speed + randomFloat(-0.5, +0.5) , newFertility, undefined))
+            let newColor = parseInt(this.color.slice(1, this.color.length), 16) + parseInt("050005", 16)
+            newColor = '#' + newColor.toString(16)
+            console.log(this.color, newColor)
+            corruptions.push(new Corumption(this.initialx, this.initialy, newColor, this.initialsize + 1, this.speed + randomFloat(-0.5, +0.5) , newFertility, undefined))
         }
     }
 
@@ -100,7 +103,7 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 1, 1, 4))
+    corruptions.push(new Corumption(pos.x, pos.y, "#05000c", 1, 1, 4))
 }
 
 var update = function () {
