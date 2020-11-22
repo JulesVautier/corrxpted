@@ -14,14 +14,16 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
-    /*background-color: #6700de;*/
 }
 
 canvas {
     position: absolute;
+    background-color: #00a2d7;
+}
+
+.why-canvas {
     top: 15%;
     left: 20%;
-    /*background-color: #00a2d7;*/
 }
 
 #musicButton {

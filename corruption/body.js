@@ -10,21 +10,28 @@ function randomFloat( min, max ) {
 }
 
 class Corumption {
-    constructor(x, y, color, size, speed, fertility) {
+    constructor(x, y, color, size, speed, fertility, angle=undefined) {
+        this.initialx = x
+        this.initialy = y
+        this.initialsize = y
+
         this.x = x
         this.y = y
         this.color = color
         this.size = size
         this.fertility = fertility
         this.speed = speed
+        this.angle = angle
         this.setAngle()
         this.exist()
     }
 
     exist() {
-        if (this.size < 1)
+        // if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.height || this.y > canvas1.width) {
+        if (this.size < 1) {
             return this.die()
-        ctx.fillStyle = "rgba(255,0,0)";
+        }
+        this.duplicate()
         ctx.fillStyle = this.color;
         ctx.beginPath();
         console.log(this.angle, this.size)
@@ -33,11 +40,19 @@ class Corumption {
     }
 
     duplicate() {
-
+        if (this.fertility < 1) {
+            return this.fertility = 0
+        }
+        this.fertility = this.fertility - randomFloat(0, this.fertility)
+        this.angle += randomFloat(-10, +10)
+        corruptions.push(new Corumption(this.x, this.y, this.color, this.size, this.speed, this.fertility, this.angle))
     }
 
     live() {
-        this.size = this.size - randomFloat(0, this.size / 20)
+        if (this.size > 5)
+            this.size = this.size - randomFloat(0, this.size / 40)
+        else
+            this.size = this.size - randomFloat(0, this.size / 100  )
         this.setAngle()
         this.y=this.speed*Math.cos(this.angle) + this.y
         this.x=this.speed*Math.sin(this.angle) + this.x
@@ -81,7 +96,7 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 40, 2, 1))
+    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 10, 1, 5))
 }
 
 var update = function () {
