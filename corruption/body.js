@@ -13,7 +13,8 @@ class Corumption {
     constructor(x, y, color, size, speed, fertility, angle=undefined) {
         this.initialx = x
         this.initialy = y
-        this.initialsize = y
+        this.initialsize = size
+        this.initialfertility = fertility
 
         this.x = x
         this.y = y
@@ -48,10 +49,10 @@ class Corumption {
     }
 
     live() {
-        if (this.size > 5)
+        if (this.size > 3)
             this.size = this.size - randomFloat(0, this.size / randomFloat(30, 50))
         else
-            this.size = this.size - randomFloat(0, this.size / 100  )
+            this.size = this.size - randomFloat(0, this.size / 150  )
         this.setAngle()
         this.y=this.speed*Math.cos(this.angle) + this.y
         this.x=this.speed*Math.sin(this.angle) + this.x
@@ -60,6 +61,10 @@ class Corumption {
 
     die() {
         corruptions.splice(corruptions.indexOf(this), 1);
+        if (corruptions.length < 50) {
+            let newFertility = randomFloat(1, this.initialsize / 2)
+            corruptions.push(new Corumption(this.initialx, this.initialy, this.color, this.initialsize + 1, this.speed + randomFloat(-0.5, +0.5) , newFertility, undefined))
+        }
     }
 
     setAngle() {
@@ -95,7 +100,7 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 10, 1, 5))
+    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 1, 1, 4))
 }
 
 var update = function () {
