@@ -49,7 +49,7 @@ class Corumption {
 
     live() {
         if (this.size > 5)
-            this.size = this.size - randomFloat(0, this.size / 40)
+            this.size = this.size - randomFloat(0, this.size / randomFloat(30, 50))
         else
             this.size = this.size - randomFloat(0, this.size / 100  )
         this.setAngle()
