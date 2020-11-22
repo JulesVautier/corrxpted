@@ -13,10 +13,9 @@ var texts = []
 var selectedText = undefined
 
 
-function randomInt( min, max ) {
-    return Math.round(Math.random() * ( max - min ) + min);
+function randomInt(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
 }
-
 
 
 function Point(x, y, canvas) {
@@ -55,10 +54,6 @@ Point.prototype.draw = function (ctx) {
     ctx2.font = fontSize + "px san-serif";
     ctx.font = fontSize + "px san-serif";
 
-    ctx2.fillStyle = "rgb(0,0,0)";
-    let charWidth = ctx2.measureText('A').width;
-    ctx2.fillRect(this.x, this.y, charWidth, parseInt(ctx2.font, 10));
-
     ctx2.fillStyle = selectedText.color
     ctx2.fillText(this.value, this.x, this.y);
 
@@ -74,25 +69,6 @@ Point.prototype.draw = function (ctx) {
     }
 }
 
-var update = function () {
-    ctx.fillStyle = "rgba(0,0,0,0.05)";
-    ctx.fillRect(0, 0, canvas1.width, canvas1.height);
-    var i = fallingCharArr.length;
-    while (i--) {
-        fallingCharArr[i].draw(ctx);
-        var v = fallingCharArr[i];
-    }
-    requestAnimationFrame(update);
-}
-
-
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
-    };
-}
 
 function findScreenCoords(mouseEvent) {
     var pos = getMousePos(canvas2, mouseEvent)
@@ -108,7 +84,6 @@ function findScreenCoords(mouseEvent) {
         }
     }
 }
-
 
 
 class Text {
@@ -160,21 +135,22 @@ class Text {
     }
 
     centerText() {
-        for(let lineIndex = 0; lineIndex < this.tab.length; lineIndex++) {
+        for (let lineIndex = 0; lineIndex < this.tab.length; lineIndex++) {
             let line = this.tab[lineIndex]
             let overSpaces = 0
             let begginSpaces = 0
-            for (begginSpaces; begginSpaces < line.length && line[begginSpaces] === ' '; begginSpaces ++) {}
+            for (begginSpaces; begginSpaces < line.length && line[begginSpaces] === ' '; begginSpaces++) {
+            }
             let endSpaces = line.length - 1
-            for (endSpaces; endSpaces >= 0 && line[endSpaces] === ' '; endSpaces--) {}
+            for (endSpaces; endSpaces >= 0 && line[endSpaces] === ' '; endSpaces--) {
+            }
             endSpaces = line.length - endSpaces
             if (begginSpaces > endSpaces) {
                 overSpaces = Math.floor(begginSpaces - endSpaces) / 2
                 line = line.slice(overSpaces, line.length)
                 while (overSpaces-- >= 0)
                     line += ' '
-            }
-            else if (begginSpaces < endSpaces) {
+            } else if (begginSpaces < endSpaces) {
                 overSpaces = Math.floor(endSpaces - begginSpaces) / 2
                 line = line.slice(0, line.length - overSpaces)
                 while (overSpaces-- >= 0)
@@ -185,10 +161,41 @@ class Text {
     }
 }
 
+
+function fadeAway(repeats) {
+    ctx2.fillStyle = "rgba(0,0,0,0.05)";
+    ctx2.fillRect(0, 0, canvas2.width, canvas2.height);
+    repeats += 1
+    if (repeats < 50) {
+        requestAnimationFrame(function () {
+            fadeAway(repeats)
+        })
+    }
+}
+
+var update = function () {
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
+    ctx.fillRect(0, 0, canvas1.width, canvas1.height);
+    var i = fallingCharArr.length;
+    while (i--) {
+        fallingCharArr[i].draw(ctx);
+        var v = fallingCharArr[i];
+    }
+    requestAnimationFrame(update);
+}
+
+
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
+        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+    };
+}
+
 async function initTexts() {
     textNames = ['summary.txt', "chapter-1.txt", "chapter-2.txt", "chapter-3.txt", "chapter-4.txt"]
     textColors = ["#9202FF", "#6600ff", "#6600cc", "#3333cc", "#3333ff"]
-    // textNames = ['summary.txt', "chapter-1.txt"]
     for (let i = 0; i < textNames.length; i++) {
         let name = textNames[i]
         let color = textColors[i]
@@ -206,11 +213,13 @@ function chooseText() {
     if (chooseText.counter === undefined)
         chooseText.counter = 0
     selectedText = texts[chooseText.counter % texts.length]
+    if (chooseText.counter > 0)
+        fadeAway(10)
     chooseText.counter++
 }
 
 function setCanvasHeight(canvas) {
-    let maxLenght = Math.max(0,...texts.map(s=>s.tab.length));
+    let maxLenght = Math.max(0, ...texts.map(s => s.tab.length));
     canvas.height = fontSize * maxLenght + 400
 }
 
@@ -234,4 +243,4 @@ init()
 canvas2.onmousemove = findScreenCoords;
 update();
 window.addEventListener('resize', init);
-setInterval(chooseText, 10000)
+setInterval(chooseText, 120000)
