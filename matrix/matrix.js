@@ -201,7 +201,7 @@ async function initTexts() {
     for (let i = 0; i < textNames.length; i++) {
         let name = textNames[i]
         let color = textColors[i]
-        texts.push(new Text('./matrix/' + name, color))
+        texts.push(new Text('./' + name, color))
     }
     for (const text of texts) {
         await text.getText()
