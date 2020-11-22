@@ -32,6 +32,8 @@ Point.prototype.suicide = function () {
 }
 
 function getChar(x, y) {
+    if (!selectedText || !selectedText.tab || selectedText.tab.length === 0)
+        return ' '
     if (y < 0)
         y = 0
     if (x < 0)
@@ -79,6 +81,7 @@ function getMousePos(canvas, evt) {
 }
 
 function findScreenCoords(mouseEvent) {
+    mouseEvent.preventDefault()
     var pos = getMousePos(canvas2, mouseEvent)
     pos.y = Math.floor((pos.y / fontSize))
     pos.x = Math.floor((pos.x / fontSize))
@@ -240,7 +243,7 @@ function init() {
     canvas2.onmousemove = findScreenCoords;
     canvas2.ontouchmove = findScreenCoords;
     window.addEventListener('resize', init);
-    setInterval(chooseText, 120000)
+    setInterval(chooseText, 30000)
 }
 
 init()
