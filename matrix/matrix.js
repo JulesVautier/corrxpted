@@ -59,7 +59,7 @@ Point.prototype.draw = function (ctx) {
     let charWidth = ctx2.measureText('A').width;
     ctx2.fillRect(this.x, this.y, charWidth, parseInt(ctx2.font, 10));
 
-    ctx2.fillStyle = "rgb(146,2,255)";
+    ctx2.fillStyle = selectedText.color
     ctx2.fillText(this.value, this.x, this.y);
 
     ctx.fillStyle = "#ececec";
@@ -114,10 +114,12 @@ function findScreenCoords(mouseEvent) {
 class Text {
     name = undefined;
     tab = [];
+    color = undefined
 
-    constructor(name) {
+    constructor(name, color) {
         this.tab = []
         this.name = name
+        this.color = color
     };
 
     async getText() {
@@ -185,10 +187,13 @@ class Text {
 
 async function initTexts() {
     textNames = ['summary.txt', "chapter-1.txt", "chapter-2.txt", "chapter-3.txt", "chapter-4.txt"]
-    textNames = ['summary.txt', "chapter-1.txt"]
-    textNames.forEach(name => {
-        texts.push(new Text('./matrix/' + name))
-    })
+    textColors = ["#9202FF", "#6600ff", "#6600cc", "#3333cc", "#3333ff"]
+    // textNames = ['summary.txt', "chapter-1.txt"]
+    for (let i = 0; i < textNames.length; i++) {
+        let name = textNames[i]
+        let color = textColors[i]
+        texts.push(new Text('./matrix/' + name, color))
+    }
     for (const text of texts) {
         await text.getText()
     }
@@ -229,4 +234,4 @@ init()
 canvas2.onmousemove = findScreenCoords;
 update();
 window.addEventListener('resize', init);
-setInterval(chooseText, 1000)
+setInterval(chooseText, 10000)
