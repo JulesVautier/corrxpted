@@ -21,7 +21,7 @@ class Corumption {
     }
 
     exist() {
-        if (this.size < 0)
+        if (this.size < 1)
             return this.die()
         console.log('exist', this.x, this.y, this.size)
         ctx.fillStyle = "rgba(255,0,0)";
@@ -37,7 +37,7 @@ class Corumption {
     }
 
     live() {
-        this.size = this.size - randomFloat(0, 1)
+        this.size = this.size - randomFloat(0, this.size / 20)
         let angle = this.getAngle()
         this.y=this.speed*Math.cos(angle) + this.y
         this.x=this.speed*Math.sin(angle) + this.x
@@ -77,7 +77,7 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 10, 1, 1))
+    corruptions.push(new Corumption(pos.x, pos.y, "#ffffff", 40, 2, 1))
 }
 
 var update = function () {
