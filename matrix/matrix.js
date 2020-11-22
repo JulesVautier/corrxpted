@@ -9,71 +9,15 @@ var canvas1 = document.getElementById('canvas1'),
     lastx = 0,
     lasty = 0
 ;
-var cw = 0, ch = 0;
-var txt = []
+var texts = []
+var selectedText = undefined
+
 
 function randomInt( min, max ) {
     return Math.round(Math.random() * ( max - min ) + min);
 }
 
-function createTabFromText(initial_text) {
-    var tab = []
-    var line = 0
-    var char_count = 0
-    for (let i = 0; i < initial_text.length; i++) {
-        // console.log(char_count % maxColums, char_count)
-        char = initial_text[i]
-        if (tab.length === 0) {
-            tab.push("")
-        }
-        if (char === '\n') {
-            for (var x = tab[line].length; x < maxColums; x++) {
-                tab[line] += ' '
-                char_count += 1
-            }
-            tab.push("")
-            line = line + 1
-            char_count = 0
-        } else if (char_count % maxColums === 0 && char_count !== 0) {
-            tab.push("")
-            line = line + 1
-            char_count = 0
-        } else {
-            tab[line] += char
-            char_count += 1
-        }
-    }
-    var last_line_len = tab[tab.length - 1].length
-    for (let i = last_line_len; i < maxColums; i++)
-        tab[tab.length - 1] += ' '
-    return centerText(tab)
-}
 
-function centerText(tab) {
-    for(let lineIndex = 0; lineIndex < tab.length; lineIndex++) {
-        line = tab[lineIndex]
-        let overSpaces = 0
-        let begginSpaces = 0
-        for (begginSpaces; begginSpaces < line.length && line[begginSpaces] === ' '; begginSpaces ++) {}
-        let endSpaces = line.length - 1
-        for (endSpaces; endSpaces >= 0 && line[endSpaces] === ' '; endSpaces--) {}
-        endSpaces = line.length - endSpaces
-        if (begginSpaces > endSpaces) {
-            overSpaces = Math.floor(begginSpaces - endSpaces) / 2
-            line = line.slice(overSpaces, line.length)
-            while (overSpaces-- >= 0)
-                line += ' '
-        }
-        else if (begginSpaces < endSpaces) {
-            overSpaces = Math.floor(endSpaces - begginSpaces) / 2
-            line = line.slice(0, line.length - overSpaces)
-            while (overSpaces-- >= 0)
-                line = ' ' + line
-        }
-        tab[lineIndex] = line
-    }
-    return tab
-}
 
 function Point(x, y, canvas) {
     this.maxLenght = randomInt(6, 40)
@@ -95,11 +39,11 @@ function getChar(x, y) {
         x = 0
     x = Math.round(x / fontSize)
     y = Math.round(y / fontSize)
-    if (y >= txt.length)
+    if (y >= selectedText.tab.length)
         return ''
     if (x >= maxColums)
         return ''
-    return txt[y].charAt(x).toUpperCase();
+    return selectedText.tab[y].charAt(x).toUpperCase();
 }
 
 Point.prototype.draw = function (ctx) {
@@ -163,31 +107,122 @@ function findScreenCoords(mouseEvent) {
 }
 
 
-function initCanvasSize(canvas) {
+
+class Text {
+    name = undefined;
+    tab = [];
+
+    constructor(name) {
+        this.tab = []
+        this.name = name
+    };
+
+    async getText() {
+        let response = await fetch(this.name)
+        let response_text = await response.text()
+        this.createTabFromText(response_text)
+        this.centerText()
+    };
+
+    createTabFromText(initial_text) {
+        var line = 0
+        var char_count = 0
+        for (let i = 0; i < initial_text.length; i++) {
+            let char = initial_text[i]
+            if (this.tab.length === 0) {
+                this.tab.push("")
+            }
+            if (char === '\n') {
+                for (var x = this.tab[line].length; x < maxColums; x++) {
+                    this.tab[line] += ' '
+                    char_count += 1
+                }
+                this.tab.push("")
+                line = line + 1
+                char_count = 0
+            } else if (char_count % maxColums === 0 && char_count !== 0) {
+                this.tab.push("")
+                line = line + 1
+                char_count = 0
+            } else {
+                this.tab[line] += char
+                char_count += 1
+            }
+        }
+        var last_line_len = this.tab[this.tab.length - 1].length
+        for (let i = last_line_len; i < maxColums; i++)
+            this.tab[this.tab.length - 1] += ' '
+    }
+
+    centerText() {
+        for(let lineIndex = 0; lineIndex < this.tab.length; lineIndex++) {
+            let line = this.tab[lineIndex]
+            let overSpaces = 0
+            let begginSpaces = 0
+            for (begginSpaces; begginSpaces < line.length && line[begginSpaces] === ' '; begginSpaces ++) {}
+            let endSpaces = line.length - 1
+            for (endSpaces; endSpaces >= 0 && line[endSpaces] === ' '; endSpaces--) {}
+            endSpaces = line.length - endSpaces
+            if (begginSpaces > endSpaces) {
+                overSpaces = Math.floor(begginSpaces - endSpaces) / 2
+                line = line.slice(overSpaces, line.length)
+                while (overSpaces-- >= 0)
+                    line += ' '
+            }
+            else if (begginSpaces < endSpaces) {
+                overSpaces = Math.floor(endSpaces - begginSpaces) / 2
+                line = line.slice(0, line.length - overSpaces)
+                while (overSpaces-- >= 0)
+                    line = ' ' + line
+            }
+            this.tab[lineIndex] = line
+        }
+    }
+}
+
+async function initTexts() {
+    textNames = ['summary.txt', "chapter-1.txt", "chapter-2.txt", "chapter-3.txt", "chapter-4.txt"]
+    textNames = ['summary.txt', "chapter-1.txt"]
+    textNames.forEach(name => {
+        texts.push(new Text('./matrix/' + name))
+    })
+    for (const text of texts) {
+        await text.getText()
+    }
+    chooseText()
+}
+
+function chooseText() {
+    if (chooseText.counter === undefined)
+        chooseText.counter = 0
+    selectedText = texts[chooseText.counter % texts.length]
+    setCanvasHeight(canvas1)
+    setCanvasHeight(canvas2)
+    chooseText.counter++
+}
+
+function setCanvasHeight(canvas) {
+    canvas.height = fontSize * selectedText.tab.length + 400
+}
+
+function setCanvasWidth(canvas) {
+    var parent = document.getElementById("canvas-container")
+
     let style = document.defaultView.getComputedStyle(canvas)
     let left = parseInt(style.left.slice(0, -2))
 
-    canvas.width = cw - left * 2
+    canvas.width = parent.offsetWidth - left * 2
     maxColums = Math.floor(canvas.width / (fontSize))
 }
 
 function init() {
-    var parent = document.getElementById("canvas-container")
-    cw = parent.offsetWidth
-    ch = parent.offsetHeight
-
-    initCanvasSize(canvas1)
-    initCanvasSize(canvas2)
-
-    fetch('text.txt')
-        .then(response => response.text()).then(text => {
-            txt = createTabFromText(text)
-            canvas1.height = fontSize * txt.length + 400
-            canvas2.height = fontSize * txt.length + 400
-    })
+    initTexts()
+    setCanvasWidth(canvas1)
+    setCanvasWidth(canvas2)
 }
 
 init()
 canvas2.onmousemove = findScreenCoords;
 update();
 window.addEventListener('resize', init);
+// setInterval(chooseText, 1000)
