@@ -108,11 +108,13 @@ Point.prototype.draw = function (ctx) {
 
     let distanceDone = (this.y - this.initialy) / fontSize
 
+    ctx2.fillText(" ", this.x, this.y);
+
     ctx2.fillStyle = "rgb(146,2,255)";
     ctx2.font = fontSize + "px san-serif";
     ctx2.fillText(this.value, this.x, this.y);
 
-    ctx.fillStyle = "#a032e0";
+    ctx.fillStyle = "#ececec";
     ctx.font = fontSize + "px san-serif";
     ctx.fillText(this.value, this.x, this.y);
 
@@ -127,7 +129,7 @@ Point.prototype.draw = function (ctx) {
 
 var update = function () {
     ctx.fillStyle = "rgba(0,0,0,0.05)";
-    ctx.fillRect(0, 0, cw, ch);
+    ctx.fillRect(0, 0, canvas1.width, canvas1.height);
     var i = fallingCharArr.length;
     while (i--) {
         fallingCharArr[i].draw(ctx);
