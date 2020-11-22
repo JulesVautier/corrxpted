@@ -34,7 +34,6 @@ class Corumption {
         this.duplicate()
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        console.log(this.angle, this.size)
         ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
         ctx.fill();
     }
@@ -86,10 +85,10 @@ function setCanvasSize(canvas) {
 
     let style = document.defaultView.getComputedStyle(canvas)
     let left = parseInt(style.left.slice(0, -2))
-    let height = parseInt(style.height.slice(0, -2))
+    let top = parseInt(style.top.slice(0, -2))
 
     canvas.width = parent.offsetWidth - left * 2
-    canvas.height = parent.offsetHeight - height * 2
+    canvas.height = parent.offsetHeight - top * 2
 }
 
 var corruptions = []
@@ -109,7 +108,9 @@ var update = function () {
 
 function init() {
     setCanvasSize(canvas1)
+    console.log(canvas1.width, canvas1.height)
     canvas1.onclick = createCorruption;
+    canvas1.ontouchstart = createCorruption;
     update()
 }
 
