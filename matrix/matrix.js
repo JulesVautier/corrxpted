@@ -240,6 +240,7 @@ function init() {
 
 init()
 canvas2.onmousemove = findScreenCoords;
+canvas2.ontouchmove = findScreenCoords;
 update();
 window.addEventListener('resize', init);
 setInterval(chooseText, 120000)
