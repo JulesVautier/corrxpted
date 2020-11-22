@@ -48,6 +48,9 @@ function getChar(x, y) {
 }
 
 Point.prototype.draw = function (ctx) {
+    if (!selectedText) {
+        return
+    }
     this.value = getChar(this.x, this.y)
     this.speed = fontSize
 
@@ -239,9 +242,9 @@ function init() {
     initTexts()
     setCanvasWidth(canvas1)
     setCanvasWidth(canvas2)
-    update();
     canvas2.onmousemove = findScreenCoords;
     canvas2.ontouchmove = findScreenCoords;
+    update();
     window.addEventListener('resize', init);
     setInterval(chooseText, 30000)
 }

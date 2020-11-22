@@ -32,15 +32,15 @@ canvas {
 
 @font-face {
     font-family: Masterblast;
-    src: url(fonts/Masterblast.otf);
+    src: url(./fonts/Masterblast.otf);
 }
 @font-face {
     font-family: MetalChakra;
-    src: url(fonts/MetalChakra.ttf);
+    src: url(./fonts/MetalChakra.ttf);
 }
 @font-face {
     font-family: Motorstrike;
-    src: url(fonts/Motorstrike.otf);
+    src: url(./fonts/Motorstrike.otf);
 }
 
 .clicableP {
