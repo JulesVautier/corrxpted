@@ -236,11 +236,11 @@ function init() {
     initTexts()
     setCanvasWidth(canvas1)
     setCanvasWidth(canvas2)
+    update();
+    canvas2.onmousemove = findScreenCoords;
+    canvas2.ontouchmove = findScreenCoords;
+    window.addEventListener('resize', init);
+    setInterval(chooseText, 120000)
 }
 
 init()
-canvas2.onmousemove = findScreenCoords;
-canvas2.ontouchmove = findScreenCoords;
-update();
-window.addEventListener('resize', init);
-setInterval(chooseText, 120000)
