@@ -28,8 +28,8 @@ class Corumption {
     }
 
     exist() {
-        // if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.height || this.y > canvas1.width) {
-        if (this.size < 1) {
+        if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.width || this.y > canvas1.height) {
+        // if (this.size < 1) {
             return this.die()
         }
         this.duplicate()
@@ -65,7 +65,6 @@ class Corumption {
             let newFertility = randomFloat(1, this.initialsize / 2)
             let newColor = parseInt(this.color.slice(1, this.color.length), 16) + parseInt("050005", 16)
             newColor = '#' + newColor.toString(16)
-            console.log(this.color, newColor)
             corruptions.push(new Corumption(this.initialx, this.initialy, newColor, this.initialsize + 1, this.speed + randomFloat(-0.5, +0.5) , newFertility, undefined))
         }
     }
@@ -97,13 +96,15 @@ function setCanvasSize(canvas) {
 
     canvas.width = parent.offsetWidth - left * 2
     canvas.height = parent.offsetHeight - top * 2
+    console.log(canvas.width)
 }
 
 var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corumption(pos.x, pos.y, "#05000c", 1, 1, 4))
+    console.log(pos)
+    corruptions.push(new Corumption(pos.x, pos.y, "#190a1e", 10, 1, 4))
 }
 
 var update = function () {
