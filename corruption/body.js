@@ -1,6 +1,3 @@
-var canvas1 = document.getElementById('canvas1'),
-    ctx = canvas1.getContext('2d')
-;
 function randomInt( min, max ) {
     return Math.floor(Math.random() * ( max - min ) + min);
 }
@@ -115,7 +112,15 @@ var update = function () {
     requestAnimationFrame(update);
 }
 
+function createCanvas() {
+    let canvasContainer = document.getElementById('canvas-container')
+    canvas1 = document.createElement("CANVAS");
+    canvasContainer.appendChild(canvas1)
+    ctx = canvas1.getContext('2d')
+}
+
 function init() {
+    createCanvas()
     setCanvasSize(canvas1)
     console.log(canvas1.width, canvas1.height)
     canvas1.onclick = createCorruption;
