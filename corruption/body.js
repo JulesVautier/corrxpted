@@ -1,17 +1,45 @@
-function randomInt( min, max ) {
-    return Math.floor(Math.random() * ( max - min ) + min);
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
-function randomFloat( min, max ) {
-    return Math.random() * ( max - min ) + min;
+function randomFloat(min, max) {
+    return Math.random() * (max - min) + min;
 }
 
-class Corumption {
-    constructor(x, y, color, size, speed, fertility, angle=undefined) {
+class Corruption {
+    constructor(x, y, color, size, speed, fertility) {
         this.initialx = x
         this.initialy = y
         this.initialsize = size
         this.initialfertility = fertility
+
+        this.color = color
+        this.speed = speed
+
+        this.childs = []
+        this.birth()
+    }
+
+    birth() {
+        this.childs.push(new ChildsOfCorrumption(this,
+            this.initialx,
+            this.initialy,
+            this.color,
+            this.initialsize,
+            this.speed,
+            this.initialfertility))
+    }
+
+    corrupt() {
+        for (let i = 0; i < this.childs.length; i++) {
+            this.childs[i].live()
+        }
+    }
+}
+
+class ChildsOfCorrumption {
+    constructor(mother, x, y, color, size, speed, fertility, angle = undefined) {
+        this.mother = mother
 
         this.x = x
         this.y = y
@@ -20,13 +48,13 @@ class Corumption {
         this.fertility = fertility
         this.speed = speed
         this.angle = angle
+        this.colorMutiplicator = 1
         this.setAngle()
         this.exist()
     }
 
     exist() {
         if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.width || this.y > canvas1.height) {
-        // if (this.size < 1) {
             return this.die()
         }
         this.duplicate()
@@ -42,27 +70,44 @@ class Corumption {
         }
         this.fertility = this.fertility - randomFloat(0, this.fertility)
         this.angle += randomFloat(-10, +10)
-        corruptions.push(new Corumption(this.x, this.y, this.color, this.size, this.speed, this.fertility, this.angle))
+        this.mother.childs.push(new ChildsOfCorrumption(this.mother,
+            this.mother.initialx, this.mother.initialy, this.color,
+            this.size, this.speed, this.fertility, this.angle))
     }
 
     live() {
         if (this.size > 3)
             this.size = this.size - randomFloat(0, this.size / randomFloat(30, 50))
         else
-            this.size = this.size - randomFloat(0, this.size / 150  )
+            this.size = this.size - randomFloat(0, this.size / 150)
         this.setAngle()
-        this.y=this.speed*Math.cos(this.angle) + this.y
-        this.x=this.speed*Math.sin(this.angle) + this.x
+        this.y = this.speed * Math.cos(this.angle) + this.y
+        this.x = this.speed * Math.sin(this.angle) + this.x
         this.exist()
     }
 
     die() {
-        corruptions.splice(corruptions.indexOf(this), 1);
-        if (corruptions.length < 50) {
-            let newFertility = randomFloat(1, this.initialsize / 2)
-            let newColor = parseInt(this.color.slice(1, this.color.length), 16) + parseInt("050005", 16)
+        this.mother.childs.splice(this.mother.childs.indexOf(this), 1);
+        if (this.mother.childs.length < 50) {
+            let newFertility = randomFloat(1, this.mother.initialsize / 2)
+            let newColor = parseInt(this.color.slice(1, this.color.length), 16)
+            if (newColor > parseInt("C600FF", 16)) {
+                this.colorMutiplicator = -1
+            } else if (newColor < parseInt("250030", 16)) {
+                this.colorMutiplicator = 1
+            }
+            newColor += this.colorMutiplicator * parseInt("050005", 16)
             newColor = '#' + newColor.toString(16)
-            corruptions.push(new Corumption(this.initialx, this.initialy, newColor, this.initialsize + 1, this.speed + randomFloat(-0.5, +0.5) , newFertility, undefined))
+            let newSpeed = this.speed + randomFloat(-0.5, +0.5)
+            if (newSpeed > 3) {
+                newSpeed = 3
+            } else if (newSpeed < 1) {
+                newSpeed = 1
+            }
+            this.mother.childs.push(new ChildsOfCorrumption(this.mother,
+                this.mother.initialx, this.mother.initialy, newColor,
+                this.mother.initialsize + 1, newSpeed,
+                newFertility, undefined))
         }
     }
 
@@ -100,14 +145,13 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    console.log(pos)
-    corruptions.push(new Corumption(pos.x, pos.y, "#190a1e", 10, 1, 4))
+    corruptions.push(new Corruption(pos.x, pos.y, "#190a1e", 10, 1, 4))
 }
 
 var update = function () {
     var i = corruptions.length;
     while (i--) {
-        corruptions[i].live();
+        corruptions[i].corrupt();
     }
     requestAnimationFrame(update);
 }
