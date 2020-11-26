@@ -93,15 +93,13 @@ function setCanvasSize(canvas) {
 
     canvas.width = parent.offsetWidth - left * 2
     canvas.height = parent.offsetHeight - top * 2
-    console.log(canvas.width)
 }
 
 var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    console.log(pos)
-    corruptions.push(new Corumption(pos.x, pos.y, "#190a1e", 10, 1, 4))
+    corruptions.push(new Corumption(pos.x, pos.y, "#190a23", 1, 1, 4))
 }
 
 var update = function () {
@@ -122,7 +120,6 @@ function createCanvas() {
 function init() {
     createCanvas()
     setCanvasSize(canvas1)
-    console.log(canvas1.width, canvas1.height)
     canvas1.onclick = createCorruption;
     canvas1.ontouchstart = createCorruption;
     update()
