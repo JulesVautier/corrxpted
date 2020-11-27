@@ -19,14 +19,16 @@ function createSkybox(scene, fileName, geometry) {
 function init() {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 45, 300000);
-    camera.position.set(-90, 0, -90);
+    camera.position.set(-10, 0, -10);
     renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
     let controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.maxDistance = 25000
+
     controls.addEventListener('change', renderer);
     createSkybox(scene, 'polluted_earth/polluted_earth', 1000)
-    createSkybox(scene, 'exosystem/exosystem', 50000)
+    createSkybox(scene, 'exosystem/exosystem', 100000)
 
     animate();
 }
