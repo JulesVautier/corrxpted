@@ -51,8 +51,9 @@ function init() {
 
     controls.addEventListener('change', renderer);
     createSkybox(scene, 'polluted_earth/polluted_earth', 1000)
+    createSkybox(scene, 'corruption/exosystem', 100000)
     // createSkybox(scene, 'exosystem/exosystem', 100000)
-    createText(scene, "issouUUUUUUUUUUUU")
+    // createText(scene, "issouUUUUUUUUUUUU")
     animate();
 }
 
