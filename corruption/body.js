@@ -25,8 +25,8 @@ class Corumption {
     }
 
     exist() {
-        if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.width || this.y > canvas1.height) {
-        // if (this.size < 1) {
+        // if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.width || this.y > canvas1.height) {
+        if (this.size < 1) {
             return this.die()
         }
         this.duplicate()
@@ -120,8 +120,9 @@ function createCanvas() {
 function init() {
     createCanvas()
     setCanvasSize(canvas1)
-    canvas1.onclick = createCorruption;
-    canvas1.ontouchstart = createCorruption;
+    // canvas1.onclick = createCorruption;
+    // canvas1.ontouchstart = createCorruption;
+    corruptions.push(new Corumption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
     update()
 }
 
