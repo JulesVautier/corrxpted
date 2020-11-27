@@ -93,6 +93,8 @@ function setCanvasSize(canvas) {
 
     canvas.width = parent.offsetWidth - left * 2
     canvas.height = parent.offsetHeight - top * 2
+    console.log(parent.offsetWidth, parent.offsetHeight)
+    console.log(canvas.width, canvas.height)
 }
 
 var corruptions = []
