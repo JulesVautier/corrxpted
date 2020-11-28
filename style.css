@@ -29,6 +29,10 @@ canvas {
     cursor: pointer;
 }
 
+.clicableP:hover {
+    color: violet;
+}
+
 .returnButton {
     position: absolute;
     margin: 1em;
