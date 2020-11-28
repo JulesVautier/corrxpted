@@ -31,10 +31,12 @@ canvas {
 }
 
 .clicableP {
+    z-index: 100;
     cursor: pointer;
 }
 
 .returnButton {
+    position: absolute;
     margin: 1em;
 }
 
