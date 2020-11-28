@@ -9,12 +9,12 @@ var mouse = new THREE.Vector2();
 function initModal() {
     var modal = document.getElementById("myModal");
 
-    document.getElementById("help-button").onclick = function() {
-        if (modal.style.display === "none")
-            modal.style.display = "block";
-        else
-            modal.style.display = "none";
-    }
+    // document.getElementById("help-button").onclick = function() {
+    //     if (modal.style.display === "none")
+    //         modal.style.display = "block";
+    //     else
+    //         modal.style.display = "none";
+    // }
 
     document.getElementsByClassName("close")[0].onclick = function() {
         modal.style.display = "none";
@@ -84,4 +84,4 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-// init();
+init();
