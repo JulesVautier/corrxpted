@@ -15,14 +15,14 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
-    background-color: #005e87;
+    /*background-color: #005e87;*/
 }
 
 canvas {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #00a2d7;
+    /*background-color: #00a2d7;*/
 }
 .overlay {
     background-color: transparent;
