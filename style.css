@@ -1,28 +1,22 @@
-/* CSS is how you can add style to your website, such as colors, fonts, and positioning of your
-   HTML content. To learn how to do something, just try searching Google for questions like
-   "how to change link color." */
-
-
 body {
     background-color: #000000;
     margin: 0;
     width: 100%;
     color: #7300d7;
-    /*text-shadow: #ff09f7;*/
 }
 
 .canvas-container {
     height: 100%;
     width: 100%;
     position: relative;
-    /*background-color: #005e87;*/
+    background-color: #005e87;
 }
 
 canvas {
     position: absolute;
     top: 0;
     left: 0;
-    /*background-color: #00a2d7;*/
+    background-color: #00a2d7;
 }
 .overlay {
     background-color: transparent;
@@ -44,39 +38,6 @@ canvas {
     margin: 0;
 }
 
-#musicButton {
-    z-index: 10;
-    color: #4e51e7;
-    font-family: "Courier 10 Pitch";
-}
-
-.indexBody {
-    background-image: url("./pics/big-corruption.png");
-    height: 100%;
-    width: 100%;
-    position: absolute;
-}
-
-.indexMenu {
-    margin-left: 30px;
-    text-align: left;
-    /*background-color: red;*/
-    height: 100%;
-    width: 100%;
-    font-family: Motorstrike;
-    font-size: 50px;
-    text-shadow: 0 0 10px #300d6c, 0 0 30px #4e1858;
-}
-
-.contactButton {
-    position: absolute;
-    bottom: 0;
-}
-
-.contactButton p {
-    font-family: SquareWave;
-    font-size: 35px;
-}
 
 @font-face {
     font-family: Masterblast;

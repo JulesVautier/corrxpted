@@ -1,0 +1,33 @@
+#musicButton {
+    z-index: 10;
+    color: #4e51e7;
+    font-family: "Courier 10 Pitch";
+}
+
+.indexBody {
+    background-image: url("./pics/big-corruption.png");
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.indexMenu {
+    margin-left: 30px;
+    text-align: left;
+    /*background-color: red;*/
+    height: 100%;
+    width: 100%;
+    font-family: Motorstrike;
+    font-size: 50px;
+    text-shadow: 0 0 10px #300d6c, 0 0 30px #4e1858;
+}
+
+.contactButton {
+    position: absolute;
+    bottom: 0;
+}
+
+.contactButton p {
+    font-family: SquareWave;
+    font-size: 35px;
+}
