@@ -4,6 +4,27 @@ var cameraCenter = new THREE.Vector3();
 var mouse = new THREE.Vector2();
 
 
+// Modal stuff
+
+function initModal() {
+    var modal = document.getElementById("myModal");
+
+    document.getElementById("help-button").onclick = function() {
+        if (modal.style.display === "none")
+            modal.style.display = "block";
+        else
+            modal.style.display = "none";
+    }
+
+    document.getElementsByClassName("close")[0].onclick = function() {
+        modal.style.display = "none";
+    }
+}
+
+initModal()
+
+// Skybox stuff
+
 function createSkybox(scene, fileName, geometry) {
     let materialArray = [];
     let extensions = ['_ft', '_bk', '_up', '_dn', '_rt', '_lf']
@@ -23,7 +44,7 @@ function createText(scene, text) {
     var context1 = canvas1.getContext('2d');
     context1.font = "Bold 30px Ubuntu";
     context1.fillStyle = "rgb(134,102,21)";
-    context1.fillText('Try to think outside the BOX', 0, 40);
+    context1.fillText(text, 0, 40);
 
     var texture1 = new THREE.Texture(canvas1)
     texture1.needsUpdate = true;
@@ -53,7 +74,7 @@ function init() {
     createSkybox(scene, 'polluted_earth/polluted_earth', 1000)
     // createSkybox(scene, 'corruption/exosystem', 100000)
     createSkybox(scene, 'exosystem/exosystem', 100000)
-    createText(scene, "issouUUUUUUUUUUUU")
+    createText(scene, "Try to think outside the BOX")
     animate();
 }
 
@@ -63,4 +84,4 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-init();
+// init();
