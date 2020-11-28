@@ -1,5 +1,4 @@
 let scene, camera, renderer;
-var mouse = new THREE.Vector2();
 var cameraCenter = new THREE.Vector3();
 var mouse = new THREE.Vector2();
 
@@ -7,17 +6,14 @@ var mouse = new THREE.Vector2();
 // Modal stuff
 
 function initModal() {
-    var modal = document.getElementById("myModal");
-
-    // document.getElementById("help-button").onclick = function() {
-    //     if (modal.style.display === "none")
-    //         modal.style.display = "block";
-    //     else
-    //         modal.style.display = "none";
-    // }
+    var helpModal = document.getElementById("helpModal");
+    var goalModal = document.getElementById("goalModal");
 
     document.getElementsByClassName("close")[0].onclick = function() {
-        modal.style.display = "none";
+        goalModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[1].onclick = function() {
+        helpModal.style.display = "none";
     }
 }
 

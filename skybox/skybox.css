@@ -10,8 +10,16 @@ body {
     display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
+}
+
+#helpModal {
     left: 50px;
     bottom: 50px;
+}
+
+#goalModal {
+    left: 50px;
+    top: 50px;
 }
 
 /* Modal Content */
