@@ -15,17 +15,32 @@ body {
     height: 100%;
     width: 100%;
     position: relative;
-    /*background-color: #005e87;*/
+    background-color: #005e87;
 }
 
 canvas {
     position: absolute;
     top: 0;
     left: 0;
-    /*background-color: #00a2d7;*/
+    background-color: #00a2d7;
+}
+.overlay {
+    background-color: transparent;
+    position: absolute;
+    z-index: 100;
 }
 
+.clicableP {
+    cursor: pointer;
+}
 
+.returnButton {
+    margin: 1em;
+}
+
+.returnButton p {
+    margin: 0;
+}
 
 #musicButton {
     z-index: 10;
@@ -42,7 +57,7 @@ canvas {
 
 #indexMenu {
     margin-left: 30px;
-    margin-top: 30px;
+    /*margin-top: 30px;*/
     text-align: left
 }
 
@@ -64,8 +79,4 @@ canvas {
 @font-face {
     font-family: Motorstrike;
     src: url(./fonts/Motorstrike.otf);
-}
-
-.clicableP {
-    cursor: pointer;
 }
