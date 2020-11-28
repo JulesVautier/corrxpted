@@ -57,6 +57,7 @@ function createText(scene, text) {
 }
 
 function init() {
+    initModal()
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 45, 300000);
     camera.position.set(0, 0, -100);
@@ -80,4 +81,4 @@ function animate() {
     requestAnimationFrame(animate);
 }
 
-init();
+document.onload = init()
