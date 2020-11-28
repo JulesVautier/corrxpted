@@ -42,7 +42,7 @@ function createText(scene, text) {
 function init() {
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 45, 300000);
-    camera.position.set(0, 0, -10);
+    camera.position.set(0, 0, -100);
     renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
@@ -51,9 +51,9 @@ function init() {
 
     controls.addEventListener('change', renderer);
     createSkybox(scene, 'polluted_earth/polluted_earth', 1000)
-    createSkybox(scene, 'corruption/exosystem', 100000)
-    // createSkybox(scene, 'exosystem/exosystem', 100000)
-    // createText(scene, "issouUUUUUUUUUUUU")
+    // createSkybox(scene, 'corruption/exosystem', 100000)
+    createSkybox(scene, 'exosystem/exosystem', 100000)
+    createText(scene, "issouUUUUUUUUUUUU")
     animate();
 }
 
