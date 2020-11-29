@@ -41,8 +41,7 @@ class Particle {
         let distance = Math.sqrt(dx * dx + dy * dy)
         let forceDirectionX = dx / distance
         let forceDirectionY = dy / distance
-        let force = 1
-        this.density = 1
+        let force = distance / 300
         let directionX = forceDirectionX * force * this.density
         let directionY = forceDirectionY * force * this.density
         this.x += directionX
