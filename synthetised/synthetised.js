@@ -19,12 +19,50 @@ class Particle {
     }
 
     draw() {
+        // console.log(this.color)
         ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-        ctx.fill();
+
+        // ctx.fi(new ImageData(this.color, 1, 1), this.x, this.y)
+        ctx.fillRect(this.x, this.y, 1, 1)
+        // ctx.beginPath();
+        // ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+        // ctx.fill();
     }
 
+}
+
+// https://stackoverflow.com/questions/47703320/draw-text-pixel-by-pixel-on-canvas
+
+function createLetters(text) {
+    console.log(canvas1)
+    console.log(ctx)
+    ctx = canvas1.getContext('2d')
+    ctx.fillStyle = "#d00000";
+    ctx.font = "14px Ubuntu"
+    ctx.fillText(text, 30, 30)
+    // const data = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
+    const data = ctx.getImageData(0, 0, 1000, 1000)
+    console.log(data.data, data.width, data.height)
+    console.log(data.width)
+    for (let y = 0; y < data.height; y++) {
+        for (let x = 0; x < data.width; x += 4) {
+            let pixel1 = data.data[data.width * y + x]
+            let pixel2 = data.data[data.width * y + x + 1]
+            let pixel3 = data.data[data.width * y + x + 2]
+            let pixel4 = data.data[data.width * y + x + 3]
+            let color = [pixel1, pixel2, pixel3, pixel4]
+            // console.log(pixel1, pixel2, pixel3, pixel4)
+            if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
+                // console.log(pixel1, pixel2, pixel3, pixel4)
+                particles.push(new Particle(x / 4 + 100, y / 4 + 100, color, 1))
+                // let color = "rgba(pixel1, pixel2, pixel3, pixel4)"
+                // console.log(color)
+            }
+            // console.log(pixel1)
+            //     if (pixel1 > 1)
+            //         console.log(pixel1)
+        }
+    }
 }
 
 function getMousePos(canvas, evt) {
@@ -70,36 +108,6 @@ function createCanvas() {
     canvas1 = document.createElement("CANVAS");
     canvasContainer.appendChild(canvas1)
     ctx = canvas1.getContext('2d')
-}
-
-function createLetters(text) {
-    console.log(canvas1)
-    console.log(ctx)
-    ctx = canvas1.getContext('2d')
-    ctx.fillStyle = "#ececec";
-    ctx.font = "30px Ubuntu"
-    ctx.fillText(text, 30, 30)
-    // const data = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
-    const data = ctx.getImageData(0, 0, 1000, 1000)
-    console.log(data.data, data.width, data.height)
-    for (let y = 0; y < data.height; y++) {
-        for (let x = 0; x < data.width; x += 4) {
-            let pixel1 = data.data[data.width * y + x]
-            let pixel2 = data.data[data.width * y + x + 1]
-            let pixel3 = data.data[data.width * y + x + 2]
-            let pixel4 = data.data[data.width * y + x + 3]
-            // console.log(pixel1, pixel2, pixel3, pixel4)
-            if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-                // console.log(pixel1, pixel2, pixel3, pixel4)
-                particles.push(new Particle(x / 4 + 100, y / 4 + 100, "#ff0000", 1))
-                // let color = "rgba(pixel1, pixel2, pixel3, pixel4)"
-                // console.log(color)
-            }
-            // console.log(pixel1)
-            //     if (pixel1 > 1)
-            //         console.log(pixel1)
-        }
-    }
 }
 
 function init() {
