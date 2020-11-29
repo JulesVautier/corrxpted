@@ -50,6 +50,9 @@ class Particle {
         let directionY = forceDirectionY * force * this.density
         this.x += directionX
         this.y += directionY
+        if (this.x === this.initialx && this.y === this.density) {
+            this.enable = false
+        }
     }
 
 }
@@ -140,11 +143,18 @@ function createCanvas() {
 }
 
 setInterval(function () {
+    let nbParticulesOnClick = 100
     if (mouse.down) {
-        particles = particles.slice(1)
-        console.log(particles.length)
+        for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+            particles[i].enable = true
+            particles[i].x = mouse.x
+            particles[i].y = mouse.y
+            enableParticles.push(particles[i])
+        }
+        particles = particles.slice(nbParticulesOnClick)
+        console.log(particles.length, enableParticles.length)
     }
-}, 300)
+}, 10)
 
 function init() {
     createCanvas()
