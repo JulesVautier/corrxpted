@@ -8,31 +8,35 @@ function randomFloat(min, max) {
 
 var mouse = {
     x: 0,
-    y: 0
+    y: 0,
+    down: false,
 }
 
 class Particle {
-    constructor(x, y, color, size) {
+    constructor(x, y, color, size, enable) {
         this.initialx = x
         this.initialy = y
 
         this.x = x + 700
         this.y = y + 700
-        this.density = Math.random() * 30 + 1
+        this.density = Math.random() * 20 + 10
 
         this.size = size
         this.color = color
         this.imageData = ctx.createImageData(1, 1)
         for (let i = 0; i < 4; i++)
             this.imageData.data[i] = color[i]
+        this.enable = enable
     }
 
     draw() {
-        // console.log(this.x, this.y, this.color)
-        ctx.putImageData(this.imageData, this.x, this.y)
+        if (this.x && this.y)
+            ctx.putImageData(this.imageData, this.x, this.y)
     }
 
     update() {
+        if (!this.enable)
+            return
         let dx = this.initialx - this.x
         let dy = this.initialy - this.y
         let distance = Math.sqrt(dx * dx + dy * dy)
@@ -55,19 +59,44 @@ function createLetters(text) {
     ctx.fillStyle = "#d00000";
     ctx.font = "30px Arial"
     ctx.fillText(text, 30, 30)
-    const data = ctx.getImageData(0, 0, 1000, 1000)
-    for (let y = 0; y < data.height; y++) {
-        for (let x = 0; x < data.width; x += 4) {
-            let pixel1 = data.data[data.width * y + x]
-            let pixel2 = data.data[data.width * y + x + 1]
-            let pixel3 = data.data[data.width * y + x + 2]
-            let pixel4 = data.data[data.width * y + x + 3]
-            let color = [pixel1, pixel2, pixel3, pixel4]
-            if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-                particles.push(new Particle(x / 4, y / 4, color, 1))
+    const data = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
+    convertImagesToParticles(data)
+}
+
+function convertImagesToParticles(imageData) {
+    let squareSize = 10
+
+    for (let x = 0; x * squareSize < imageData.width; x += squareSize) {
+        for (let y = 0; y * squareSize < imageData.height; y += squareSize) {
+            for (let squareY = y; squareY < imageData.height && squareY < (y + 1) * squareSize; squareY++) {
+                for (let squareX = x; squareX < imageData.width && squareX < (x + 1) * squareSize; squareX++) {
+                    let pixel1 = imageData.data[imageData.width * squareY + (squareX * 4)]
+                    let pixel2 = imageData.data[imageData.width * squareY + (squareX * 4) + 1]
+                    let pixel3 = imageData.data[imageData.width * squareY + (squareX * 4) + 2]
+                    let pixel4 = imageData.data[imageData.width * squareY + (squareX * 4) + 3]
+                    let color = [pixel1, pixel2, pixel3, pixel4]
+                    if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
+                        particles.push(new Particle(squareX, squareY, color, 1, false))
+                    }
+                }
             }
         }
     }
+    console.log('finish', particles.length)
+
+
+    // for (let y = 0; y < data.height; y++) {
+    //     for (let x = 0; x < data.width; x += 4) {
+    //         let pixel1 = data.data[data.width * y + x]
+    //         let pixel2 = data.data[data.width * y + x + 1]
+    //         let pixel3 = data.data[data.width * y + x + 2]
+    //         let pixel4 = data.data[data.width * y + x + 3]
+    //         let color = [pixel1, pixel2, pixel3, pixel4]
+    //         if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
+    //             particles.push(new Particle(x / 4, y / 4, color, 1))
+    //         }
+    //     }
+    // }
 }
 
 function getMousePos(evt) {
@@ -88,14 +117,15 @@ function setCanvasSize(canvas) {
 }
 
 var particles = []
+var enableParticles = []
 
 var update = function () {
     ctx.clearRect(0, 0, canvas1.width, canvas1.height)
-    var i = particles.length;
-    while (i--) {
-        particles[i].draw();
-        particles[i].update();
+    for (let i = 0; i < enableParticles.length; i++) {
+        enableParticles[i].draw();
+        enableParticles[i].update();
     }
+    enableParticles = particles.filter(x => x.enable)
     requestAnimationFrame(update);
 }
 
@@ -109,12 +139,22 @@ function createCanvas() {
     ctx = canvas1.getContext('2d')
 }
 
+setInterval(function () {
+    if (mouse.down) {
+        particles = particles.slice(1)
+        console.log(particles.length)
+    }
+}, 300)
+
 function init() {
     createCanvas()
     setCanvasSize(canvas1)
     canvas1.onmousemove = getMousePos
-    canvas1.onclick = function () {
-        particles.push(new Particle(mouse.x, mouse.y, [255, 255, 255, 255], 30))
+    canvas1.onmousedown = function () {
+        mouse.down = true
+    }
+    canvas1.onmouseup = function () {
+        mouse.down = false
     }
     createLetters("ABCDE")
     update()
