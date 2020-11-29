@@ -22,16 +22,7 @@ class Particle {
     }
 
     draw() {
-        // console.log(this.color)
-        // ctx.fillStyle = this.color;
-        // ctx.fillStyle = `rgba(255,0,0,25)`;
-
-        // ctx.fi(new ImageData(this.color, 1, 1), this.x, this.y)
-        // ctx.fillRect(this.x, this.y, 1, 1)
         ctx.putImageData(this.imageData, this.x, this.y)
-        // ctx.beginPath();
-        // ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-        // ctx.fill();
     }
 
 }
@@ -41,7 +32,7 @@ class Particle {
 function createLetters(text) {
     ctx.imageSmoothingEnabled = false;
     ctx.fillStyle = "#d00000";
-    ctx.font = "14px Ubuntu"
+    ctx.font = "30px Arial"
     ctx.fillText(text, 30, 30)
     // const data = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
     const data = ctx.getImageData(0, 0, 1000, 1000)
@@ -118,7 +109,7 @@ function init() {
     setCanvasSize(canvas1)
     canvas1.onclick = createParticles;
     canvas1.ontouchstart = createParticles;
-    createLetters("A")
+    createLetters("ABCDE")
     update()
 }
 
