@@ -16,14 +16,19 @@ class Particle {
 
         this.size = size
         this.color = color
+        this.imageData = ctx.createImageData(1, 1)
+        for (let i = 0; i < 4; i++)
+            this.imageData.data[i] = color[i]
     }
 
     draw() {
         // console.log(this.color)
-        ctx.fillStyle = this.color;
+        // ctx.fillStyle = this.color;
+        // ctx.fillStyle = `rgba(255,0,0,25)`;
 
         // ctx.fi(new ImageData(this.color, 1, 1), this.x, this.y)
-        ctx.fillRect(this.x, this.y, 1, 1)
+        // ctx.fillRect(this.x, this.y, 1, 1)
+        ctx.putImageData(this.imageData, this.x, this.y)
         // ctx.beginPath();
         // ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
         // ctx.fill();
@@ -34,9 +39,7 @@ class Particle {
 // https://stackoverflow.com/questions/47703320/draw-text-pixel-by-pixel-on-canvas
 
 function createLetters(text) {
-    console.log(canvas1)
-    console.log(ctx)
-    ctx = canvas1.getContext('2d')
+    ctx.imageSmoothingEnabled = false;
     ctx.fillStyle = "#d00000";
     ctx.font = "14px Ubuntu"
     ctx.fillText(text, 30, 30)
@@ -53,7 +56,7 @@ function createLetters(text) {
             let color = [pixel1, pixel2, pixel3, pixel4]
             // console.log(pixel1, pixel2, pixel3, pixel4)
             if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-                // console.log(pixel1, pixel2, pixel3, pixel4)
+                console.log(pixel1, pixel2, pixel3, pixel4)
                 particles.push(new Particle(x / 4 + 100, y / 4 + 100, color, 1))
                 // let color = "rgba(pixel1, pixel2, pixel3, pixel4)"
                 // console.log(color)
