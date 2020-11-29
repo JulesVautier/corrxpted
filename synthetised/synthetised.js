@@ -13,6 +13,7 @@ class Particle {
 
         this.x = x
         this.y = y
+        console.log(x, y)
 
         this.size = size
         this.color = color
@@ -84,8 +85,8 @@ function createLetters(text) {
             let pixel4 = data.data[data.width * y + x + 3]
             // console.log(pixel1, pixel2, pixel3, pixel4)
             if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-                console.log(pixel1, pixel2, pixel3, pixel4)
-                particles.push(new Particle(x, y, "#ff0000", 1))
+                // console.log(pixel1, pixel2, pixel3, pixel4)
+                particles.push(new Particle(x / 4, y / 4, "#ff0000", 1))
                 // let color = "rgba(pixel1, pixel2, pixel3, pixel4)"
                 // console.log(color)
             }
