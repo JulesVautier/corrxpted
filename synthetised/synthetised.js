@@ -16,8 +16,8 @@ class Particle {
         this.initialx = x
         this.initialy = y
 
-        this.x = x
-        this.y = y
+        this.x = x + 700
+        this.y = y + 700
         this.density = Math.random() * 30 + 1
 
         this.size = size
@@ -33,12 +33,12 @@ class Particle {
     }
 
     update() {
-        let dx = mouse.x - this.x
-        let dy = mouse.y - this.y
-        if (mouse.x === this.x || mouse.y === this.y) {
+        let dx = this.initialx - this.x
+        let dy = this.initialy - this.y
+        let distance = Math.sqrt(dx * dx + dy * dy)
+        if (distance === 0) {
             return
         }
-        let distance = Math.sqrt(dx * dx + dy * dy)
         let forceDirectionX = dx / distance
         let forceDirectionY = dy / distance
         let force = distance / 300
@@ -64,7 +64,7 @@ function createLetters(text) {
             let pixel4 = data.data[data.width * y + x + 3]
             let color = [pixel1, pixel2, pixel3, pixel4]
             if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-                particles.push(new Particle(x / 4 + 100, y / 4 + 100, color, 1))
+                particles.push(new Particle(x / 4, y / 4, color, 1))
             }
         }
     }
@@ -116,7 +116,7 @@ function init() {
     canvas1.onclick = function () {
         particles.push(new Particle(mouse.x, mouse.y, [255, 255, 255, 255], 30))
     }
-    // createLetters("ABCDE")
+    createLetters("ABCDE")
     update()
 }
 
