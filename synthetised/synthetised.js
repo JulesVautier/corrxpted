@@ -17,8 +17,8 @@ class Particle {
         this.initialx = x
         this.initialy = y
 
-        this.x = x + 100
-        this.y = y
+        // this.x = x
+        // this.y = y
         // this.x = x
         // this.y = y
         this.density = Math.random() * 20 + 10
@@ -29,7 +29,6 @@ class Particle {
         for (let i = 0; i < 4; i++)
             this.imageData.data[i] = color[i]
         this.enable = enable
-        console.log("_", this.x, this.y)
 
     }
 
@@ -67,49 +66,34 @@ class Particle {
 function createLetters(text) {
     ctx.imageSmoothingEnabled = false;
     ctx.fillStyle = "#d00000";
-    // ctx.font = "30px Arial"
+    ctx.font = "30px Arial"
     ctx.fillText(text, 30, 30)
-    ctx.fillRect(0, 0, 30, 30)
+    // ctx.fillRect(0, 0, 30, 30)
     // const data = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
-    const data = ctx.getImageData(0, 0, 30, 30)
+    const data = ctx.getImageData(0, 0, 500, 200)
     convertImagesToParticles(data)
 }
 
 function convertImagesToParticles(imageData) {
-    for (let squareY = 0; squareY < imageData.height; squareY++) {
-        for (let squareX = 0; squareX < imageData.width; squareX++) {
-            let pixel1 = imageData.data[(imageData.width * squareY) + (squareX * 4)]
-            let pixel2 = imageData.data[(imageData.width * squareY) + (squareX * 4) + 1]
-            let pixel3 = imageData.data[(imageData.width * squareY) + (squareX * 4) + 2]
-            let pixel4 = imageData.data[(imageData.width * squareY) + (squareX * 4) + 3]
-            let color = [pixel1, pixel2, pixel3, pixel4]
-            if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-                console.log(squareX, squareY)
-                particles.push(new Particle(squareX, squareY, color, 1, true))
+    let squareSize = 10
+    for (let x = 0; x < imageData.width; x += squareSize) {
+        console.log(x)
+        for (let y = 0; y < imageData.height; y += squareSize) {
+            for (let squareY = y; squareY < imageData.height && squareY < (y + 1) * squareSize; squareY++) {
+                for (let squareX = x; squareX < imageData.width && squareX < (x + 1) * squareSize; squareX++) {
+                    let pixel1 = imageData.data[imageData.width * squareY * 4 + (squareX * 4)]
+                    let pixel2 = imageData.data[imageData.width * squareY * 4 + (squareX * 4) + 1]
+                    let pixel3 = imageData.data[imageData.width * squareY * 4 + (squareX * 4) + 2]
+                    let pixel4 = imageData.data[imageData.width * squareY * 4 + (squareX * 4) + 3]
+                    let color = [pixel1, pixel2, pixel3, pixel4]
+                    if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
+                        particles.push(new Particle(squareX, squareY, color, 1, false))
+                    }
+                }
             }
         }
     }
 
-    // console.log(imageData.width, imageData.height)
-    // let squareSize = 10
-    // for (let x = 0; x < imageData.width; x += squareSize) {
-    //     for (let y = 0; y < imageData.height; y += squareSize) {
-    //         console.log('_', x, y)
-    //         for (let squareY = y; squareY < imageData.height && squareY < (y + 1) * squareSize; squareY++) {
-    //             for (let squareX = x; squareX < imageData.width && squareX < (x + 1) * squareSize; squareX++) {
-    //                 let pixel1 = imageData.data[imageData.width * squareY + (squareX * 4)]
-    //                 let pixel2 = imageData.data[imageData.width * squareY + (squareX * 4) + 1]
-    //                 let pixel3 = imageData.data[imageData.width * squareY + (squareX * 4) + 2]
-    //                 let pixel4 = imageData.data[imageData.width * squareY + (squareX * 4) + 3]
-    //                 let color = [pixel1, pixel2, pixel3, pixel4]
-    //                 if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-    //                     particles.push(new Particle(squareX, squareY / 4, color, 1, true))
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-    //
     enableParticles = particles.filter(x => x.enable)
     console.log('finish', particles.length)
 }
@@ -135,10 +119,10 @@ var particles = []
 var enableParticles = []
 
 var update = function () {
-    // ctx.clearRect(0, 0, canvas1.width, canvas1.height)
+    ctx.clearRect(0, 0, canvas1.width, canvas1.height)
     for (let i = 0; i < enableParticles.length; i++) {
         enableParticles[i].draw();
-        // enableParticles[i].update();
+        enableParticles[i].update();
     }
     // enableParticles = particles.filter(x => x.enable)
 
