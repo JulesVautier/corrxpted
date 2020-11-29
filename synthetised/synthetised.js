@@ -6,13 +6,19 @@ function randomFloat(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+var mouse = {
+    x: 0,
+    y: 0
+}
+
 class Particle {
     constructor(x, y, color, size) {
-        this.destinaltionx = x
-        this.destinaltiony = y
+        this.initialx = x
+        this.initialy = y
 
         this.x = x
         this.y = y
+        this.density = Math.random() * 30 + 1
 
         this.size = size
         this.color = color
@@ -22,22 +28,35 @@ class Particle {
     }
 
     draw() {
+        // console.log(this.x, this.y, this.color)
         ctx.putImageData(this.imageData, this.x, this.y)
     }
 
-}
+    update() {
+        let dx = mouse.x - this.x
+        let dy = mouse.y - this.y
+        if (mouse.x === this.x || mouse.y === this.y) {
+            return
+        }
+        let distance = Math.sqrt(dx * dx + dy * dy)
+        let forceDirectionX = dx / distance
+        let forceDirectionY = dy / distance
+        let force = 1
+        this.density = 1
+        let directionX = forceDirectionX * force * this.density
+        let directionY = forceDirectionY * force * this.density
+        this.x += directionX
+        this.y += directionY
+    }
 
-// https://stackoverflow.com/questions/47703320/draw-text-pixel-by-pixel-on-canvas
+}
 
 function createLetters(text) {
     ctx.imageSmoothingEnabled = false;
     ctx.fillStyle = "#d00000";
     ctx.font = "30px Arial"
     ctx.fillText(text, 30, 30)
-    // const data = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
     const data = ctx.getImageData(0, 0, 1000, 1000)
-    console.log(data.data, data.width, data.height)
-    console.log(data.width)
     for (let y = 0; y < data.height; y++) {
         for (let x = 0; x < data.width; x += 4) {
             let pixel1 = data.data[data.width * y + x]
@@ -45,26 +64,16 @@ function createLetters(text) {
             let pixel3 = data.data[data.width * y + x + 2]
             let pixel4 = data.data[data.width * y + x + 3]
             let color = [pixel1, pixel2, pixel3, pixel4]
-            // console.log(pixel1, pixel2, pixel3, pixel4)
             if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-                console.log(pixel1, pixel2, pixel3, pixel4)
                 particles.push(new Particle(x / 4 + 100, y / 4 + 100, color, 1))
-                // let color = "rgba(pixel1, pixel2, pixel3, pixel4)"
-                // console.log(color)
             }
-            // console.log(pixel1)
-            //     if (pixel1 > 1)
-            //         console.log(pixel1)
         }
     }
 }
 
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
-    };
+function getMousePos(evt) {
+    mouse.x = evt.clientX
+    mouse.y = evt.clientY
 }
 
 
@@ -81,15 +90,12 @@ function setCanvasSize(canvas) {
 
 var particles = []
 
-function createParticles(evt) {
-    let pos = getMousePos(canvas1, evt)
-    particles.push(new Particle(pos.x, pos.y, "#787676", 1))
-}
-
 var update = function () {
+    ctx.clearRect(0, 0, canvas1.width, canvas1.height)
     var i = particles.length;
     while (i--) {
         particles[i].draw();
+        particles[i].update();
     }
     requestAnimationFrame(update);
 }
@@ -107,9 +113,11 @@ function createCanvas() {
 function init() {
     createCanvas()
     setCanvasSize(canvas1)
-    canvas1.onclick = createParticles;
-    canvas1.ontouchstart = createParticles;
-    createLetters("ABCDE")
+    canvas1.onmousemove = getMousePos
+    canvas1.onclick = function () {
+        particles.push(new Particle(mouse.x, mouse.y, [255, 255, 255, 255], 30))
+    }
+    // createLetters("ABCDE")
     update()
 }
 
