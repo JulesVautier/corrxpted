@@ -103,20 +103,21 @@ function createLetters(text) {
     drawing.onload = function () {
         console.log(drawing)
         ctx1.drawImage(drawing, 0, 0);
-        const data = ctx1.getImageData(0, 0, drawing.width, drawing.height)
+        const data = ctx1.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
         console.log(data.width * 4 * data.height, data.data.length)
         convertImagesToParticles(data)
     }
 }
 
 function getPixel(imageData, x, y) {
-    let pixel1 = imageData.data[imageData.width * y * 4 + (x * 4)]
-    let pixel2 = imageData.data[imageData.width * y * 4 + (x * 4) + 1]
-    let pixel3 = imageData.data[imageData.width * y * 4 + (x * 4) + 2]
-    let pixel4 = imageData.data[imageData.width * y * 4 + (x * 4) + 3]
+    let index = imageData.width * y * 4 + (x * 4)
+    if (index >= imageData.data.length - 4)
+        return [0, 0, 0, 0]
+    let pixel1 = imageData.data[index]
+    let pixel2 = imageData.data[index + 1]
+    let pixel3 = imageData.data[index + 2]
+    let pixel4 = imageData.data[index + 3]
     let pixel = [pixel1, pixel2, pixel3, pixel4]
-    if (x < 10 && y < 10)
-        console.log(x, y, pixel, pixel1, pixel2, pixel3, pixel4)
     return pixel
 }
 
@@ -127,8 +128,6 @@ function getPixels(imageData, x, y, size) {
             pixels.push(...getPixel(imageData, x + i, y + j))
         }
     }
-    if (x < 10 && y < 10)
-        console.log("______", pixels)
     return pixels
 }
 
