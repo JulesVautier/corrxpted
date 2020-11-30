@@ -16,7 +16,7 @@
     margin: 30px;
 }
 
-.indexMenu p {
+.indexMenu span {
     font-family: Motorstrike;
     font-size: 50px;
     text-shadow: 0 0 10px #300d6c, 0 0 30px #4e1858;
@@ -27,7 +27,12 @@
     bottom: 0;
 }
 
-.contactButton p {
+.contactButton span {
     font-family: SquareWave;
     font-size: 35px;
+}
+
+.menu-span {
+    margin-top: 50px;
+    margin-bottom: 50px;
 }

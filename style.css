@@ -18,9 +18,15 @@ canvas {
     left: 0;
     /*background-color: #00a2d7;*/
 }
+
+.row div{
+    display: inline-block;
+}
+
+
 .overlay {
     background-color: transparent;
-    position: absolute;
+    /*position: absolute;*/
     z-index: 100;
 }
 
