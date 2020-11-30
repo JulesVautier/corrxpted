@@ -26,6 +26,8 @@ class Particle {
         this.imageData = ctx1.createImageData(particleSize, particleSize)
         for (let i = 0; i < 4 * particleSize * particleSize; i++)
             this.imageData.data[i] = color[i]
+        if (this.initialx === 0 && this.initialy === 0)
+            console.log(this.imageData.data, this.imageData.data.length)
         this.enable = enable
 
     }
@@ -104,25 +106,7 @@ function createLetters(text) {
         const data = ctx1.getImageData(0, 0, drawing.width, drawing.height)
         console.log(data.width * 4 * data.height, data.data.length)
         convertImagesToParticles(data)
-        console.log('finished')
-        // console.log(particles.sort(function (a, b) {
-        //     if (a.initialx > b.initialx)
-        //         return 1
-        //     else if (a.initialx < b.initialx)
-        //         return -1
-        //     else
-        //         return 0
-        // }))
     }
-
-    // ctx1.imageSmoothingEnabled = false;
-    // ctx1.fillStyle = "#d00000";
-    // ctx1.font = "30px Arial"
-    // ctx1.fillText(text, 30, 30)
-    // ctx1.fillRect(0, 0, 30, 30)
-    // // const data = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
-    // const data = ctx1.getImageData(0, 0, 500, 200)
-    // convertImagesToParticles(data)
 }
 
 function getPixel(imageData, x, y) {
@@ -131,18 +115,20 @@ function getPixel(imageData, x, y) {
     let pixel3 = imageData.data[imageData.width * y * 4 + (x * 4) + 2]
     let pixel4 = imageData.data[imageData.width * y * 4 + (x * 4) + 3]
     let pixel = [pixel1, pixel2, pixel3, pixel4]
+    if (x < 10 && y < 10)
+        console.log(x, y, pixel, pixel1, pixel2, pixel3, pixel4)
     return pixel
 }
 
 function getPixels(imageData, x, y, size) {
-    // console.log(size)
     let pixels = []
-    for (let i = 0; i < size; i++) {
-        for (let j = 0; j < size; j++) {
-            // console.log(getPixel(imageData,x+i, y+j))
-            pixels.push(...getPixel(imageData,x+i, y+j))
+    for (let j = 0; j < size; j++) {
+        for (let i = 0; i < size; i++) {
+            pixels.push(...getPixel(imageData, x + i, y + j))
         }
     }
+    if (x < 10 && y < 10)
+        console.log("______", pixels)
     return pixels
 }
 
