@@ -135,13 +135,26 @@ function getPixel(imageData, x, y) {
     return pixel
 }
 
+function getPixels(imageData, x, y, size) {
+    // console.log(size)
+    let pixels = []
+    for (let i = 0; i <= size; i++) {
+        for (let j = 0; j <= size; j++) {
+            // console.log(getPixel(imageData,x+i, y+j))
+            pixels.push(...getPixel(imageData,x+i, y+j))
+        }
+    }
+    // console.log("_______")
+    return pixels
+}
+
 function convertImagesToParticles(imageData) {
     let squareSize = 100
     for (let y = 0; y < imageData.height; y += squareSize) {
         for (let x = 0; x < imageData.width; x += squareSize) {
-            for (let squareY = y; squareY < imageData.height && squareY < y + squareSize; squareY += 2) {
-                for (let squareX = x; squareX < imageData.width && squareX < x + squareSize; squareX += 2) {
-                    let pixels = getPixel(imageData, squareX, squareY)
+            for (let squareY = y; squareY < imageData.height && squareY < y + squareSize; squareY += particleSize) {
+                for (let squareX = x; squareX < imageData.width && squareX < x + squareSize; squareX += particleSize) {
+                    let pixels = getPixels(imageData, squareX, squareY, particleSize)
                     if (pixels.reduce((a, b) => a + b) > 0) {
                         particles.push(new Particle(squareX, squareY, pixels, 1, false))
                     }
