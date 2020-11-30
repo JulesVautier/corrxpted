@@ -64,6 +64,16 @@ class Particle {
 }
 
 function createLetters(text) {
+    // drawing = new Image()
+    // drawing.src = "../pics/trou.jpg"
+    // drawing.onload = function () {
+    //     console.log(drawing)
+    //     ctx.drawImage(drawing,0,0);
+    //     const data = ctx.getImageData(0, 0, 500, 200)
+    //     convertImagesToParticles(data)
+    //     console.log('finished')
+    // }
+
     ctx.imageSmoothingEnabled = false;
     ctx.fillStyle = "#d00000";
     ctx.font = "30px Arial"
@@ -88,6 +98,9 @@ function convertImagesToParticles(imageData) {
                     let color = [pixel1, pixel2, pixel3, pixel4]
                     if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
                         particles.push(new Particle(squareX, squareY, color, 1, false))
+                    }
+                    if (x > 10000) {
+                        return
                     }
                 }
             }
@@ -150,10 +163,6 @@ function createParticlesOnMousePos() {
     particles = particles.slice(nbParticulesOnClick)
 }
 
-setInterval(function () {
-    if (mouse.down)
-        createParticlesOnMousePos()
-}, 1000)
 
 function init() {
     createCanvas()
@@ -167,6 +176,10 @@ function init() {
         mouse.down = false
     }
     createLetters("ABCDE")
+    setInterval(function () {
+        if (mouse.down)
+            createParticlesOnMousePos()
+    }, 1000)
     update()
 }
 
