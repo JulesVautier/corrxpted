@@ -12,7 +12,7 @@ var mouse = {
     down: false,
 }
 
-particleSize = 1
+particleSize = 3
 
 class Particle {
     constructor(x, y, color, size, enable) {
@@ -24,7 +24,7 @@ class Particle {
         this.size = size
         this.color = color
         this.imageData = ctx1.createImageData(particleSize, particleSize)
-        for (let i = 0; i < 4 * particleSize; i++)
+        for (let i = 0; i < 4 * particleSize * particleSize; i++)
             this.imageData.data[i] = color[i]
         this.enable = enable
 
@@ -36,10 +36,10 @@ class Particle {
     }
 
     update() {
-        let dx = this.initialx - this.x
-        let dy = this.initialy - this.y
+        let dx = this.initialx - Math.round(this.x)
+        let dy = this.initialy - Math.round(this.y)
         let distance = Math.sqrt(dx * dx + dy * dy)
-        if (distance < 10) {
+        if ((distance > 0 && distance < 10) || (distance < 0 && distance > -10)) {
             this.x = this.initialx
             this.y = this.initialy
         } else {
@@ -55,8 +55,8 @@ class Particle {
             let directionY = forceDirectionY * force * this.density
             this.x += directionX
             this.y += directionY
-            this.x = Math.floor(this.x)
-            this.y = Math.floor(this.y)
+            this.x = Math.round(this.x)
+            this.y = Math.round(this.y)
             // this.x += this.density
             // this.y += this.density
         }
@@ -66,7 +66,6 @@ class Particle {
 
             // particles.splice(particles.indexOf(this), 1);
             enableParticles.splice(enableParticles.indexOf(this), 1);
-            console.log(particles.length, enableParticles.length)
             // console.log(this.x, this.y)
             // this.enable = false
         }
@@ -138,13 +137,12 @@ function getPixel(imageData, x, y) {
 function getPixels(imageData, x, y, size) {
     // console.log(size)
     let pixels = []
-    for (let i = 0; i <= size; i++) {
-        for (let j = 0; j <= size; j++) {
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
             // console.log(getPixel(imageData,x+i, y+j))
             pixels.push(...getPixel(imageData,x+i, y+j))
         }
     }
-    // console.log("_______")
     return pixels
 }
 
