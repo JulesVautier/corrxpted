@@ -7,9 +7,9 @@ body {
 
 /* The Modal (background) */
 .modal {
-    display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
+    display: none;
 }
 
 #helpModal {
@@ -30,13 +30,25 @@ body {
 
 .modal-content span {
     font-size: 30px;
-    font-family: Ubuntu;
     color: #aaaaaa;
+    font-family: Ubuntu;
 }
 
 .help-button {
-    display: none;
+    bottom: 7px;
+    left: 7px;
+    position: fixed;
+    display: block;
+    /*background-color: #c10c0c;*/
+    border: 2px solid #aaaaaa;
+    border-radius: 6px;
+    font-family: Ubuntu;
+    color: #aaaaaa;
+    z-index: 1;
 }
+ .help-button:hover {
+     color: azure;
+ }
 
 /* The Close Button */
 .close {
@@ -57,3 +69,4 @@ body {
     width: 30px;
     height: 30px;
 }
+

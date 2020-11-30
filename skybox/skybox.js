@@ -8,6 +8,17 @@ var mouse = new THREE.Vector2();
 function initModal() {
     var helpModal = document.getElementById("helpModal");
     var goalModal = document.getElementById("goalModal");
+    var helpBtn = document.getElementById("helpBtn");
+
+    helpBtn.onclick = function () {
+        if (goalModal.style.display === "none" || !goalModal.style.display) {
+            goalModal.style.display = "block";
+            helpModal.style.display = "block";
+        } else {
+            goalModal.style.display = "none";
+            helpModal.style.display = "none";
+        }
+    }
 
     document.getElementsByClassName("close")[0].onclick = function() {
         goalModal.style.display = "none";
