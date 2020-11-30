@@ -144,7 +144,7 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corruption(pos.x, pos.y, "#190a23", 1, 1, 4))
+    corruptions.push(new Corruption(pos.x, pos.y, "#190a23", 10, 1, 4))
 }
 
 var update = function () {
