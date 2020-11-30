@@ -58,10 +58,10 @@ class ChildsOfCorrumption {
             return this.die()
         }
         this.duplicate()
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-        ctx.fill();
+        ctx1.fillStyle = this.color;
+        ctx1.beginPath();
+        ctx1.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+        ctx1.fill();
     }
 
     duplicate() {
@@ -159,7 +159,7 @@ function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
     canvas1 = document.createElement("CANVAS");
     canvasContainer.appendChild(canvas1)
-    ctx = canvas1.getContext('2d')
+    ctx1 = canvas1.getContext('2d')
 }
 
 function init() {
