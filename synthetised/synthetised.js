@@ -65,46 +65,42 @@ class Particle {
             this.y += directionY
             this.x = Math.round(this.x)
             this.y = Math.round(this.y)
-            // this.x += this.density
-            // this.y += this.density
         }
 
         if (this.x === this.initialx && this.y === this.initialy) {
             ctx2.putImageData(this.imageData, this.x, this.y)
-
-            // particles.splice(particles.indexOf(this), 1);
             enableParticles.splice(enableParticles.indexOf(this), 1);
-            // console.log(this.x, this.y)
-            // this.enable = false
         }
     }
 }
 
 
 var update = function () {
-    ctx1.clearRect(0, 0, canvas1.width, canvas1.height)
+    // if (enableParticles.length === 0)
+    //     ctx1.fillStyle = "rgba(0,0,0)";
+    // else
+    //     ctx1.fillStyle = "rgba(0,0,0, 0.02)";
+    // ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
     for (let i = 0; i < enableParticles.length; i++) {
         enableParticles[i].draw();
         enableParticles[i].update();
     }
-    // enableParticles = particles.filter(x => x.enable)
-
     requestAnimationFrame(update);
 }
 
-setInterval(function () {
-    let nbParticulesOnClick = 100
-    if (particles.length > 0) {
-        for (let counter = 0; counter < nbParticulesOnClick; counter++) {
-            let i = randomInt(0, particles.length)
-            // console.log(i, particles.length)
-            particles[i].enable = true
-            particles[i].setInitialPos()
-            enableParticles.push(particles[i])
-            particles.splice(i, 1)
-        }
-    }
-}, 100)
+// setInterval(function () {
+//     let nbParticulesOnClick = 100
+//     if (particles.length > 0) {
+//         for (let counter = 0; counter < nbParticulesOnClick; counter++) {
+//             let i = randomInt(0, particles.length)
+//             // console.log(i, particles.length)
+//             particles[i].enable = true
+//             particles[i].setInitialPos()
+//             enableParticles.push(particles[i])
+//             particles.splice(i, 1)
+//         }
+//     }
+// }, 100)
 
 function createParticlesOnMousePos() {
     let nbParticulesOnClick = 1000
@@ -124,6 +120,8 @@ function createLetters(text) {
         ctx1.drawImage(drawing, 0, 0);
         const data = ctx1.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
         convertImagesToParticles(data)
+        ctx1.fillStyle = "rgba(0,0,0)";
+        ctx1.fillRect(0,0, canvas1.width, canvas1.height)
     }
 }
 
@@ -187,11 +185,11 @@ function setCanvasSize(canvas) {
 var particles = []
 var enableParticles = []
 
-var ctx1 = undefined
-var canvas1 = undefined
+var topCanvas = undefined
 
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
+
 
     canvas2 = document.createElement("CANVAS");
     canvasContainer.appendChild(canvas2)
@@ -201,6 +199,7 @@ function createCanvas() {
     canvasContainer.appendChild(canvas1)
     ctx1 = canvas1.getContext('2d')
 
+    topCanvas = canvas1
 }
 
 
@@ -208,12 +207,12 @@ function init() {
     createCanvas()
     setCanvasSize(canvas1)
     setCanvasSize(canvas2)
-    canvas1.onclick = createParticlesOnMousePos
-    canvas1.onmousemove = getMousePos
-    canvas1.onmousedown = function () {
+    topCanvas.onclick = createParticlesOnMousePos
+    topCanvas.onmousemove = getMousePos
+    topCanvas.onmousedown = function () {
         mouse.down = true
     }
-    canvas1.onmouseup = function () {
+    topCanvas.onmouseup = function () {
         mouse.down = false
     }
     createLetters("ABCDE")
