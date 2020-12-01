@@ -36,13 +36,20 @@ initModal()
 
 // Skybox stuff
 
-function createSkybox(scene, fileName, geometry) {
+function createSkybox(scene, fileName, geometry, invert) {
     let materialArray = [];
     let extensions = ['_ft', '_bk', '_up', '_dn', '_rt', '_lf']
-    for (let i = 0; i < 6; i++)
-        materialArray.push(new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load(fileName + extensions[i] + '.jpg')}));
-    for (let i = 0; i < 6; i++)
+    for (let i = 0; i < 6; i++) {
+        let texture = new THREE.TextureLoader().load(fileName + extensions[i] + '.jpg')
+        if (invert) {
+            texture.wrapS = THREE.RepeatWrapping;
+            texture.repeat.x = -1;
+        }
+        materialArray.push(new THREE.MeshBasicMaterial({map: texture}));
+    }
+    for (let i = 0; i < 6; i++) {
         materialArray[i].side = THREE.BackSide;
+    }
     let skyboxGeo = new THREE.BoxGeometry(geometry, geometry, geometry);
     let skybox = new THREE.Mesh(skyboxGeo, materialArray);
     scene.add(skybox);
@@ -72,19 +79,18 @@ function createText(scene, text) {
 
     setInterval(function () {
         context1.clearRect(0, 0, canvas1.width, canvas1.height)
-        writeText("Try to think outside the box", context1)
+        writeText("Try to think outside the box", context1, "rgb(134,102,21)")
         texture1.needsUpdate = true
     }, 100)
 }
 
-function writeText(initialText, ctx) {
+function writeText(initialText, ctx, color) {
     let fonts = ["Times New Roman", "Ubuntu", "Arial", "Times", "Courier New", "Verdana", "Georgia", "Palantino", "Garamond", "Ani", "aakar", "FreeMono", "DialogInput", "DejaVu Sans", "Doird Sans"]
     let font = fonts[randomInt(0, fonts.length)]
     let px = randomInt(20, 40).toString() + "px"
-    console.log(font)
     ctx.clearRect(0, 0, ctx.width, ctx.height)
     ctx.font = `Bold ${px} ${font}`
-    ctx.fillStyle = "rgb(134,102,21)";
+    ctx.fillStyle = color;
     ctx.fillText(initialText, 0, 40);
     ctx.needsUpdate = true
 }
@@ -101,9 +107,9 @@ function init() {
     controls.maxDistance = 25000
 
     controls.addEventListener('change', renderer);
-    createSkybox(scene, 'polluted_earth/polluted_earth', 1000)
-    // createSkybox(scene, 'corruption/exosystem', 100000)
-    createSkybox(scene, 'exosystem/exosystem', 100000)
+    createSkybox(scene, 'polluted_earth/polluted_earth', 1000, false)
+    createSkybox(scene, 'corruption/exosystem', 100000, true)
+    // createSkybox(scene, 'exosystem/exosystem', 100000)
     createText(scene, "Try to think outside the BOX")
     animate();
 }
