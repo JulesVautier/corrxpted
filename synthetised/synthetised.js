@@ -23,6 +23,7 @@ class Particle {
 
         this.size = size
         this.color = color
+        this.setInitialPos()
         this.imageData = ctx1.createImageData(particleSize, particleSize)
         for (let i = 0; i < 4 * particleSize * particleSize; i++)
             this.imageData.data[i] = color[i]
@@ -30,6 +31,11 @@ class Particle {
             console.log(this.imageData.data, this.imageData.data.length)
         this.enable = enable
 
+    }
+
+    setInitialPos() {
+        this.x = randomInt(0, canvas1.width)
+        this.y = randomInt(0, canvas1.height)
     }
 
     draw() {
@@ -86,6 +92,20 @@ var update = function () {
     requestAnimationFrame(update);
 }
 
+setInterval(function () {
+    let nbParticulesOnClick = 100
+    if (particles.length > 0) {
+        for (let counter = 0; counter < nbParticulesOnClick; counter++) {
+            let i = randomInt(0, particles.length)
+            // console.log(i, particles.length)
+            particles[i].enable = true
+            particles[i].setInitialPos()
+            enableParticles.push(particles[i])
+            particles.splice(i, 1)
+        }
+    }
+}, 100)
+
 function createParticlesOnMousePos() {
     let nbParticulesOnClick = 1000
     for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
@@ -101,10 +121,8 @@ function createLetters(text) {
     drawing = new Image()
     drawing.src = "../pics/trou.jpg"
     drawing.onload = function () {
-        console.log(drawing)
         ctx1.drawImage(drawing, 0, 0);
         const data = ctx1.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
-        console.log(data.width * 4 * data.height, data.data.length)
         convertImagesToParticles(data)
     }
 }
@@ -145,7 +163,6 @@ function convertImagesToParticles(imageData) {
             }
         }
     }
-
     enableParticles = particles.filter(x => x.enable)
     console.log('finish', particles.length)
 }
