@@ -3,6 +3,9 @@ var cameraCenter = new THREE.Vector3();
 var mouse = new THREE.Vector2();
 
 
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+}
 // Modal stuff
 
 function initModal() {
@@ -65,6 +68,24 @@ function createText(scene, text) {
     );
     mesh1.position.set(0,0,200);
     scene.add( mesh1 );
+
+    setInterval(function () {
+        context1.clearRect(0,0,canvas1.width,canvas1.height)
+        writeText("Try to think outside the box", context1)
+        texture1.needsUpdate = true
+    }, 100)
+}
+
+function writeText(initialText, ctx) {
+    let fonts = ["Times New Roman", "Ubuntu", "Arial", "Times", "Courier New", "Verdana", "Georgia", "Palantino", "Garamond"]
+    let font = fonts[randomInt(0, fonts.length)]
+    console.log(font)
+    ctx.clearRect(0,0,ctx.width,ctx.height)
+    ctx.font = "Bold 30px "+font;
+    ctx.fillStyle = "rgb(134,102,21)";
+    ctx.fillText(initialText, 0, 40);
+    ctx.needsUpdate = true
+
 }
 
 function init() {
