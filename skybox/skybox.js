@@ -104,11 +104,12 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
     let controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.maxDistance = 30000
+    controls.maxDistance = 5000000
 
     controls.addEventListener('change', renderer);
     createSkybox(scene, 'polluted_earth/polluted_earth', ".jpg", 2000, false)
     createSkybox(scene, 'ulukai/corona', '.png', 100000, false)
+    createSkybox(scene, 'ulukai/redeclipse', '.png', 500000, false)
     createText(scene, "Try to think outside the BOX")
     animate();
 }
