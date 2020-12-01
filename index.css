@@ -16,6 +16,12 @@
     margin: 30px;
 }
 
+.indexMenu .wip {
+    color: yellow;
+    font-size: 25px;
+    font-family: SquareWave;
+}
+
 .indexMenu span {
     font-family: Motorstrike;
     font-size: 50px;
