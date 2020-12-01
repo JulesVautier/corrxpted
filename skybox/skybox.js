@@ -87,7 +87,7 @@ function createText(scene, text) {
 function writeText(initialText, ctx, color) {
     let fonts = ["Times New Roman", "Ubuntu", "Arial", "Times", "Courier New", "Verdana", "Georgia", "Palantino", "Garamond", "Ani", "aakar", "FreeMono", "DialogInput", "DejaVu Sans", "Doird Sans"]
     let font = fonts[randomInt(0, fonts.length)]
-    let px = randomInt(20, 40).toString() + "px"
+    let px = randomInt(20, 20).toString() + "px"
     ctx.clearRect(0, 0, ctx.width, ctx.height)
     ctx.font = `Bold ${px} ${font}`
     ctx.fillStyle = color;
@@ -104,12 +104,12 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
     let controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.maxDistance = 5000000
+    controls.maxDistance = 40000
 
     controls.addEventListener('change', renderer);
     createSkybox(scene, 'polluted_earth/polluted_earth', ".jpg", 2000, false)
-    createSkybox(scene, 'ulukai/corona', '.png', 100000, false)
-    createSkybox(scene, 'ulukai/redeclipse', '.png', 500000, false)
+    createSkybox(scene, 'ulukai/corona', '.png', 300000, false)
+    // createSkybox(scene, 'ulukai/redeclipse', '.png', 400000, false)
     createText(scene, "Try to think outside the BOX")
     animate();
 }
