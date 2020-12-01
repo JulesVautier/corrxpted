@@ -36,11 +36,11 @@ initModal()
 
 // Skybox stuff
 
-function createSkybox(scene, fileName, geometry, invert) {
+function createSkybox(scene, fileName, extension, geometry, invert) {
     let materialArray = [];
     let extensions = ['_ft', '_bk', '_up', '_dn', '_rt', '_lf']
     for (let i = 0; i < 6; i++) {
-        let texture = new THREE.TextureLoader().load(fileName + extensions[i] + '.jpg')
+        let texture = new THREE.TextureLoader().load(fileName + extensions[i] + extension)
         if (invert) {
             texture.wrapS = THREE.RepeatWrapping;
             texture.repeat.x = -1;
@@ -104,12 +104,11 @@ function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
     let controls = new THREE.OrbitControls(camera, renderer.domElement);
-    controls.maxDistance = 25000
+    controls.maxDistance = 30000
 
     controls.addEventListener('change', renderer);
-    createSkybox(scene, 'polluted_earth/polluted_earth', 1000, false)
-    createSkybox(scene, 'corruption/exosystem', 100000, true)
-    // createSkybox(scene, 'exosystem/exosystem', 100000)
+    createSkybox(scene, 'polluted_earth/polluted_earth', ".jpg", 2000, false)
+    createSkybox(scene, 'ulukai/corona', '.png', 100000, false)
     createText(scene, "Try to think outside the BOX")
     animate();
 }
