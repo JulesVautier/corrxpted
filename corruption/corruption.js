@@ -1,5 +1,5 @@
 class Corruption {
-    constructor(x, y, color, size, speed, fertility, angle = undefined) {
+    constructor(x, y, color, colorCoef, size, speed, fertility, angle = undefined) {
         this.initialx = x
         this.initialy = y
         this.initialsize = size
@@ -8,6 +8,7 @@ class Corruption {
         this.x = x
         this.y = y
         this.color = color
+        this.coef = colorCoef
         this.size = size
         this.fertility = fertility
         this.speed = speed
@@ -33,7 +34,7 @@ class Corruption {
         }
         this.fertility = this.fertility - randomFloat(0, this.fertility)
         this.angle += randomFloat(-10, +10)
-        corruptions.push(new Corruption(this.x, this.y, this.color, this.size, this.speed, this.fertility, this.angle))
+        corruptions.push(new Corruption(this.x, this.y, this.color, this.coef, this.size, this.speed, this.fertility, this.angle))
     }
 
     live() {
@@ -51,9 +52,13 @@ class Corruption {
         corruptions.splice(corruptions.indexOf(this), 1);
         if (corruptions.length < 50) {
             let newFertility = randomFloat(1, this.initialsize / 2)
-            let newColor = parseInt(this.color.slice(1, this.color.length), 16) + parseInt("050005", 16)
+            let newColor = parseInt(this.color.slice(1, this.color.length), 16) + (parseInt("050005", 16) * this.coef)
+            if (newColor > parseInt("dd0aff", 16) || newColor < parseInt("190a23", 16)) {
+                this.coef = this.coef * -1
+            }
             newColor = '#' + newColor.toString(16)
-            corruptions.push(new Corruption(this.initialx, this.initialy, newColor, this.initialsize + 1, this.speed + randomFloat(-0.5, +0.5), newFertility, undefined))
+            this.initialsize += this.coef
+            corruptions.push(new Corruption(this.initialx, this.initialy, newColor, this.coef, this.initialsize, this.speed + randomFloat(-0.5, +0.5), newFertility, undefined))
         }
     }
 
@@ -92,8 +97,8 @@ function createCanvas(containerName) {
 }
 
 var corruptions = []
-var corruptionCanvas = undefined
-var corruptionCTX = undefined
+// var corruptionCanvas = undefined
+// var corruptionCTX = undefined
 
 class CorruptionModule {
     init(containerName) {
@@ -103,7 +108,8 @@ class CorruptionModule {
     }
 
     start() {
-        corruptions.push(new Corruption(window.innerWidth / 4, window.innerHeight / 2, "#190a23", 1, 1, 4))
+        corruptions.push(new Corruption(window.innerWidth / 4, window.innerHeight / 2, "#190a23", 1, 1, 1, 4))
+        setInterval(this.reset.bind(this), 20000)
     }
 
 
@@ -117,6 +123,18 @@ class CorruptionModule {
     update() {
         this.playOneFrame()
         requestAnimationFrame(this.update.bind(this));
+    }
+
+    async reset() {
+        corruptions = []
+        corruptionCTX.fillStyle = "rgba(0,0,0,0.05)";
+
+        for (let i = 0; i < 40; i++) {
+            corruptionCTX.fillRect(0, 0, corruptionCanvas.width, corruptionCanvas.height)
+            await timeout(100)
+        }
+        corruptionCTX.clearRect(0, 0, corruptionCanvas.width, corruptionCanvas.height)
+        corruptions.push(new Corruption(window.innerWidth / 4, window.innerHeight / 2, "#190a23", 1, 1, 1, 4))
     }
 }
 
