@@ -54,7 +54,8 @@ class Corruption {
             let newFertility = randomFloat(1, this.initialsize / 2)
             let newColor = parseInt(this.color.slice(1, this.color.length), 16) + (parseInt("050005", 16) * this.coef)
             if (newColor > parseInt("dd0aff", 16) || newColor < parseInt("190a23", 16)) {
-                this.coef = this.coef * -1
+                this.coef = 0
+                newColor = "000000"
             }
             newColor = '#' + newColor.toString(16)
             this.initialsize += 1
@@ -108,7 +109,9 @@ class CorruptionModule {
     }
 
     start(x, y) {
-        corruptions.push(new Corruption(x, y, "#190a23", 1, 1, 1, 4))
+        this.x = x
+        this.y = y
+        corruptions.push(new Corruption(this.x, this.y, "#190a23", 1, 1, 1, 4))
         setInterval(this.reset.bind(this), 20000)
     }
 
@@ -134,7 +137,7 @@ class CorruptionModule {
             await timeout(100)
         }
         corruptionCTX.clearRect(0, 0, corruptionCanvas.width, corruptionCanvas.height)
-        corruptions.push(new Corruption(window.innerWidth / 4, window.innerHeight / 2, "#190a23", 1, 1, 1, 4))
+        corruptions.push(new Corruption(this.x, this.y, "#190a23", 1, 1, 1, 4))
     }
 }
 

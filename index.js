@@ -1,6 +1,5 @@
 module = new CorruptionModule()
 module.init('canvas-container')
-console.log(window.innerHeight, window.innerWidth)
 if (window.innerWidth > window.innerHeight)
     module.start(window.innerWidth / 4, window.innerHeight / 2)
 else

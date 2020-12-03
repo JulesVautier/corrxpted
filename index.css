@@ -25,6 +25,7 @@
     font-family: SquareWave;
 }
 
+
 .indexMenu span {
     font-family: Motorstrike;
     font-size: 50px;
@@ -45,3 +46,14 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+
+@media only screen and (hover: none) and (pointer: coarse) {
+    .indexMenu span {
+        font-size: 12vw;
+    }
+
+    .contactButton span {
+        font-size: 7vw;
+    }
+}
+
