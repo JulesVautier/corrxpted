@@ -1,2 +1,2 @@
 module = new CorruptionModule()
-module.init()
+module.init('canvas-container')
