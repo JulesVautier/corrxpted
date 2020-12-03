@@ -51,25 +51,6 @@ class Particle {
 
 }
 
-function createLetters(text) {
-    ctx.imageSmoothingEnabled = false;
-    ctx.fillStyle = "#d00000";
-    ctx.font = "30px Arial"
-    ctx.fillText(text, 30, 30)
-    const data = ctx.getImageData(0, 0, 1000, 1000)
-    for (let y = 0; y < data.height; y++) {
-        for (let x = 0; x < data.width; x += 4) {
-            let pixel1 = data.data[data.width * y + x]
-            let pixel2 = data.data[data.width * y + x + 1]
-            let pixel3 = data.data[data.width * y + x + 2]
-            let pixel4 = data.data[data.width * y + x + 3]
-            let color = [pixel1, pixel2, pixel3, pixel4]
-            if (pixel1 > 0 || pixel2 > 0 || pixel3 > 0 || pixel4 > 0) {
-                particles.push(new Particle(x / 4 + 100, y / 4 + 100, color, 1))
-            }
-        }
-    }
-}
 
 function getMousePos(evt) {
     mouse.x = evt.clientX
@@ -117,8 +98,8 @@ function init() {
     canvas1.onclick = function () {
         particles.push(new Particle(mouse.x, mouse.y, [255, 255, 255, 255], 30))
     }
-    // createLetters("ABCDE")
     update()
 }
 
 init()
+window.addEventListener('resize', setCanvasSize.bind(canvas1));
