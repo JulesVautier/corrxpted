@@ -144,7 +144,7 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corruption(pos.x, pos.y, "#190a23", 10, 1, 4))
+    corruptions.push(new Corruption(pos.x, pos.y, settings.startColor, settings.size, settings.speed, settings.fertility))
 }
 
 var update = function () {
@@ -167,7 +167,33 @@ function init() {
     setCanvasSize(canvas1)
     canvas1.onclick = createCorruption;
     canvas1.ontouchstart = createCorruption;
+    initGui()
     update()
+}
+
+function reset() {
+    corruptions = []
+    ctx1.clearRect(0,0,canvas1.width,canvas1.height)
+}
+
+var settings = {
+    startColor: '#190a23',
+    endColor: '#ff0aff',
+    size: 10,
+    speed: 2,
+    fertility: 4,
+    reset: reset
+};
+
+function initGui() {
+    var gui = new dat.GUI();
+    gui.add(settings, 'reset')
+    gui.add(settings, 'size', 1, 200).step(0.5)
+    gui.add(settings, 'speed', 1, 100).step(0.5)
+    gui.add(settings, 'fertility', 1, 100).step(0.5);
+    gui.addColor(settings, 'startColor')
+    gui.addColor(settings, 'endColor')
+    gui.open();
 }
 
 init()
