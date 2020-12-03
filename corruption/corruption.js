@@ -22,10 +22,10 @@ class Corruption {
             return this.die()
         }
         this.duplicate()
-        ctx1.fillStyle = this.color;
-        ctx1.beginPath();
-        ctx1.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-        ctx1.fill();
+        corruptionCTX.fillStyle = this.color;
+        corruptionCTX.beginPath();
+        corruptionCTX.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+        corruptionCTX.fill();
     }
 
     duplicate() {
@@ -67,13 +67,6 @@ class Corruption {
     }
 }
 
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
-    };
-}
 
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
@@ -82,10 +75,10 @@ function setCanvasSize(canvas) {
     let left = parseInt(style.left.slice(0, -2))
     let top = parseInt(style.top.slice(0, -2))
 
+
     canvas.width = parent.offsetWidth - left * 2
     canvas.height = parent.offsetHeight - top * 2
 }
-
 
 var update = function () {
     var i = corruptions.length;
@@ -95,23 +88,24 @@ var update = function () {
     requestAnimationFrame(update);
 }
 
-function createCanvas() {
-    let canvasContainer = document.getElementById('canvas-container')
-    canvas1 = document.createElement("CANVAS");
-    canvasContainer.appendChild(canvas1)
-    ctx1 = canvas1.getContext('2d')
+function createCanvas(containerName) {
+    let canvasContainer = document.getElementById(containerName)
+    corruptionCanvas = document.createElement("CANVAS");
+    canvasContainer.appendChild(corruptionCanvas)
+    corruptionCTX = corruptionCanvas.getContext('2d')
 }
 
 var corruptions = []
+var corruptionCanvas = undefined
+var corruptionCTX = undefined
 
 class CorruptionModule {
     init() {
-        createCanvas()
-        setCanvasSize(canvas1)
+        createCanvas('canvas-container')
+        setCanvasSize(corruptionCanvas)
         corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
         update()
+        console.log(corruptionCanvas)
     }
 }
 
-module = new CorruptionModule()
-module.init()

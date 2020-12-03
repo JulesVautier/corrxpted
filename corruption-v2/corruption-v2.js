@@ -87,14 +87,14 @@ class ChildsOfCorrumption {
     }
 
     exist() {
-        if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.width || this.y > canvas1.height) {
+        if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > corruptionCanvas.width || this.y > corruptionCanvas.height) {
             return this.die()
         }
         this.duplicate()
-        ctx1.fillStyle = this.color;
-        ctx1.beginPath();
-        ctx1.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-        ctx1.fill();
+        corruptionCTX.fillStyle = this.color;
+        corruptionCTX.beginPath();
+        corruptionCTX.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+        corruptionCTX.fill();
     }
 
     duplicate() {
@@ -190,7 +190,7 @@ function setCanvasSize(canvas) {
 var corruptions = []
 
 function createCorruption(evt) {
-    let pos = getMousePos(canvas1, evt)
+    let pos = getMousePos(corruptionCanvas, evt)
     corruptions.push(new Corruption(pos.x, pos.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
 }
 
@@ -204,23 +204,23 @@ var update = function () {
 
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
-    canvas1 = document.createElement("CANVAS");
+    corruptionCanvas = document.createElement("CANVAS");
     canvasContainer.appendChild(canvas1)
-    ctx1 = canvas1.getContext('2d')
+    corruptionCTX = canvas1.getContext('2d')
 }
 
 function init() {
     createCanvas()
-    setCanvasSize(canvas1)
-    canvas1.onclick = createCorruption;
-    canvas1.ontouchstart = createCorruption;
+    setCanvasSize(corruptionCanvas)
+    corruptionCanvas.onclick = createCorruption;
+    corruptionCanvas.ontouchstart = createCorruption;
     initGui()
     update()
 }
 
 function reset() {
     corruptions = []
-    ctx1.clearRect(0, 0, canvas1.width, canvas1.height)
+    corruptionCTX.clearRect(0, 0, corruptionCanvas.width, corruptionCanvas.height)
 }
 
 var settings = {
