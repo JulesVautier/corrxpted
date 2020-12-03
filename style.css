@@ -43,6 +43,7 @@ canvas {
 }
 
 .returnButton {
+    font-family: Masterblast;
     position: absolute;
     margin: 1em;
 }
@@ -54,7 +55,7 @@ canvas {
 
 .returnButton p:hover {
     margin: 0;
-    text-shadow: 0 0 10px #300d6c, 0 0 30px #4e1858;
+    color: yellow;
 }
 
 

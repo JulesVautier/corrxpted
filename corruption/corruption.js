@@ -57,7 +57,7 @@ class Corruption {
                 this.coef = this.coef * -1
             }
             newColor = '#' + newColor.toString(16)
-            this.initialsize += this.coef
+            this.initialsize += 1
             corruptions.push(new Corruption(this.initialx, this.initialy, newColor, this.coef, this.initialsize, this.speed + randomFloat(-0.5, +0.5), newFertility, undefined))
         }
     }

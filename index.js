@@ -3,12 +3,14 @@ module.init('canvas-container')
 module.start()
 
 window.onload = function () {
-    let limit = randomInt(100, 4000)
+    let limit = 3000
+    let speed = 8
     console.log(limit)
     for (let i = 0; i < limit; i++) {
         module.playOneFrame()
-        if (i % 100 === 0)
-            module.update()
+    }
+    for (let i = 0; i < speed; i++) {
+        module.update()
     }
     console.log('finished')
 }
