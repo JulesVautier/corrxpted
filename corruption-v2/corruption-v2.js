@@ -48,7 +48,7 @@ class Corruption {
         this.childs.push(new ChildsOfCorrumption(this,
             this.initialx,
             this.initialy,
-            this.color, this.colorStep, this.startColor, this.endColor,
+            this.color,
             this.initialsize,
             this.speed,
             this.initialfertility))
@@ -72,7 +72,7 @@ class Corruption {
 
 
 class ChildsOfCorrumption {
-    constructor(mother, x, y, color, colorStep, startColor, endColor, size, speed, fertility, angle = undefined) {
+    constructor(mother, x, y, color, size, speed, fertility, angle = undefined) {
         this.mother = mother
 
         this.x = x
@@ -81,11 +81,7 @@ class ChildsOfCorrumption {
         this.fertility = fertility
         this.speed = speed
         this.angle = angle
-        this.colorMutiplicator = 1
         this.color = color
-        this.colorStep = colorStep
-        this.endColor = endColor
-        this.startColor = startColor
         this.setAngle()
         this.exist()
     }
@@ -109,7 +105,7 @@ class ChildsOfCorrumption {
         this.angle += randomFloat(-10, +10)
         this.mother.childs.push(new ChildsOfCorrumption(this.mother,
             this.mother.initialx, this.mother.initialy,
-            this.color, this.colorStep, this.startColor, this.endColor,
+            this.color,
             this.size, this.speed, this.fertility, this.angle))
     }
 
@@ -136,7 +132,7 @@ class ChildsOfCorrumption {
                 newSpeed = 1
             }
             this.mother.childs.push(new ChildsOfCorrumption(this.mother,
-                this.mother.initialx, this.mother.initialy, newColor, this.colorStep, this.startColor, this.endColor,
+                this.mother.initialx, this.mother.initialy, newColor,
                 this.mother.initialsize + 1, newSpeed,
                 newFertility, undefined))
         }
@@ -145,16 +141,16 @@ class ChildsOfCorrumption {
     updateColor() {
         let newColor = getRGB(this.color)
         for (let i = 0; i < 3; i++) {
-            newColor[i] =  Math.floor(newColor[i] + this.colorStep[i])
+            newColor[i] =  Math.floor(newColor[i] + this.mother.colorStep[i])
         }
         newColor = arrayToRGB(newColor)
-        if (colorToInt(this.startColor) < colorToInt(this.endColor)) {
-            if (colorToInt(newColor) < colorToInt(this.endColor))
+        if (colorToInt(this.mother.startColor) < colorToInt(this.mother.endColor)) {
+            if (colorToInt(newColor) < colorToInt(this.mother.endColor))
                 return newColor
             else
                 return this.color
         } else {
-            if (colorToInt(newColor) > colorToInt(this.endColor))
+            if (colorToInt(newColor) > colorToInt(this.mother.endColor))
                 return newColor
             else
                 return this.color
