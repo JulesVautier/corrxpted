@@ -110,7 +110,6 @@ class CorruptionModule {
     }
 
     start() {
-        console.log('start', corruptionCanvas)
         corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
         update()
     }

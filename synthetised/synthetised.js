@@ -162,7 +162,6 @@ function convertImagesToParticles(imageData) {
         }
     }
     enableParticles = particles.filter(x => x.enable)
-    console.log('finish', particles.length)
 }
 
 function getMousePos(evt) {
