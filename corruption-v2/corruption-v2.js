@@ -6,20 +6,18 @@ function randomFloat(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-function colorToInt(color) {
-    return parseInt(color.slice(1, color.length), 16)
-}
-function intToColor(color) {
-    return newColor = '#' + color.toString(16)
-}
-
 function getRGB(colorString) {
-    return [colorString.slice(1, 3), colorString.slice(3, 5), colorString.slice(5, 7)]
+    let rgb = [colorString.slice(1, 3), colorString.slice(3, 5), colorString.slice(5, 7)]
+    for (let i = 0; i < 3; i++) {
+        rgb[i] = parseInt(rgb[i], 16)
+    }
+    return rgb
 }
 
 function arrayToRGB(colorArray) {
-    return `#${colorArray[0].toString(16)}${colorArray[1].toString(16)}${colorArray[2].toString(16)}`
+    return `#${colorArray[0].toString(16).padStart(2, '0')}${colorArray[1].toString(16).padStart(2, '0')}${colorArray[2].toString(16).padStart(2, '0')}`
 }
+
 class Corruption {
     constructor(x, y, startColor, endColor, size, speed, fertility) {
         this.initialx = x
@@ -56,16 +54,11 @@ class Corruption {
     }
 
     setColor() {
-        let intStartColor = colorToInt(this.startColor)
-        let intEndColor = colorToInt(this.endColor)
-
         let rgb = [getRGB(this.startColor), getRGB(this.endColor)]
         this.colorStep = [0, 0, 0]
         for (let i = 0; i < 3; i++) {
             this.colorStep[i] = (parseInt(rgb[1][i], 16) - parseInt(rgb[0][i], 16)) / 40
         }
-        console.log(rgb)
-        console.log(this.colorStep)
         this.color = this.startColor
     }
 }
@@ -93,7 +86,7 @@ class ChildsOfCorrumption {
         if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.width || this.y > canvas1.height) {
             return this.die()
         }
-        this.duplicate()
+        // this.duplicate()
         ctx1.fillStyle = this.color;
         ctx1.beginPath();
         ctx1.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
@@ -139,21 +132,16 @@ class ChildsOfCorrumption {
     }
 
     updateColor() {
-        console.log('this color', this.color)
+        console.log('this color', this.color, getRGB(this.color))
         let newColor = getRGB(this.color)
         for (let i = 0; i < 3; i++) {
             console.log(newColor[i], this.colorStep[i])
-            newColor[i] =  Math.floor(parseInt(newColor[i], 16) + this.colorStep[i])
+            newColor[i] =  Math.floor(newColor[i] + this.colorStep[i])
         }
+        console.log('this color', this.color, getRGB(this.color))
+        console.log('new array', arrayToRGB(newColor), newColor)
         newColor = arrayToRGB(newColor)
-        console.log('new_color', newColor)
-        // if (newColor > colorToInt(this.endColor)) {
-        //     this.colorMutiplicator = -1
-        // } else if (newColor < colorToInt(this.endColor)) {
-        //     this.colorMutiplicator = 1
-        // }
-        // newColor += this.colorMutiplicator * parseInt("050005", 16)
-        // newColor = intToColor(newColor)
+        console.log('______________')
         return newColor
     }
 
@@ -244,3 +232,4 @@ function initGui() {
 }
 
 init()
+
