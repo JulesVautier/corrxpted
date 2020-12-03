@@ -6,6 +6,13 @@ function randomFloat(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+function colorToInt(color) {
+    return parseInt(color.slice(1, color.length), 16)
+}
+function intToColor(color) {
+    return newColor = '#' + color.toString(16)
+}
+
 function getRGB(colorString) {
     let rgb = [colorString.slice(1, 3), colorString.slice(3, 5), colorString.slice(5, 7)]
     for (let i = 0; i < 3; i++) {
@@ -41,7 +48,7 @@ class Corruption {
         this.childs.push(new ChildsOfCorrumption(this,
             this.initialx,
             this.initialy,
-            this.color, this.colorStep, this.endColor,
+            this.color, this.colorStep, this.startColor, this.endColor,
             this.initialsize,
             this.speed,
             this.initialfertility))
@@ -65,7 +72,7 @@ class Corruption {
 
 
 class ChildsOfCorrumption {
-    constructor(mother, x, y, color, colorStep, endColor, size, speed, fertility, angle = undefined) {
+    constructor(mother, x, y, color, colorStep, startColor, endColor, size, speed, fertility, angle = undefined) {
         this.mother = mother
 
         this.x = x
@@ -78,6 +85,7 @@ class ChildsOfCorrumption {
         this.color = color
         this.colorStep = colorStep
         this.endColor = endColor
+        this.startColor = startColor
         this.setAngle()
         this.exist()
     }
@@ -86,7 +94,7 @@ class ChildsOfCorrumption {
         if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.width || this.y > canvas1.height) {
             return this.die()
         }
-        // this.duplicate()
+        this.duplicate()
         ctx1.fillStyle = this.color;
         ctx1.beginPath();
         ctx1.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
@@ -101,12 +109,15 @@ class ChildsOfCorrumption {
         this.angle += randomFloat(-10, +10)
         this.mother.childs.push(new ChildsOfCorrumption(this.mother,
             this.mother.initialx, this.mother.initialy,
-            this.color, this.colorStep, this.endColor,
+            this.color, this.colorStep, this.startColor, this.endColor,
             this.size, this.speed, this.fertility, this.angle))
     }
 
     live() {
-        this.size = this.size - randomFloat(0, this.size / 15)
+        if (this.size > 3)
+            this.size = this.size - randomFloat(0, this.size / randomFloat(30, 50))
+        else
+            this.size = this.size - randomFloat(0, this.size / 150)
         this.setAngle()
         this.y = this.speed * Math.cos(this.angle) + this.y
         this.x = this.speed * Math.sin(this.angle) + this.x
@@ -125,24 +136,22 @@ class ChildsOfCorrumption {
                 newSpeed = 1
             }
             this.mother.childs.push(new ChildsOfCorrumption(this.mother,
-                this.mother.initialx, this.mother.initialy, newColor, this.colorStep, this.endColor,
+                this.mother.initialx, this.mother.initialy, newColor, this.colorStep, this.startColor, this.endColor,
                 this.mother.initialsize + 1, newSpeed,
                 newFertility, undefined))
         }
     }
 
     updateColor() {
-        console.log('this color', this.color, getRGB(this.color))
         let newColor = getRGB(this.color)
         for (let i = 0; i < 3; i++) {
-            console.log(newColor[i], this.colorStep[i])
             newColor[i] =  Math.floor(newColor[i] + this.colorStep[i])
         }
-        console.log('this color', this.color, getRGB(this.color))
-        console.log('new array', arrayToRGB(newColor), newColor)
         newColor = arrayToRGB(newColor)
-        console.log('______________')
-        return newColor
+        if (colorToInt(newColor) < colorToInt(this.endColor))
+            return newColor
+        else
+            return this.color
     }
 
     setAngle() {
