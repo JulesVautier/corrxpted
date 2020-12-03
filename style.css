@@ -3,7 +3,7 @@ body {
     margin: 0;
     height: 100vh;
     width: 100vw;
-    color: #7300d7;
+    color: #ffffff;
 }
 
 .canvas-container {
@@ -37,7 +37,9 @@ canvas {
 }
 
 .clicableP:hover {
-    color: violet;
+    color: yellow;
+    text-shadow: 0 0 2px yellow, 0 0 30px #000000;
+
 }
 
 .returnButton {
