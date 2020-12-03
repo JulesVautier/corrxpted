@@ -199,7 +199,7 @@ var update = function () {
 }
 
 async function initTexts() {
-    textNames = ['summary.txt', "chapter-1.txt", "chapter-2.txt", "chapter-3.txt", "chapter-4.txt"]
+    textNames = ['summary.txt', "chapter-1.txt", "chapter-2.txt"]
     textColors = ["#9202FF", "#6600ff", "#6600cc", "#3333cc", "#3333ff"]
     for (let i = 0; i < textNames.length; i++) {
         let name = textNames[i]
@@ -245,7 +245,7 @@ function init() {
     canvas2.onmousemove = findScreenCoords;
     canvas2.ontouchmove = findScreenCoords;
     window.addEventListener('resize', init);
-    setInterval(chooseText, 30000)
+    setInterval(chooseText, 45000)
     update();
 }
 
