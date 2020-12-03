@@ -75,7 +75,6 @@ function getMousePos(canvas, evt) {
     };
 }
 
-
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
 
@@ -85,16 +84,8 @@ function setCanvasSize(canvas) {
 
     canvas.width = parent.offsetWidth - left * 2
     canvas.height = parent.offsetHeight - top * 2
-    console.log(parent.offsetWidth, parent.offsetHeight)
-    console.log(canvas.width, canvas.height)
 }
 
-var corruptions = []
-
-function createCorruption(evt) {
-    let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corruption(pos.x, pos.y, "#190a23", 1, 1, 4))
-}
 
 var update = function () {
     var i = corruptions.length;
@@ -111,13 +102,16 @@ function createCanvas() {
     ctx1 = canvas1.getContext('2d')
 }
 
-function init() {
-    createCanvas()
-    setCanvasSize(canvas1)
-    // canvas1.onclick = createCorruption;
-    // canvas1.ontouchstart = createCorruption;
-    corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
-    update()
+var corruptions = []
+
+class CorruptionModule {
+    init() {
+        createCanvas()
+        setCanvasSize(canvas1)
+        corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
+        update()
+    }
 }
 
-init()
+module = new CorruptionModule()
+module.init()
