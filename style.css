@@ -49,6 +49,12 @@ canvas {
 
 .returnButton p {
     margin: 0;
+    color: #7300d7;
+}
+
+.returnButton p:hover {
+    margin: 0;
+    text-shadow: 0 0 10px #300d6c, 0 0 30px #4e1858;
 }
 
 
