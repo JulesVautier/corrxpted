@@ -107,8 +107,8 @@ class CorruptionModule {
         setCanvasBackground()
     }
 
-    start() {
-        corruptions.push(new Corruption(window.innerWidth / 4, window.innerHeight / 2, "#190a23", 1, 1, 1, 4))
+    start(x, y) {
+        corruptions.push(new Corruption(x, y, "#190a23", 1, 1, 1, 4))
         setInterval(this.reset.bind(this), 20000)
     }
 
