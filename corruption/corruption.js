@@ -103,9 +103,12 @@ class CorruptionModule {
     init(containerName) {
         createCanvas(containerName)
         setCanvasSize(corruptionCanvas)
+    }
+
+    start() {
+        console.log('start')
         corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
         update()
-        console.log(corruptionCanvas)
     }
 }
 
