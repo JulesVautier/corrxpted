@@ -87,14 +87,14 @@ class ChildsOfCorrumption {
     }
 
     exist() {
-        if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > corruptionCanvas.width || this.y > corruptionCanvas.height) {
+        if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > corruptionV2Canvas.width || this.y > corruptionV2Canvas.height) {
             return this.die()
         }
         this.duplicate()
-        corruptionCTX.fillStyle = this.color;
-        corruptionCTX.beginPath();
-        corruptionCTX.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
-        corruptionCTX.fill();
+        corruptionV2CTX.fillStyle = this.color;
+        corruptionV2CTX.beginPath();
+        corruptionV2CTX.arc(this.x, this.y, this.size, 0, 2 * Math.PI);
+        corruptionV2CTX.fill();
     }
 
     duplicate() {
@@ -190,7 +190,7 @@ function setCanvasSize(canvas) {
 var corruptions = []
 
 function createCorruption(evt) {
-    let pos = getMousePos(corruptionCanvas, evt)
+    let pos = getMousePos(corruptionV2Canvas, evt)
     corruptions.push(new Corruption(pos.x, pos.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
 }
 
@@ -204,23 +204,23 @@ var update = function () {
 
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
-    corruptionCanvas = document.createElement("CANVAS");
-    canvasContainer.appendChild(corruptionCanvas)
-    corruptionCTX = corruptionCanvas.getContext('2d')
+    corruptionV2Canvas = document.createElement("CANVAS");
+    canvasContainer.appendChild(corruptionV2Canvas)
+    corruptionV2CTX = corruptionV2Canvas.getContext('2d')
 }
 
 function init() {
     createCanvas()
-    setCanvasSize(corruptionCanvas)
-    corruptionCanvas.onclick = createCorruption;
-    corruptionCanvas.ontouchstart = createCorruption;
+    setCanvasSize(corruptionV2Canvas)
+    corruptionV2Canvas.onclick = createCorruption;
+    corruptionV2Canvas.ontouchstart = createCorruption;
     initGui()
     update()
 }
 
 function reset() {
     corruptions = []
-    corruptionCTX.clearRect(0, 0, corruptionCanvas.width, corruptionCanvas.height)
+    corruptionV2CTX.clearRect(0, 0, corruptionV2Canvas.width, corruptionV2Canvas.height)
 }
 
 var settings = {

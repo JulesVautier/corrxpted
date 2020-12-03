@@ -24,7 +24,7 @@ class Particle {
         this.size = size
         this.color = color
         this.setInitialPos()
-        this.imageData = corruptionCTX.createImageData(particleSize, particleSize)
+        this.imageData = synthetisedCTX.createImageData(particleSize, particleSize)
         for (let i = 0; i < 4 * particleSize * particleSize; i++)
             this.imageData.data[i] = color[i]
         if (this.initialx === 0 && this.initialy === 0)
@@ -34,13 +34,13 @@ class Particle {
     }
 
     setInitialPos() {
-        this.x = randomInt(0, corruptionCanvas.width)
-        this.y = randomInt(0, corruptionCanvas.height)
+        this.x = randomInt(0, synthetisedCanvas1.width)
+        this.y = randomInt(0, synthetisedCanvas1.height)
     }
 
     draw() {
         if (this.x && this.y)
-            corruptionCTX.putImageData(this.imageData, this.x, this.y)
+            synthetisedCTX.putImageData(this.imageData, this.x, this.y)
     }
 
     update() {
@@ -80,7 +80,7 @@ var update = function () {
     //     ctx1.fillStyle = "rgba(0,0,0)";
     // else
     //     ctx1.fillStyle = "rgba(0,0,0, 0.02)";
-    // ctx1.fillRect(0, 0, canvas1.width, canvas1.height);
+    // ctx1.fillRect(0, 0, synthetisedCanvas1.width, synthetisedCanvas1.height);
     for (let i = 0; i < enableParticles.length; i++) {
         enableParticles[i].draw();
         enableParticles[i].update();
@@ -117,11 +117,11 @@ function createLetters(text) {
     drawing = new Image()
     drawing.src = "../pics/trou.jpg"
     drawing.onload = function () {
-        corruptionCTX.drawImage(drawing, 0, 0);
-        const data = corruptionCTX.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
+        synthetisedCTX.drawImage(drawing, 0, 0);
+        const data = synthetisedCTX.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
         convertImagesToParticles(data)
-        corruptionCTX.fillStyle = "rgba(0,0,0)";
-        corruptionCTX.fillRect(0,0, corruptionCanvas.width, corruptionCanvas.height)
+        synthetisedCTX.fillStyle = "rgba(0,0,0)";
+        synthetisedCTX.fillRect(0,0, synthetisedCanvas1.width, synthetisedCanvas1.height)
     }
 }
 
@@ -133,8 +133,7 @@ function getPixel(imageData, x, y) {
     let pixel2 = imageData.data[index + 1]
     let pixel3 = imageData.data[index + 2]
     let pixel4 = imageData.data[index + 3]
-    let pixel = [pixel1, pixel2, pixel3, pixel4]
-    return pixel
+    return [pixel1, pixel2, pixel3, pixel4]
 }
 
 function getPixels(imageData, x, y, size) {
@@ -190,22 +189,22 @@ function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
 
 
-    canvas2 = document.createElement("CANVAS");
-    canvasContainer.appendChild(canvas2)
-    ctx2 = canvas2.getContext('2d')
+    synthetisedCanvas2 = document.createElement("CANVAS");
+    canvasContainer.appendChild(synthetisedCanvas2)
+    ctx2 = synthetisedCanvas2.getContext('2d')
 
-    corruptionCanvas = document.createElement("CANVAS");
-    canvasContainer.appendChild(canvas1)
-    corruptionCTX = canvas1.getContext('2d')
+    synthetisedCanvas1 = document.createElement("CANVAS");
+    canvasContainer.appendChild(synthetisedCanvas1)
+    synthetisedCTX = synthetisedCanvas1.getContext('2d')
 
-    topCanvas = canvas1
+    topCanvas = synthetisedCanvas1
 }
 
 
 function init() {
     createCanvas()
-    setCanvasSize(corruptionCanvas)
-    setCanvasSize(canvas2)
+    setCanvasSize(synthetisedCanvas1)
+    setCanvasSize(synthetisedCanvas2)
     topCanvas.onclick = createParticlesOnMousePos
     topCanvas.onmousemove = getMousePos
     topCanvas.onmousedown = function () {
