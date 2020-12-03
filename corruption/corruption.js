@@ -79,13 +79,6 @@ function setCanvasSize(canvas) {
     canvas.height = parent.offsetHeight - top * 2
 }
 
-var update = function () {
-    var i = corruptions.length;
-    while (i--) {
-        corruptions[i].live();
-    }
-    requestAnimationFrame(update);
-}
 
 function setCanvasBackground() {
     corruptionCanvas.style.backgroundColor = "#000000"
@@ -111,7 +104,20 @@ class CorruptionModule {
 
     start() {
         corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
-        update()
+        this.update()
+    }
+
+
+    playOneFrame() {
+        var i = corruptions.length;
+        while (i--) {
+            corruptions[i].live();
+        }
+    }
+
+    update() {
+        this.playOneFrame()
+        requestAnimationFrame(this.update.bind(this));
     }
 }
 
