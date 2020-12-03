@@ -6,6 +6,13 @@ function randomFloat(min, max) {
     return Math.random() * (max - min) + min;
 }
 
+function colorToInt(color) {
+    return parseInt(color.slice(1, color.length), 16)
+}
+function intToColor(color) {
+    return newColor = '#' + color.toString(16)
+}
+
 class Corruption {
     constructor(x, y, startColor, endColor, size, speed, fertility) {
         this.initialx = x
@@ -43,6 +50,8 @@ class Corruption {
 
     setColor() {
         this.color = this.startColor
+        console.log(this.startColor, this.endColor)
+        console.log(this.startColor - this.endColor)
     }
 }
 
@@ -102,14 +111,15 @@ class ChildsOfCorrumption {
         this.mother.childs.splice(this.mother.childs.indexOf(this), 1);
         if (this.mother.childs.length < 50) {
             let newFertility = randomFloat(1, this.mother.initialsize / 2)
-            let newColor = parseInt(this.color.slice(1, this.color.length), 16)
-            if (newColor > parseInt("C600FF", 16)) {
+            let newColor = colorToInt(this.color)
+            // newColor += this.colorStep
+            if (newColor > colorToInt(this.endColor)) {
                 this.colorMutiplicator = -1
-            } else if (newColor < parseInt("250030", 16)) {
+            } else if (newColor < colorToInt(this.endColor)) {
                 this.colorMutiplicator = 1
             }
             newColor += this.colorMutiplicator * parseInt("050005", 16)
-            newColor = '#' + newColor.toString(16)
+            newColor = intToColor(newColor)
             let newSpeed = this.speed + randomFloat(-0.5, +0.5)
             if (newSpeed > 3) {
                 newSpeed = 3
