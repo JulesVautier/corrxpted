@@ -7,13 +7,18 @@ function randomFloat(min, max) {
 }
 
 class Corruption {
-    constructor(x, y, color, size, speed, fertility) {
+    constructor(x, y, startColor, endColor, size, speed, fertility) {
         this.initialx = x
         this.initialy = y
         this.initialsize = size
         this.initialfertility = fertility
+        this.startColor = startColor
+        this.endColor = endColor
 
-        this.color = color
+        this.color = undefined
+        this.colorStep = undefined
+        this.setColor()
+
         this.speed = speed
 
         this.childs = []
@@ -24,7 +29,7 @@ class Corruption {
         this.childs.push(new ChildsOfCorrumption(this,
             this.initialx,
             this.initialy,
-            this.color,
+            this.color, this.colorStep, this.endColor,
             this.initialsize,
             this.speed,
             this.initialfertility))
@@ -35,20 +40,26 @@ class Corruption {
             this.childs[i].live()
         }
     }
+
+    setColor() {
+        this.color = this.startColor
+    }
 }
 
 class ChildsOfCorrumption {
-    constructor(mother, x, y, color, size, speed, fertility, angle = undefined) {
+    constructor(mother, x, y, color, colorStep, endColor, size, speed, fertility, angle = undefined) {
         this.mother = mother
 
         this.x = x
         this.y = y
-        this.color = color
         this.size = size
         this.fertility = fertility
         this.speed = speed
         this.angle = angle
         this.colorMutiplicator = 1
+        this.color = color
+        this.colorStep = colorStep
+        this.endColor = endColor
         this.setAngle()
         this.exist()
     }
@@ -71,7 +82,8 @@ class ChildsOfCorrumption {
         this.fertility = this.fertility - randomFloat(0, this.fertility)
         this.angle += randomFloat(-10, +10)
         this.mother.childs.push(new ChildsOfCorrumption(this.mother,
-            this.mother.initialx, this.mother.initialy, this.color,
+            this.mother.initialx, this.mother.initialy,
+            this.color, this.colorStep, this.endColor,
             this.size, this.speed, this.fertility, this.angle))
     }
 
@@ -105,7 +117,7 @@ class ChildsOfCorrumption {
                 newSpeed = 1
             }
             this.mother.childs.push(new ChildsOfCorrumption(this.mother,
-                this.mother.initialx, this.mother.initialy, newColor,
+                this.mother.initialx, this.mother.initialy, newColor, this.colorStep, this.endColor,
                 this.mother.initialsize + 1, newSpeed,
                 newFertility, undefined))
         }
@@ -118,6 +130,7 @@ class ChildsOfCorrumption {
             this.angle += randomFloat(-0.1, +0.1)
         }
     }
+
 }
 
 function getMousePos(canvas, evt) {
@@ -144,7 +157,7 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corruption(pos.x, pos.y, settings.startColor, settings.size, settings.speed, settings.fertility))
+    corruptions.push(new Corruption(pos.x, pos.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
 }
 
 var update = function () {
@@ -173,14 +186,14 @@ function init() {
 
 function reset() {
     corruptions = []
-    ctx1.clearRect(0,0,canvas1.width,canvas1.height)
+    ctx1.clearRect(0, 0, canvas1.width, canvas1.height)
 }
 
 var settings = {
     startColor: '#190a23',
     endColor: '#ff0aff',
     size: 10,
-    speed: 2,
+    speed: 1,
     fertility: 4,
     reset: reset
 };
@@ -188,9 +201,9 @@ var settings = {
 function initGui() {
     var gui = new dat.GUI();
     gui.add(settings, 'reset')
-    gui.add(settings, 'size', 1, 200).step(0.5)
-    gui.add(settings, 'speed', 1, 100).step(0.5)
-    gui.add(settings, 'fertility', 1, 100).step(0.5);
+    gui.add(settings, 'size', 1, 100).step(1)
+    gui.add(settings, 'speed', 1, 10).step(0.5)
+    gui.add(settings, 'fertility', 1, 50).step(0.5);
     gui.addColor(settings, 'startColor')
     gui.addColor(settings, 'endColor')
     gui.open();
