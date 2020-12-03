@@ -17,7 +17,6 @@ class Corruption {
     }
 
     exist() {
-        // if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > canvas1.width || this.y > canvas1.height) {
         if (this.size < 1) {
             return this.die()
         }
@@ -88,6 +87,10 @@ var update = function () {
     requestAnimationFrame(update);
 }
 
+function setCanvasBackground() {
+    corruptionCanvas.style.backgroundColor = "#000000"
+}
+
 function createCanvas(containerName) {
     let canvasContainer = document.getElementById(containerName)
     corruptionCanvas = document.createElement("CANVAS");
@@ -103,10 +106,11 @@ class CorruptionModule {
     init(containerName) {
         createCanvas(containerName)
         setCanvasSize(corruptionCanvas)
+        setCanvasBackground()
     }
 
     start() {
-        console.log('start')
+        console.log('start', corruptionCanvas)
         corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
         update()
     }
