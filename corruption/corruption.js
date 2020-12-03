@@ -103,8 +103,7 @@ class CorruptionModule {
     }
 
     start() {
-        corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
-        this.update()
+        corruptions.push(new Corruption(window.innerWidth / 4, window.innerHeight / 2, "#190a23", 1, 1, 4))
     }
 
 
