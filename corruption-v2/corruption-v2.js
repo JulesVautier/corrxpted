@@ -49,10 +49,22 @@ class Corruption {
     }
 
     setColor() {
+        let intStartColor = colorToInt(this.startColor)
+        let intEndColor = colorToInt(this.endColor)
+
+        let rgb = [getRGB(this.startColor), getRGB(this.endColor)]
+        this.colorStep = [0, 0, 0]
+        for (let i = 0; i < 3; i++) {
+            this.colorStep[i] = (parseInt(rgb[1][i], 16) - parseInt(rgb[0][i], 16)) / 40
+        }
+        console.log(rgb)
+        console.log(this.colorStep)
         this.color = this.startColor
-        console.log(this.startColor, this.endColor)
-        console.log(this.startColor - this.endColor)
     }
+}
+
+function getRGB(colorString) {
+    return [colorString.slice(1, 3), colorString.slice(3, 5), colorString.slice(5, 7)]
 }
 
 class ChildsOfCorrumption {
