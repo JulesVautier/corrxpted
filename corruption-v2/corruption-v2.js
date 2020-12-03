@@ -205,8 +205,8 @@ var update = function () {
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
     corruptionCanvas = document.createElement("CANVAS");
-    canvasContainer.appendChild(canvas1)
-    corruptionCTX = canvas1.getContext('2d')
+    canvasContainer.appendChild(corruptionCanvas)
+    corruptionCTX = corruptionCanvas.getContext('2d')
 }
 
 function init() {
