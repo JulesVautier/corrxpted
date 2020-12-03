@@ -148,10 +148,17 @@ class ChildsOfCorrumption {
             newColor[i] =  Math.floor(newColor[i] + this.colorStep[i])
         }
         newColor = arrayToRGB(newColor)
-        if (colorToInt(newColor) < colorToInt(this.endColor))
-            return newColor
-        else
-            return this.color
+        if (colorToInt(this.startColor) < colorToInt(this.endColor)) {
+            if (colorToInt(newColor) < colorToInt(this.endColor))
+                return newColor
+            else
+                return this.color
+        } else {
+            if (colorToInt(newColor) > colorToInt(this.endColor))
+                return newColor
+            else
+                return this.color
+        }
     }
 
     setAngle() {
