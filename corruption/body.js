@@ -1,13 +1,5 @@
-function randomInt( min, max ) {
-    return Math.floor(Math.random() * ( max - min ) + min);
-}
-
-function randomFloat( min, max ) {
-    return Math.random() * ( max - min ) + min;
-}
-
-class Corumption {
-    constructor(x, y, color, size, speed, fertility, angle=undefined) {
+class Corruption {
+    constructor(x, y, color, size, speed, fertility, angle = undefined) {
         this.initialx = x
         this.initialy = y
         this.initialsize = size
@@ -42,17 +34,17 @@ class Corumption {
         }
         this.fertility = this.fertility - randomFloat(0, this.fertility)
         this.angle += randomFloat(-10, +10)
-        corruptions.push(new Corumption(this.x, this.y, this.color, this.size, this.speed, this.fertility, this.angle))
+        corruptions.push(new Corruption(this.x, this.y, this.color, this.size, this.speed, this.fertility, this.angle))
     }
 
     live() {
         if (this.size > 3)
             this.size = this.size - randomFloat(0, this.size / randomFloat(30, 50))
         else
-            this.size = this.size - randomFloat(0, this.size / 150  )
+            this.size = this.size - randomFloat(0, this.size / 150)
         this.setAngle()
-        this.y=this.speed*Math.cos(this.angle) + this.y
-        this.x=this.speed*Math.sin(this.angle) + this.x
+        this.y = this.speed * Math.cos(this.angle) + this.y
+        this.x = this.speed * Math.sin(this.angle) + this.x
         this.exist()
     }
 
@@ -62,7 +54,7 @@ class Corumption {
             let newFertility = randomFloat(1, this.initialsize / 2)
             let newColor = parseInt(this.color.slice(1, this.color.length), 16) + parseInt("050005", 16)
             newColor = '#' + newColor.toString(16)
-            corruptions.push(new Corumption(this.initialx, this.initialy, newColor, this.initialsize + 1, this.speed + randomFloat(-0.5, +0.5) , newFertility, undefined))
+            corruptions.push(new Corruption(this.initialx, this.initialy, newColor, this.initialsize + 1, this.speed + randomFloat(-0.5, +0.5), newFertility, undefined))
         }
     }
 
@@ -101,7 +93,7 @@ var corruptions = []
 
 function createCorruption(evt) {
     let pos = getMousePos(canvas1, evt)
-    corruptions.push(new Corumption(pos.x, pos.y, "#190a23", 1, 1, 4))
+    corruptions.push(new Corruption(pos.x, pos.y, "#190a23", 1, 1, 4))
 }
 
 var update = function () {
@@ -124,7 +116,7 @@ function init() {
     setCanvasSize(canvas1)
     // canvas1.onclick = createCorruption;
     // canvas1.ontouchstart = createCorruption;
-    corruptions.push(new Corumption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
+    corruptions.push(new Corruption(window.innerWidth / 2, window.innerHeight / 2, "#190a23", 1, 1, 4))
     update()
 }
 
