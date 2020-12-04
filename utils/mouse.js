@@ -5,7 +5,6 @@ var mouse = {
 
 
 function getMousePos(evt) {
-    console.log(evt)
     mouse.x = evt.clientX
     mouse.y = evt.clientY
 }

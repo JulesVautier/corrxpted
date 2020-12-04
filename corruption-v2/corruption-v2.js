@@ -1,4 +1,4 @@
-class Corruption {
+class CorruptionV2 {
     constructor(x, y, startColor, endColor, size, speed, fertility) {
         this.initialx = x
         this.initialy = y
@@ -18,7 +18,7 @@ class Corruption {
     }
 
     birth() {
-        this.childs.push(new ChildsOfCorrumption(this,
+        this.childs.push(new ParticleCorruptionV2(this,
             this.initialx,
             this.initialy,
             this.color,
@@ -44,7 +44,7 @@ class Corruption {
 }
 
 
-class ChildsOfCorrumption {
+class ParticleCorruptionV2 {
     constructor(mother, x, y, color, size, speed, fertility, angle = undefined) {
         this.mother = mother
 
@@ -76,7 +76,7 @@ class ChildsOfCorrumption {
         }
         this.fertility = this.fertility - randomFloat(0, this.fertility)
         this.angle += randomFloat(-10, +10)
-        this.mother.childs.push(new ChildsOfCorrumption(this.mother,
+        this.mother.childs.push(new ParticleCorruptionV2(this.mother,
             this.mother.initialx, this.mother.initialy,
             this.color,
             this.size, this.speed, this.fertility, this.angle))
@@ -104,7 +104,7 @@ class ChildsOfCorrumption {
             } else if (newSpeed < 1) {
                 newSpeed = 1
             }
-            this.mother.childs.push(new ChildsOfCorrumption(this.mother,
+            this.mother.childs.push(new ParticleCorruptionV2(this.mother,
                 this.mother.initialx, this.mother.initialy, newColor,
                 this.mother.initialsize + 1, newSpeed,
                 newFertility, undefined))
@@ -140,7 +140,6 @@ class ChildsOfCorrumption {
 
 }
 
-
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
 
@@ -155,7 +154,7 @@ function setCanvasSize(canvas) {
 var corruptions = []
 
 function createCorruption(evt) {
-    corruptions.push(new Corruption(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
+    corruptions.push(new CorruptionV2(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
 }
 
 var update = function () {
@@ -190,6 +189,7 @@ function reset() {
 }
 
 var settings = {
+    background: '#000000',
     startColor: '#190a23',
     endColor: '#ff0aff',
     size: 10,
@@ -201,12 +201,15 @@ var settings = {
 function initGui() {
     var gui = new dat.GUI();
     gui.add(settings, 'reset')
-    gui.add(settings, 'size', 1, 100).step(1)
+    gui.addColor(settings, 'background').onChange(function (color) {
+        corruptionV2Canvas.style.backgroundColor = color
+    })
+    gui.add(settings, 'size', 1, 100).step(1).onC
     gui.add(settings, 'speed', 1, 10).step(0.5)
     gui.add(settings, 'fertility', 1, 50).step(0.5);
     gui.addColor(settings, 'startColor')
     gui.addColor(settings, 'endColor')
-    gui.open();
+    gui.close()
 }
 
 init()
