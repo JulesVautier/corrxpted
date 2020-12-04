@@ -1,30 +1,3 @@
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function randomFloat(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-function colorToInt(color) {
-    return parseInt(color.slice(1, color.length), 16)
-}
-function intToColor(color) {
-    return newColor = '#' + color.toString(16)
-}
-
-function getRGB(colorString) {
-    let rgb = [colorString.slice(1, 3), colorString.slice(3, 5), colorString.slice(5, 7)]
-    for (let i = 0; i < 3; i++) {
-        rgb[i] = parseInt(rgb[i], 16)
-    }
-    return rgb
-}
-
-function arrayToRGB(colorArray) {
-    return `#${colorArray[0].toString(16).padStart(2, '0')}${colorArray[1].toString(16).padStart(2, '0')}${colorArray[2].toString(16).padStart(2, '0')}`
-}
-
 class Corruption {
     constructor(x, y, startColor, endColor, size, speed, fertility) {
         this.initialx = x
@@ -167,14 +140,6 @@ class ChildsOfCorrumption {
 
 }
 
-function getMousePos(canvas, evt) {
-    var rect = canvas.getBoundingClientRect();
-    return {
-        x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
-        y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
-    };
-}
-
 
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
@@ -190,8 +155,7 @@ function setCanvasSize(canvas) {
 var corruptions = []
 
 function createCorruption(evt) {
-    let pos = getMousePos(corruptionV2Canvas, evt)
-    corruptions.push(new Corruption(pos.x, pos.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
+    corruptions.push(new Corruption(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
 }
 
 var update = function () {
@@ -212,6 +176,8 @@ function createCanvas() {
 function init() {
     createCanvas()
     setCanvasSize(corruptionV2Canvas)
+    corruptionV2Canvas.onmousemove = getMousePos
+    corruptionV2Canvas.ontouchmove = getMousePos
     corruptionV2Canvas.onclick = createCorruption;
     corruptionV2Canvas.ontouchstart = createCorruption;
     initGui()
