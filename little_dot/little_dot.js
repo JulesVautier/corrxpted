@@ -40,14 +40,8 @@ class Particle {
 }
 
 function setCanvasSize(canvas) {
-    var parent = document.getElementById("canvas-container")
-
-    let style = document.defaultView.getComputedStyle(canvas)
-    let left = parseInt(style.left.slice(0, -2))
-    let top = parseInt(style.top.slice(0, -2))
-
-    canvas.width = parent.offsetWidth - left * 2
-    canvas.height = parent.offsetHeight - top * 2
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
 }
 
 var particles = []
@@ -110,8 +104,8 @@ var settings = {
 function initGui() {
     var gui = new dat.GUI();
     gui.add(settings, 'reset')
-    gui.addColor(settings, 'background').onChange(function (color) {
-        canvas1.style.backgroundColor = color
+    gui.addColor(settings, 'background').onChange(function (background) {
+        canvas1.style.backgroundColor = background
     })
     gui.addColor(settings, 'color')
     gui.add(settings, 'rainbowMode')
