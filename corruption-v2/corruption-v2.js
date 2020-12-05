@@ -95,14 +95,14 @@ class ParticleCorruptionV2 {
         else
             this.size = this.size - randomFloat(0, this.size / 150)
         this.setAngle()
-        this.y = Math.cos(this.angle) + this.y
-        this.x = Math.sin(this.angle) + this.x
+        let speed = (this.size / 7) + 1
+        this.y = speed * Math.cos(this.angle) + this.y
+        this.x = speed* Math.sin(this.angle) + this.x
         this.draw()
     }
 
     destroy() {
         this.mother.childs.splice(this.mother.childs.indexOf(this), 1);
-        return
         if (this.mother.childs.length < 50) {
             let newFertility = randomFloat(1, this.mother.initialsize / 2)
             let newColor = this.updateColor()
