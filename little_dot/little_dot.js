@@ -39,13 +39,6 @@ class Particle {
 
 }
 
-
-function getMousePos(evt) {
-    mouse.x = evt.clientX
-    mouse.y = evt.clientY
-}
-
-
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
 
@@ -60,7 +53,13 @@ function setCanvasSize(canvas) {
 var particles = []
 
 var update = function () {
-    // ctx.clearRect(0, 0, canvas1.width, canvas1.height)
+    if (settings.transparency) {
+        if (update.counter % (Math.floor(10 /settings.transparency)) === 0) {
+            ctx.fillStyle = 'rgba(0,0,0,0.05)'
+            ctx.fillRect(0, 0, canvas1.width, canvas1.height)
+        }
+        update.counter++
+    }
     var i = particles.length;
     while (i--) {
         particles[i].draw();
@@ -68,6 +67,7 @@ var update = function () {
     }
     requestAnimationFrame(update);
 }
+update.counter = 0
 
 var ctx = undefined
 var canvas1 = undefined
@@ -84,9 +84,41 @@ function init() {
     setCanvasSize(canvas1)
     canvas1.onmousemove = getMousePos
     canvas1.onclick = function () {
-        particles.push(new Particle(mouse.x, mouse.y, [255, 255, 255, 255], 30))
+        particles.push(new Particle(mouse.x, mouse.y, getRGB(settings.color), 30))
     }
+    initGui()
     update()
+}
+
+
+function reset() {
+    particles = []
+    ctx.clearRect(0, 0, canvas1.width, canvas1.height)
+}
+
+var settings = {
+    background: '#000000',
+    color: '#ffffff',
+    rainbowMode: false,
+    size: 1,
+    speed: 1,
+    transparency: 0.5,
+    reset: reset
+};
+
+
+function initGui() {
+    var gui = new dat.GUI();
+    gui.add(settings, 'reset')
+    gui.addColor(settings, 'background').onChange(function (color) {
+        canvas1.style.backgroundColor = color
+    })
+    gui.addColor(settings, 'color')
+    gui.add(settings, 'rainbowMode')
+    gui.add(settings, 'transparency', 0, 10).step(0.5)
+    gui.add(settings, 'size', 1, 10).step(0.5)
+    gui.add(settings, 'speed', 1, 100).step(1)
+    gui.close()
 }
 
 init()

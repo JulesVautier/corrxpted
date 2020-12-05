@@ -20,10 +20,12 @@ function intToColor(color) {
 }
 
 function getRGB(colorString) {
+    console.log(colorString)
     let rgb = [colorString.slice(1, 3), colorString.slice(3, 5), colorString.slice(5, 7)]
     for (let i = 0; i < 3; i++) {
         rgb[i] = parseInt(rgb[i], 16)
     }
+    rgb.push(255)
     return rgb
 }
 
