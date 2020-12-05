@@ -1,10 +1,9 @@
 class CorruptionV2 {
-    constructor(x, y, startColor, endColor, size, speed, fertility, division) {
+    constructor(x, y, startColor, endColor, size, speed, divisionRate) {
         this.initialx = x
         this.initialy = y
         this.initialsize = size
-        this.initialfertility = fertility
-        this.division = division
+        this.divisionRate = divisionRate
         this.startColor = startColor
         this.endColor = endColor
 
@@ -26,7 +25,7 @@ class CorruptionV2 {
                 this.initialy,
                 this.color,
                 this.initialsize,
-                this.initialfertility))
+                this.divisionRate))
         }
     }
 
@@ -46,19 +45,20 @@ class CorruptionV2 {
     }
 
     getNbParticlesToCreate() {
+        return 1
         return 1 + (this.initialsize / 3)
     }
 }
 
 
 class ParticleCorruptionV2 {
-    constructor(mother, x, y, color, size, fertility, angle = undefined) {
+    constructor(mother, x, y, color, size, divisionRate, angle = undefined) {
         this.mother = mother
 
         this.x = x
         this.y = y
         this.size = size
-        this.divisionRate = fertility
+        this.divisionRate = divisionRate
         this.angle = angle
         this.color = color
         this.setAngle()
@@ -77,10 +77,11 @@ class ParticleCorruptionV2 {
     }
 
     duplicate() {
-        let condition = randomInt(0, 1000)
-        if (condition < this.divisionRate) {
+        let facteur = 450
+        let condition = randomInt(0, 100 * facteur)
+        if ((this.divisionRate * 1) > condition) {
+            console.log('divisionRate!', this.divisionRate, condition)
             this.divisionRate /= 2
-            console.log('division!', condition, this.mother.division)
             this.mother.childs.push(new ParticleCorruptionV2(this.mother,
                 this.x, this.y,
                 this.color,
@@ -101,6 +102,7 @@ class ParticleCorruptionV2 {
 
     destroy() {
         this.mother.childs.splice(this.mother.childs.indexOf(this), 1);
+        return
         if (this.mother.childs.length < 50) {
             let newFertility = randomFloat(1, this.mother.initialsize / 2)
             let newColor = this.updateColor()
@@ -165,7 +167,7 @@ var corruptionV2Canvas = undefined
 var corruptions = []
 
 function createCorruption(evt) {
-    corruptions.push(new CorruptionV2(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility, settings.division))
+    corruptions.push(new CorruptionV2(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.divisionRate * 50))
 }
 
 function init() {
@@ -200,8 +202,7 @@ var settings = {
     endColor: '#ff0aff',
     size: 10,
     speed: 1,
-    fertility: 4,
-    division: 20,
+    divisionRate: 100,
     reset: reset
 };
 
@@ -213,8 +214,7 @@ function initGui() {
     })
     gui.add(settings, 'size', 1, 100).step(1)
     gui.add(settings, 'speed', 1, 10).step(0.5)
-    gui.add(settings, 'fertility', 1, 50).step(0.5);
-    gui.add(settings, 'division', 0, 100).step(1);
+    gui.add(settings, 'divisionRate', 0, 100).step(1);
     gui.addColor(settings, 'startColor')
     gui.addColor(settings, 'endColor')
     gui.close()
