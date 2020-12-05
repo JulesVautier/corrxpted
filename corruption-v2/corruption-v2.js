@@ -23,7 +23,6 @@ class CorruptionV2 {
             this.initialy,
             this.color,
             this.initialsize,
-            this.speed,
             this.initialfertility))
     }
 
@@ -45,14 +44,13 @@ class CorruptionV2 {
 
 
 class ParticleCorruptionV2 {
-    constructor(mother, x, y, color, size, speed, fertility, angle = undefined) {
+    constructor(mother, x, y, color, size, fertility, angle = undefined) {
         this.mother = mother
 
         this.x = x
         this.y = y
         this.size = size
         this.fertility = fertility
-        this.speed = speed
         this.angle = angle
         this.color = color
         this.setAngle()
@@ -79,7 +77,7 @@ class ParticleCorruptionV2 {
         this.mother.childs.push(new ParticleCorruptionV2(this.mother,
             this.mother.initialx, this.mother.initialy,
             this.color,
-            this.size, this.speed, this.fertility, this.angle))
+            this.size, this.fertility, this.angle))
     }
 
     animate() {
@@ -88,8 +86,8 @@ class ParticleCorruptionV2 {
         else
             this.size = this.size - randomFloat(0, this.size / 150)
         this.setAngle()
-        this.y = this.speed * Math.cos(this.angle) + this.y
-        this.x = this.speed * Math.sin(this.angle) + this.x
+        this.y = Math.cos(this.angle) + this.y
+        this.x = Math.sin(this.angle) + this.x
         this.draw()
     }
 
@@ -100,7 +98,7 @@ class ParticleCorruptionV2 {
             let newColor = this.updateColor()
             this.mother.childs.push(new ParticleCorruptionV2(this.mother,
                 this.mother.initialx, this.mother.initialy, newColor,
-                this.mother.initialsize + 1, this.speed,
+                this.mother.initialsize + 1,
                 newFertility, undefined))
         }
     }
