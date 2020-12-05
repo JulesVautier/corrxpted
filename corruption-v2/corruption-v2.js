@@ -114,7 +114,7 @@ class ParticleCorruptionV2 {
     updateColor() {
         let newColor = getRGB(this.color)
         for (let i = 0; i < 3; i++) {
-            newColor[i] =  Math.floor(newColor[i] + this.mother.colorStep[i])
+            newColor[i] = Math.floor(newColor[i] + this.mother.colorStep[i])
         }
         newColor = arrayToRGB(newColor)
         if (colorToInt(this.mother.startColor) < colorToInt(this.mother.endColor)) {
@@ -151,18 +151,12 @@ function setCanvasSize(canvas) {
     canvas.height = parent.offsetHeight - top * 2
 }
 
+window.addEventListener('resize', setCanvasSize.bind(corruptionV2Canvas));
+
 var corruptions = []
 
 function createCorruption(evt) {
     corruptions.push(new CorruptionV2(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
-}
-
-var update = function () {
-    var i = corruptions.length;
-    while (i--) {
-        corruptions[i].corrupt();
-    }
-    requestAnimationFrame(update);
 }
 
 function createCanvas() {
@@ -171,6 +165,9 @@ function createCanvas() {
     canvasContainer.appendChild(corruptionV2Canvas)
     corruptionV2CTX = corruptionV2Canvas.getContext('2d')
 }
+
+var corruptionV2Canvas = undefined
+
 
 function init() {
     createCanvas()
@@ -186,6 +183,14 @@ function init() {
 function reset() {
     corruptions = []
     corruptionV2CTX.clearRect(0, 0, corruptionV2Canvas.width, corruptionV2Canvas.height)
+}
+
+var update = function () {
+    var i = corruptions.length;
+    while (i--) {
+        corruptions[i].corrupt();
+    }
+    requestAnimationFrame(update);
 }
 
 var settings = {
