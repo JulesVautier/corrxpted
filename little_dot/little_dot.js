@@ -67,11 +67,6 @@ class Particle {
 
 }
 
-// var rainbowColor = 0
-// setInterval(function () {
-//     rainbowColor++
-// }, 100)
-
 function setCanvasSize(canvas) {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
@@ -128,10 +123,10 @@ function reset() {
 var settings = {
     background: '#000000',
     color: '#ffffff',
-    rainbowMode: true,
+    rainbowMode: false,
     size: 1,
     speed: 3,
-    transparency: 0.5,
+    transparency: 0.0,
     reset: reset
 };
 
