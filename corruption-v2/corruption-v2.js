@@ -80,7 +80,6 @@ class ParticleCorruptionV2 {
         let facteur = 450
         let condition = randomInt(0, 100 * facteur)
         if ((this.divisionRate * 1) > condition) {
-            console.log('divisionRate!', this.divisionRate, condition)
             this.divisionRate /= 2
             this.mother.childs.push(new ParticleCorruptionV2(this.mother,
                 this.x, this.y,

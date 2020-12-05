@@ -27,8 +27,6 @@ class Particle {
         this.imageData = synthetisedCTX.createImageData(particleSize, particleSize)
         for (let i = 0; i < 4 * particleSize * particleSize; i++)
             this.imageData.data[i] = color[i]
-        if (this.initialx === 0 && this.initialy === 0)
-            console.log(this.imageData.data, this.imageData.data.length)
         this.enable = enable
 
     }
