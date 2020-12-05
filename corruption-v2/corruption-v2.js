@@ -15,7 +15,6 @@ class CorruptionV2 {
 
         this.childs = []
         this.create()
-
     }
 
     create() {
@@ -99,15 +98,9 @@ class ParticleCorruptionV2 {
         if (this.mother.childs.length < 50) {
             let newFertility = randomFloat(1, this.mother.initialsize / 2)
             let newColor = this.updateColor()
-            let newSpeed = this.speed + randomFloat(-0.5, +0.5)
-            if (newSpeed > 3) {
-                newSpeed = 3
-            } else if (newSpeed < 1) {
-                newSpeed = 1
-            }
             this.mother.childs.push(new ParticleCorruptionV2(this.mother,
                 this.mother.initialx, this.mother.initialy, newColor,
-                this.mother.initialsize + 1, newSpeed,
+                this.mother.initialsize + 1, this.speed,
                 newFertility, undefined))
         }
     }
@@ -188,7 +181,9 @@ function reset() {
 var update = function () {
     var i = corruptions.length;
     while (i--) {
-        corruptions[i].draw()
+        for (let speed = 0; speed < corruptions[i].speed; speed++) {
+            corruptions[i].draw()
+        }
     }
     requestAnimationFrame(update);
 }
