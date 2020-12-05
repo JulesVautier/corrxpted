@@ -18,7 +18,15 @@ class Particle {
     }
 
     draw() {
-        ctx.putImageData(this.imageData, this.x, this.y)
+        let rgb = this.color
+        ctx.fillStyle = 'rgb(50, 40, 40)'
+        ctx.fillStyle = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')'
+        ctx.beginPath()
+        console.log(this.size)
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+        ctx.closePath()
+        ctx.fill()
+        // ctx.putImageData(this.imageData, this.x, this.y)
     }
 
     update() {
@@ -80,7 +88,7 @@ function init() {
     setCanvasSize(canvas1)
     canvas1.onmousemove = getMousePos
     canvas1.onclick = function () {
-        particles.push(new Particle(mouse.x, mouse.y, getRGB(settings.color), 30))
+        particles.push(new Particle(mouse.x, mouse.y, getRGB(settings.color), settings.size))
     }
     initGui()
     update()
@@ -112,7 +120,7 @@ function initGui() {
     gui.addColor(settings, 'color')
     gui.add(settings, 'rainbowMode')
     gui.add(settings, 'transparency', 0, 10).step(0.5)
-    gui.add(settings, 'size', 1, 10).step(0.5)
+    gui.add(settings, 'size', 1, 5).step(0.1)
     gui.add(settings, 'speed', 1, 100).step(1)
     gui.close()
 }
