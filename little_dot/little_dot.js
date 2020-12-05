@@ -1,12 +1,13 @@
 
 class Particle {
-    constructor(x, y, color, size) {
+    constructor(x, y, color, size, speed) {
         this.initialx = x
         this.initialy = y
 
         this.x = x
         this.y = y
         this.density = 0.5
+        this.speed = speed
 
         this.size = size
         this.color = color
@@ -18,15 +19,15 @@ class Particle {
     }
 
     draw() {
-        let rgb = this.color
-        ctx.fillStyle = 'rgb(50, 40, 40)'
-        ctx.fillStyle = 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')'
-        ctx.beginPath()
-        console.log(this.size)
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.closePath()
-        ctx.fill()
-        // ctx.putImageData(this.imageData, this.x, this.y)
+        ctx.fillStyle = 'rgb(' + this.color[0] + ',' + this.color[1] + ',' + this.color[2] + ')'
+        if (this.size > 1) {
+            ctx.beginPath()
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+            ctx.closePath()
+            ctx.fill()
+        } else {
+            ctx.fillRect(this.x, this.y, 1, 1)
+        }
     }
 
     update() {
@@ -38,7 +39,7 @@ class Particle {
         let distance = Math.sqrt(dx * dx + dy * dy)
         let forceDirectionX = dx / distance
         let forceDirectionY = dy / distance
-        let force = distance / 300
+        let force = distance / 900 * this.speed
         this.directionX += forceDirectionX * force * this.density
         this.directionY += forceDirectionY * force * this.density
         this.x += this.directionX
@@ -88,7 +89,7 @@ function init() {
     setCanvasSize(canvas1)
     canvas1.onmousemove = getMousePos
     canvas1.onclick = function () {
-        particles.push(new Particle(mouse.x, mouse.y, getRGB(settings.color), settings.size))
+        particles.push(new Particle(mouse.x, mouse.y, getRGB(settings.color), settings.size, settings.speed))
     }
     initGui()
     update()
@@ -105,7 +106,7 @@ var settings = {
     color: '#ffffff',
     rainbowMode: false,
     size: 1,
-    speed: 1,
+    speed: 3,
     transparency: 0.5,
     reset: reset
 };
@@ -121,7 +122,7 @@ function initGui() {
     gui.add(settings, 'rainbowMode')
     gui.add(settings, 'transparency', 0, 10).step(0.5)
     gui.add(settings, 'size', 1, 5).step(0.1)
-    gui.add(settings, 'speed', 1, 100).step(1)
+    gui.add(settings, 'speed', 0, 10).step(0.1)
     gui.close()
 }
 
