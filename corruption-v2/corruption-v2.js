@@ -1,9 +1,10 @@
 class CorruptionV2 {
-    constructor(x, y, startColor, endColor, size, speed, fertility) {
+    constructor(x, y, startColor, endColor, size, speed, fertility, division) {
         this.initialx = x
         this.initialy = y
         this.initialsize = size
         this.initialfertility = fertility
+        this.division = division
         this.startColor = startColor
         this.endColor = endColor
 
@@ -157,7 +158,7 @@ var corruptionV2Canvas = undefined
 var corruptions = []
 
 function createCorruption(evt) {
-    corruptions.push(new CorruptionV2(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
+    corruptions.push(new CorruptionV2(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility, settings.division))
 }
 
 function init() {
@@ -193,6 +194,7 @@ var settings = {
     size: 10,
     speed: 1,
     fertility: 4,
+    division: 20,
     reset: reset
 };
 
@@ -202,9 +204,10 @@ function initGui() {
     gui.addColor(settings, 'background').onChange(function (color) {
         corruptionV2Canvas.style.backgroundColor = color
     })
-    gui.add(settings, 'size', 1, 100).step(1).onC
+    gui.add(settings, 'size', 1, 100).step(1)
     gui.add(settings, 'speed', 1, 10).step(0.5)
     gui.add(settings, 'fertility', 1, 50).step(0.5);
+    gui.add(settings, 'division', 0, 100).step(1);
     gui.addColor(settings, 'startColor')
     gui.addColor(settings, 'endColor')
     gui.close()
