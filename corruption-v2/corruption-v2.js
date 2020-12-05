@@ -19,12 +19,15 @@ class CorruptionV2 {
     }
 
     create() {
-        this.childs.push(new ParticleCorruptionV2(this,
-            this.initialx,
-            this.initialy,
-            this.color,
-            this.initialsize,
-            this.initialfertility))
+        this.nbParticles = this.getNbParticlesToCreate()
+        for (let i = 0; i < this.nbParticles; i++) {
+            this.childs.push(new ParticleCorruptionV2(this,
+                this.initialx,
+                this.initialy,
+                this.color,
+                this.initialsize,
+                this.initialfertility))
+        }
     }
 
     draw() {
@@ -41,6 +44,10 @@ class CorruptionV2 {
         }
         this.color = this.startColor
     }
+
+    getNbParticlesToCreate() {
+        return 1 + (this.initialsize / 3)
+    }
 }
 
 
@@ -51,7 +58,7 @@ class ParticleCorruptionV2 {
         this.x = x
         this.y = y
         this.size = size
-        this.fertility = fertility
+        this.divisionRate = fertility
         this.angle = angle
         this.color = color
         this.setAngle()
@@ -70,15 +77,15 @@ class ParticleCorruptionV2 {
     }
 
     duplicate() {
-        if (this.fertility < 1) {
-            return this.fertility = 0
+        let condition = randomInt(0, 1000)
+        if (condition < this.divisionRate) {
+            this.divisionRate /= 2
+            console.log('division!', condition, this.mother.division)
+            this.mother.childs.push(new ParticleCorruptionV2(this.mother,
+                this.x, this.y,
+                this.color,
+                this.size, this.divisionRate, this.angle))
         }
-        this.fertility = this.fertility - randomFloat(0, this.fertility)
-        this.angle += randomFloat(-10, +10)
-        this.mother.childs.push(new ParticleCorruptionV2(this.mother,
-            this.mother.initialx, this.mother.initialy,
-            this.color,
-            this.size, this.fertility, this.angle))
     }
 
     animate() {
