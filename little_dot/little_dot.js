@@ -1,6 +1,6 @@
 
 class Particle {
-    constructor(x, y, color, size, speed) {
+    constructor(x, y, color, size, speed, rainbowMode) {
         this.initialx = x
         this.initialy = y
 
@@ -8,6 +8,7 @@ class Particle {
         this.y = y
         this.density = 0.5
         this.speed = speed
+        this.rainbowMode = rainbowMode
 
         this.size = size
         this.color = color
@@ -16,10 +17,19 @@ class Particle {
             this.imageData.data[i] = color[i]
         this.directionX = 0
         this.directionY = 0
+        if (this.rainbowMode) {
+            this.rainbowColor = 0
+            this.setColor()
+        }
+
     }
 
     draw() {
-        ctx.fillStyle = 'rgb(' + this.color[0] + ',' + this.color[1] + ',' + this.color[2] + ')'
+        if (this.rainbowMode) {
+            ctx.fillStyle = this.color
+        } else {
+            ctx.fillStyle = 'rgb(' + this.color[0] + ',' + this.color[1] + ',' + this.color[2] + ')'
+        }
         if (this.size > 1) {
             ctx.beginPath()
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
@@ -46,7 +56,21 @@ class Particle {
         this.y += this.directionY
     }
 
+    setColor() {
+        this.color = 'hsl('+this.rainbowColor+', 100%, 50%)';
+        setInterval(function () {
+            this.rainbowColor++
+            this.color = 'hsl('+this.rainbowColor+', 100%, 50%)';
+        }.bind(this), 70)
+
+    }
+
 }
+
+// var rainbowColor = 0
+// setInterval(function () {
+//     rainbowColor++
+// }, 100)
 
 function setCanvasSize(canvas) {
     canvas.width = window.innerWidth
@@ -89,7 +113,7 @@ function init() {
     setCanvasSize(canvas1)
     canvas1.onmousemove = getMousePos
     canvas1.onclick = function () {
-        particles.push(new Particle(mouse.x, mouse.y, getRGB(settings.color), settings.size, settings.speed))
+        particles.push(new Particle(mouse.x, mouse.y, getRGB(settings.color), settings.size, settings.speed, settings.rainbowMode))
     }
     initGui()
     update()
@@ -104,7 +128,7 @@ function reset() {
 var settings = {
     background: '#000000',
     color: '#ffffff',
-    rainbowMode: false,
+    rainbowMode: true,
     size: 1,
     speed: 3,
     transparency: 0.5,
