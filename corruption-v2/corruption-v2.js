@@ -14,10 +14,11 @@ class CorruptionV2 {
         this.speed = speed
 
         this.childs = []
-        this.birth()
+        this.create()
+
     }
 
-    birth() {
+    create() {
         this.childs.push(new ParticleCorruptionV2(this,
             this.initialx,
             this.initialy,
@@ -27,9 +28,9 @@ class CorruptionV2 {
             this.initialfertility))
     }
 
-    corrupt() {
+    draw() {
         for (let i = 0; i < this.childs.length; i++) {
-            this.childs[i].live()
+            this.childs[i].animate()
         }
     }
 
@@ -56,12 +57,12 @@ class ParticleCorruptionV2 {
         this.angle = angle
         this.color = color
         this.setAngle()
-        this.exist()
+        this.draw()
     }
 
-    exist() {
+    draw() {
         if (this.size < 1 || this.x < 0 || this.y < 0 || this.x > corruptionV2Canvas.width || this.y > corruptionV2Canvas.height) {
-            return this.die()
+            return this.destroy()
         }
         this.duplicate()
         corruptionV2CTX.fillStyle = this.color;
@@ -82,7 +83,7 @@ class ParticleCorruptionV2 {
             this.size, this.speed, this.fertility, this.angle))
     }
 
-    live() {
+    animate() {
         if (this.size > 3)
             this.size = this.size - randomFloat(0, this.size / randomFloat(30, 50))
         else
@@ -90,10 +91,10 @@ class ParticleCorruptionV2 {
         this.setAngle()
         this.y = this.speed * Math.cos(this.angle) + this.y
         this.x = this.speed * Math.sin(this.angle) + this.x
-        this.exist()
+        this.draw()
     }
 
-    die() {
+    destroy() {
         this.mother.childs.splice(this.mother.childs.indexOf(this), 1);
         if (this.mother.childs.length < 50) {
             let newFertility = randomFloat(1, this.mother.initialsize / 2)
@@ -153,11 +154,6 @@ function setCanvasSize(canvas) {
 
 window.addEventListener('resize', setCanvasSize.bind(corruptionV2Canvas));
 
-var corruptions = []
-
-function createCorruption(evt) {
-    corruptions.push(new CorruptionV2(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
-}
 
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
@@ -167,7 +163,11 @@ function createCanvas() {
 }
 
 var corruptionV2Canvas = undefined
+var corruptions = []
 
+function createCorruption(evt) {
+    corruptions.push(new CorruptionV2(mouse.x, mouse.y, settings.startColor, settings.endColor, settings.size, settings.speed, settings.fertility))
+}
 
 function init() {
     createCanvas()
@@ -188,7 +188,7 @@ function reset() {
 var update = function () {
     var i = corruptions.length;
     while (i--) {
-        corruptions[i].corrupt();
+        corruptions[i].draw()
     }
     requestAnimationFrame(update);
 }
