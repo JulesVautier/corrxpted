@@ -49,7 +49,9 @@ var particles = []
 var update = function () {
     if (settings.transparency) {
         if (update.counter % (Math.floor(10 /settings.transparency)) === 0) {
-            ctx.fillStyle = 'rgba(0,0,0,0.05)'
+            let rgb = getRGB(settings.background)
+            rgb[3] = 0.07
+            ctx.fillStyle = 'rgba(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ',' + rgb[3] + ')'
             ctx.fillRect(0, 0, canvas1.width, canvas1.height)
         }
         update.counter++
