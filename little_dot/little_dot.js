@@ -107,6 +107,7 @@ function init() {
     createCanvas()
     setCanvasSize(canvas1)
     canvas1.onmousemove = getMousePos
+    canvas1.ontouchmove = getMouvePos
     canvas1.onclick = function () {
         particles.push(new Particle(mouse.x, mouse.y, getRGB(settings.color), settings.size, settings.speed, settings.rainbowMode))
     }

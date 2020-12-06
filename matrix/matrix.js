@@ -95,6 +95,7 @@ function mytouchmove(touchEvent) {
         createPointOnPos(pos)
     }
 }
+
 function findScreenCoords(mouseEvent) {
     mouseEvent.preventDefault()
     var pos = {x: mouseEvent.offsetX, y: mouseEvent.offsetY}
