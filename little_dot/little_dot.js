@@ -123,8 +123,8 @@ function reset() {
 var settings = {
     background: '#000000',
     color: '#ffffff',
-    rainbowMode: false,
-    size: 1,
+    rainbowMode: true,
+    size: 1.1,
     speed: 3,
     transparency: 0.0,
     reset: reset
@@ -141,7 +141,7 @@ function initGui() {
     gui.add(settings, 'rainbowMode')
     gui.add(settings, 'transparency', 0, 10).step(0.5)
     gui.add(settings, 'size', 1, 5).step(0.1)
-    gui.add(settings, 'speed', 0, 10).step(0.1)
+    gui.add(settings, 'speed', 1, 10).step(0.1)
     gui.close()
 }
 
