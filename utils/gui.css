@@ -1,0 +1,5 @@
+@media only screen and (hover: none) and (pointer: coarse) {
+    .close-bottom {
+        font-size:25px;
+    }
+}
