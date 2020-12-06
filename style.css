@@ -53,6 +53,12 @@ canvas {
     color: #7300d7;
 }
 
+@media only screen and (hover: none) and (pointer: coarse) {
+    .returnButton p {
+        font-size: 40px;
+    }
+}
+
 .returnButton p:hover {
     margin: 0;
     color: yellow;
