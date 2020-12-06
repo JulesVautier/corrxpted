@@ -83,11 +83,27 @@ function getMousePos(canvas, evt) {
     };
 }
 
+
+function mytouchmove(touchEvent) {
+    touchEvent.preventDefault()
+    var rect = touchEvent.target.getBoundingClientRect();
+    for (var i = 0; i < touchEvent.touches.length; i++) {
+        var touch = touchEvent.touches[i];
+        var pos = {x: touch.pageX - rect.left, y: touch.pageY - rect.top}
+        pos.y = Math.floor((pos.y / fontSize))
+        pos.x = Math.floor((pos.x / fontSize))
+        createPointOnPos(pos)
+    }
+}
 function findScreenCoords(mouseEvent) {
     mouseEvent.preventDefault()
-    var pos = getMousePos(canvas2, mouseEvent)
+    var pos = {x: mouseEvent.offsetX, y: mouseEvent.offsetY}
     pos.y = Math.floor((pos.y / fontSize))
     pos.x = Math.floor((pos.x / fontSize))
+    createPointOnPos(pos)
+}
+
+function createPointOnPos(pos) {
     if (Math.floor(pos.x) !== lastx || Math.floor(pos.y) !== lasty) {
         fallingCharArr.push(new Point(pos.x * fontSize, pos.y * fontSize, canvas1));
         if (Math.floor(pos.x) !== lastx) {
@@ -97,8 +113,8 @@ function findScreenCoords(mouseEvent) {
             lastx = Math.floor(pos.y)
         }
     }
-}
 
+}
 
 class Text {
     name = undefined;
@@ -238,12 +254,13 @@ function setCanvasWidth(canvas) {
     maxColums = Math.floor(canvas.width / (fontSize))
 }
 
+
 function init() {
     initTexts()
     setCanvasWidth(canvas1)
     setCanvasWidth(canvas2)
+    canvas2.ontouchmove = mytouchmove;
     canvas2.onmousemove = findScreenCoords;
-    canvas2.ontouchmove = findScreenCoords;
     window.addEventListener('resize', init);
     setInterval(chooseText, 45000)
     update();
