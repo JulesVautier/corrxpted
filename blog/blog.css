@@ -37,11 +37,16 @@ body {
 .signature {
 }
 
+.censored:hover {
+    color: inherit;
+}
+
 .shiny {
     color: yellow;
 }
 
 .shiny:hover {
+    color: yellow;
     text-shadow: 0 0 3px yellow;
 }
 
@@ -50,5 +55,16 @@ body {
 }
 
 .strange:hover {
+    color: #a500ff;
     text-shadow: 0 0 6px #a500ff;
 }
+
+.black-hover:hover {
+    color: black;
+}
+
+
+.censored {
+    color: black;
+}
+
