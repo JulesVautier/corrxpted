@@ -17,6 +17,7 @@ body {
     padding: 50px;
     border: 1px dashed yellow;
     background-color: #000000;
+    margin-top: 100px;
 }
 
 .blog-title {
@@ -36,11 +37,18 @@ body {
 .signature {
 }
 
-a {
+.shiny {
     color: yellow;
-    text-decoration: inherit; /* no underline */
 }
 
-a:hover {
+.shiny:hover {
     text-shadow: 0 0 3px yellow;
+}
+
+.strange {
+    color: #a500ff;
+}
+
+.strange:hover {
+    text-shadow: 0 0 6px #a500ff;
 }
