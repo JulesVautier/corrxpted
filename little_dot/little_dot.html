@@ -26,18 +26,19 @@
 
 <body>
 <div class="clicableP returnButton" onclick="location.href='../menu.html';"><p>x</p></div>
+
 <div class="downloadButton clicableP overlay">
     <a href="#" class="button" id="btn-download"
-       download="little-dot.jpg">- Download your amazing Art -</a>
+       download="corruption.jpg">- Download your amazing Art -</a>
 </div>
-
 <script>
     var button = document.getElementById('btn-download');
     button.addEventListener('click', function (e) {
-        var dataURL = canvas1.toDataURL('image/jpeg');
+        var dataURL = corruptionV2Canvas.toDataURL('image/jpeg');
         button.href = dataURL;
     });
 </script>
+
 <div id="canvas-container" class="canvas-container">
 </div>
 
