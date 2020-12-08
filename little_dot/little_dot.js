@@ -69,7 +69,6 @@ class Particle {
 
 function setCanvasSize(evt) {
     let imageData = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
-    console.log(imageData)
     canvas1.width = window.innerWidth
     canvas1.height = window.innerHeight
     ctx.putImageData(imageData, 0, 0)
