@@ -1,7 +1,43 @@
+body {
+    background-color: #c10c0c;
+}
+
 .blog-content {
-    width: 50%;
+    width: 800px;
     margin: 0 auto;
-    background-color: #4e51e7;
+    background-color: #3c3c42;
     font-family: SquareWave;
-    font-size: 25px;
+    /*font-family: Ubuntu;*/
+    font-size: 28px;
+    padding: 50px;
+    margin-top: 60px;
+    position: relative;
+}
+
+.blog-title {
+
+}
+
+.blogP {
+
+}
+
+.blog-date {
+    text-align: right;
+    color: yellow;
+    float: right;
+}
+
+.blog-date:hover {
+    text-shadow: 0 0 3px #ff0000;
+
+}
+
+a {
+    color: yellow;
+    text-decoration: inherit; /* no underline */
+}
+
+a:hover {
+    text-shadow: 0 0 3px yellow;
 }
