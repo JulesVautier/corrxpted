@@ -9,9 +9,12 @@ body {
     font-family: SquareWave;
     /*font-family: Ubuntu;*/
     font-size: 28px;
-    padding: 50px;
     margin-top: 60px;
     position: relative;
+}
+
+.blog-entry {
+    padding: 50px;
 }
 
 .blog-title {
