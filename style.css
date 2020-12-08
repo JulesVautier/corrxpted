@@ -34,9 +34,11 @@ canvas {
 .downloadButton {
     font-family: "Lucida Grande", sans-serif;
     font-size: 12px;
-    right: 250px;
+    right: 280px;
     z-index: 100;
     position: absolute;
+    top: 2px;
+    color: #832ad0;
 }
 
 .downloadButton a {

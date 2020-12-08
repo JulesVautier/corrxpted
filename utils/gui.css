@@ -3,3 +3,14 @@
         font-size:25px;
     }
 }
+
+
+.close-button {
+    color: #832ad0;
+}
+
+.close-button:hover {
+    color: yellow;
+    text-shadow: 0 0 2px yellow, 0 0 30px #000000;
+
+}
