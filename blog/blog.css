@@ -1,20 +1,22 @@
 body {
-    background-color: #c10c0c;
+    /*background-color: #c10c0c;*/
 }
 
 .blog-content {
     width: 800px;
     margin: 0 auto;
-    background-color: #3c3c42;
     font-family: SquareWave;
     /*font-family: Ubuntu;*/
     font-size: 28px;
     margin-top: 60px;
     position: relative;
+    background-color: black;
 }
 
 .blog-entry {
     padding: 50px;
+    border: 1px dashed yellow;
+    /*background-color: #3c3c42;*/
 }
 
 .blog-title {
@@ -33,7 +35,6 @@ body {
 
 .blog-date:hover {
     text-shadow: 0 0 3px #ff0000;
-
 }
 
 a {
