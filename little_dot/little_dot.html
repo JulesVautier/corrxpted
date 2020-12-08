@@ -22,7 +22,15 @@
 
 <body>
 <div class="clicableP returnButton" onclick="location.href='../menu.html';"><p>x</p></div>
-
+<a href="#" class="button" id="btn-download" download="my-file-name.jpg">Download</a>
+<script>
+    var button = document.getElementById('btn-download');
+    button.addEventListener('click', function (e) {
+        var dataURL = canvas1.toDataURL('image/jpeg');
+        button.href = dataURL;
+        console.log('issous')
+    });
+</script>
 <div id="canvas-container" class="canvas-container">
 </div>
 
