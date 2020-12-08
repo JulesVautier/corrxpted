@@ -25,12 +25,12 @@
 
 <div class="downloadButton clicableP overlay">
     <a href="#" class="button" id="btn-download"
-       download="little-dot.jpg">save</a>
+       download="corruption.jpeg">save</a>
 </div>
 <script>
     var button = document.getElementById('btn-download');
     button.addEventListener('click', function (e) {
-        var dataURL = canvas1.toDataURL('image/jpeg');
+        var dataURL = corruptionV2Canvas.toDataURL('image/jpeg', 1);
         button.href = dataURL;
     });
 </script>
