@@ -31,6 +31,19 @@ canvas {
     z-index: 100;
 }
 
+.downloadButton {
+    font-family: "Lucida Grande", sans-serif;
+    font-size: 12px;
+    right: 250px;
+    z-index: 100;
+    position: absolute;
+}
+
+.downloadButton a {
+    color: inherit; /* blue colors for links too */
+    text-decoration: inherit; /* no underline */
+}
+
 .clicableP {
     z-index: 100;
     cursor: pointer;

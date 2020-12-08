@@ -6,7 +6,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RVL1GEYF0T"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'G-RVL1GEYF0T');
@@ -22,13 +26,16 @@
 
 <body>
 <div class="clicableP returnButton" onclick="location.href='../menu.html';"><p>x</p></div>
-<a href="#" class="button" id="btn-download" download="my-file-name.jpg">Download</a>
+<div class="downloadButton clicableP overlay">
+    <a href="#" class="button" id="btn-download"
+       download="little-dot.jpg">- Download your amazing Art -</a>
+</div>
+
 <script>
     var button = document.getElementById('btn-download');
     button.addEventListener('click', function (e) {
         var dataURL = canvas1.toDataURL('image/jpeg');
         button.href = dataURL;
-        console.log('issous')
     });
 </script>
 <div id="canvas-container" class="canvas-container">
