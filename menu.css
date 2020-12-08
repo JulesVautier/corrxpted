@@ -25,6 +25,13 @@
     font-family: SquareWave;
 }
 
+#blog-link .wip {
+    display: none;
+}
+#blog-link:hover .wip {
+    display: block;
+}
+
 
 .indexMenu span {
     font-family: Motorstrike;
