@@ -16,14 +16,10 @@ body {
 .blog-entry {
     padding: 50px;
     border: 1px dashed yellow;
-    /*background-color: #3c3c42;*/
+    background-color: #000000;
 }
 
 .blog-title {
-
-}
-
-.blogP {
 
 }
 
@@ -35,6 +31,9 @@ body {
 
 .blog-date:hover {
     text-shadow: 0 0 3px #ff0000;
+}
+
+.signature {
 }
 
 a {
