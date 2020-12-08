@@ -67,9 +67,12 @@ class Particle {
 
 }
 
-function setCanvasSize(canvas) {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+function setCanvasSize(evt) {
+    let imageData = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
+    console.log(imageData)
+    canvas1.width = window.innerWidth
+    canvas1.height = window.innerHeight
+    ctx.putImageData(imageData, 0, 0)
 }
 
 var particles = []
@@ -113,6 +116,7 @@ function init() {
     }
     initGui()
     update()
+    window.addEventListener('resize', setCanvasSize.bind(canvas1));
 }
 
 
@@ -147,4 +151,3 @@ function initGui() {
 }
 
 init()
-window.addEventListener('resize', setCanvasSize.bind(canvas1));
