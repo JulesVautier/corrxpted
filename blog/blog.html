@@ -18,6 +18,7 @@
     <meta charset="UTF-8">
     <title>c o r r u p t i o n</title>
     <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="modal.css" rel="stylesheet" type="text/css" media="all">
     <link href="blog.css" rel="stylesheet" type="text/css" media="all">
     <link rel="shortcut icon" type="image/jpg" href="../favicon/favicon.ico"/>
 </head>
@@ -54,6 +55,20 @@
         </p>
     </div>
 
+    <div class="blog-entry">
+        <div class="row">
+            <div class="blog-title"><p>Secret Text</p></div>
+            <div class="blog-date"><p>2020 / 11 / 2_</p></div>
+        </div>
+        <p>
+            <!-- Trigger/Open The Modal -->
+            <button id="myBtn" onclick="displayModal()">Open Modal</button>
+
+        </p>
+        <p class="signature">
+            [x]
+        </p>
+    </div>
     <div class="blog-entry">
         <div class="row">
             <div class="blog-title"><p>Arriving at neocities.org</p></div>
@@ -152,6 +167,17 @@ ____
     </div>
 </div>
 <div class="blog-footer">
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Some text in the Modal..</p>
+    </div>
+
 </div>
 <script src="../utils/utils.js"></script>
 <script src="blog.js"></script>

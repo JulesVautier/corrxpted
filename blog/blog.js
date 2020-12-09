@@ -23,3 +23,17 @@ function redirectToStrangeWebsite() {
     window.open(site, "_blank")
 }
 
+var modal = document.getElementById("myModal");
+function displayModal() {
+    modal.style.display = "block";
+}
+function closeModal() {
+    modal.style.display = "none";
+}
+var span = document.getElementsByClassName("close")[0];
+span.onclick = closeModal
+window.onclick = function(event) {
+    if (event.target === modal) {
+        closeModal()
+    }
+}
