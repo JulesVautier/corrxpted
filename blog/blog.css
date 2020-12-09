@@ -89,15 +89,12 @@ body {
 
 #tv {
     position: relative;
-    width: 350px;
-    height: 550px;
-    background: white;
+    border: 0.5px solid yellow;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
-    color: white;
-    box-shadow: 20px 20px rgba(0,0,0,.15);
     transition: all .4s ease;
+    box-shadow: 10px 10px rgb(255, 225, 50);
 }
 #tv:hover {
-    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
-    box-shadow: 10px 10px rgba(0,0,0,.25);
+    /*border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;*/
+    box-shadow: 20px 20px rgba(255, 255, 0, 1);
 }
