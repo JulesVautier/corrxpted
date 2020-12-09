@@ -1,0 +1,653 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Neocities - Sites corrxpted follows</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- <link rel="manifest" href="/manifest.json"> -->
+    <meta itemprop="name"           content="Neocities.org">
+    <meta itemprop="description"    content="Free web hosting and tools that allow anyone to create a website. Join our community today!">
+    <meta name="description"        content="Free web hosting and tools that allow anyone to create a website. Join our community today!">
+    <meta name="keywords"           content="free website, html, css, learn to code, free hosting, build a website, create a web page">
+    <meta property="og:title"       content="Neocities">
+    <meta property="og:site_name"   content="Neocities | neocities.org">
+    <meta property="og:type"        content="website">
+    <meta property="og:image"       content="/img/cat-larger.png">
+    <meta property="og:url"         content="https://www.neocities.org">
+    <meta property="og:description" content="Neocities is the new Geocities. Create your own free home page, and do whatever you want with it.">
+    <meta name="referrer"           content="no-referrer-when-downgrade">
+
+
+    <link href="/css/neo.css" rel="stylesheet" type="text/css" media="all">
+
+    <link href="/favicon.ico?v=4" rel="shortcut icon" type="image/ico">
+
+    <!-- Mobile Meta -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized"  content="320">
+    <meta name="viewport"         content="width=device-width, minimum-scale=1, initial-scale=1">
+
+
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="/js/html5.min.js"></script>
+    <![endif]-->
+
+    <script src="/js/jquery-1.11.0.min.js"></script>
+
+    <script src="/js/highlight.pack.js"></script>
+    <link rel="stylesheet" href="/css/highlight/styles/tomorrow-night.css">
+    <script>hljs.initHighlightingOnLoad()</script>
+  </head>
+
+  <body class="interior">
+    <div class="page">
+      <header class="header-Base">
+
+  <nav class="header-Nav clearfix" role="navigation">
+
+    <a href="#!" title="show small screen nav" class="small-Nav">
+      <img src="/img/nav-Icon.png" alt="navigation icon" />
+    </a>
+
+    <ul class="h-Nav constant-Nav">
+        <li>
+    <a href="/browse">Websites</a>
+  </li>
+  <li>
+    <a href="/activity">Activity</a>
+  </li>
+  <li>
+    <a href="/tutorials">Learn</a>
+  </li>
+
+    <li>
+      <a href="/supporter">Support Us<i class="fa fa-heart"></i></i></a>
+    </li>
+
+    </ul>
+
+    <ul class="status-Nav">
+        <li>
+          <a href="/#new" class="create-New">Sign up for Free</a>
+        </li>
+        <li>
+          <a href="/signin" class="sign-In">Sign In</a>
+        </li>
+      </ul>
+  </nav>
+
+  <h1 class="logo int-Logo">
+    <a href="/" title="back to home">
+      <span class="hidden">Neocities.org</span>
+      <img src="/img/cat.png" alt="Neocities.org" />
+    </a>
+  </h1>
+</header>
+
+      <div class="header-Outro with-columns browse-page">
+  <div class="row content">
+    <div class="col col-100">
+      <h1>Sites that <a href="/site/corrxpted"><strong>c o r r x p t e d</a></strong> follows</h1>
+    </div>
+  </div>
+</div>
+
+<div class="browse-page">
+    <ul class="row website-Gallery content int-Gall">
+        <li>
+          <a href="https://hoylecake.com" class="neo-Screen-Shot" title="hoylezone">
+            <span class="img-Holder" style="background:url(/site_screenshots/22/18/hoylecake/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="hoylezone" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://hoylecake.com" title="hoylezone">hoylezone</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/hoylecake" title="Profile">
+                <i class="fa fa-user"><i class="fa fa-heart"></i></i>hoylecake
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/hoylecake">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  17,339<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=fansite">fansite</a>,
+                  <a class="" href="/browse?tag=windowsxp">windowsxp</a>,
+                  <a class="" href="/browse?tag=radiohead">radiohead</a>,
+                  <a class="" href="/browse?tag=blog">blog</a>,
+                  <a class="" href="/browse?tag=programming">programming</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://gatosalchicha.neocities.org" class="neo-Screen-Shot" title="⬡⬡⬡">
+            <span class="img-Holder" style="background:url(/site_screenshots/22/20/gatosalchicha/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="⬡⬡⬡" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://gatosalchicha.neocities.org" title="⬡⬡⬡">⬡⬡⬡</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/gatosalchicha" title="Profile">
+                <i class="fa fa-user"></i>gatosalchicha
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/gatosalchicha">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  14,927<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=cats">cats</a>,
+                  <a class="" href="/browse?tag=food">food</a>,
+                  <a class="" href="/browse?tag=programming">programming</a>,
+                  <a class="" href="/browse?tag=music">music</a>,
+                  <a class="" href="/browse?tag=art">art</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://shishka.neocities.org" class="neo-Screen-Shot" title="shishka">
+            <span class="img-Holder" style="background:url(/site_screenshots/30/13/shishka/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="shishka" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://shishka.neocities.org" title="shishka">shishka</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/shishka" title="Profile">
+                <i class="fa fa-user"></i>shishka
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/shishka">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  115,209<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=graphics">graphics</a>,
+                  <a class="" href="/browse?tag=anime">anime</a>,
+                  <a class="" href="/browse?tag=art">art</a>,
+                  <a class="" href="/browse?tag=videogames">videogames</a>,
+                  <a class="" href="/browse?tag=blinkies">blinkies</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://hotlinecafe.com" class="neo-Screen-Shot" title="Hotline Cafe">
+            <span class="img-Holder" style="background:url(/site_screenshots/25/59/hotlinecafe/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="Hotline Cafe" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://hotlinecafe.com" title="Hotline Cafe">Hotline Cafe</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/hotlinecafe" title="Profile">
+                <i class="fa fa-user"><i class="fa fa-heart"></i></i>hotlinecafe
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/hotlinecafe">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  89,399<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=midi">midi</a>,
+                  <a class="" href="/browse?tag=gamedev">gamedev</a>,
+                  <a class="" href="/browse?tag=html5">html5</a>,
+                  <a class="" href="/browse?tag=videogames">videogames</a>,
+                  <a class="" href="/browse?tag=music">music</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://districts.neocities.org" class="neo-Screen-Shot" title="districts on Neocities">
+            <span class="img-Holder" style="background:url(/site_screenshots/17/59/districts/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="districts on Neocities" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://districts.neocities.org" title="districts on Neocities">districts on Neocities</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/districts" title="Profile">
+                <i class="fa fa-user"></i>districts
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/districts">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  289,491<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=index">index</a>,
+                  <a class="" href="/browse?tag=neocities">neocities</a>,
+                  <a class="" href="/browse?tag=directory">directory</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://quartzosc-chip.neocities.org" class="neo-Screen-Shot" title="💎 quartzosc hangout 💎">
+            <span class="img-Holder" style="background:url(/site_screenshots/17/19/quartzosc-chip/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="💎 quartzosc hangout 💎" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://quartzosc-chip.neocities.org" title="💎 quartzosc hangout 💎">💎 quartzosc hangout 💎</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/quartzosc-chip" title="Profile">
+                <i class="fa fa-user"></i>quartzosc-chip
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/quartzosc-chip">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  8,199<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=personal">personal</a>,
+                  <a class="" href="/browse?tag=cyberspace">cyberspace</a>,
+                  <a class="" href="/browse?tag=y2k">y2k</a>,
+                  <a class="" href="/browse?tag=music">music</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://one-t-archive.neocities.org" class="neo-Screen-Shot" title="One-T Archive">
+            <span class="img-Holder" style="background:url(/site_screenshots/42/12/one-t-archive/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="One-T Archive" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://one-t-archive.neocities.org" title="One-T Archive">One-T Archive</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/one-t-archive" title="Profile">
+                <i class="fa fa-user"></i>one-t-archive
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/one-t-archive">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  969<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=uk">uk</a>,
+                  <a class="" href="/browse?tag=french">french</a>,
+                  <a class="" href="/browse?tag=onet">onet</a>,
+                  <a class="" href="/browse?tag=band">band</a>,
+                  <a class="" href="/browse?tag=music">music</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://seraphsanctum.neocities.org" class="neo-Screen-Shot" title="The web site of seraphsanctum">
+            <span class="img-Holder" style="background:url(/site_screenshots/40/34/seraphsanctum/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="The web site of seraphsanctum" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://seraphsanctum.neocities.org" title="The web site of seraphsanctum">The web site of seraphsanctum</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/seraphsanctum" title="Profile">
+                <i class="fa fa-user"></i>seraphsanctum
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/seraphsanctum">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  3,434<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=blog">blog</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://clouds.neocities.org" class="neo-Screen-Shot" title="Cloud Quotes">
+            <span class="img-Holder" style="background:url(/site_screenshots/25/92/clouds/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="Cloud Quotes" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://clouds.neocities.org" title="Cloud Quotes">Cloud Quotes</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/clouds" title="Profile">
+                <i class="fa fa-user"></i>clouds
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/clouds">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  37,093<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://googol.neocities.org" class="neo-Screen-Shot" title="Googol">
+            <span class="img-Holder" style="background:url(/site_screenshots/93/82/googol/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="Googol" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://googol.neocities.org" title="Googol">Googol</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/googol" title="Profile">
+                <i class="fa fa-user"></i>googol
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/googol">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  92,426<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=games">games</a>,
+                  <a class="" href="/browse?tag=fun">fun</a>,
+                  <a class="" href="/browse?tag=bootstrap">bootstrap</a>,
+                  <a class="" href="/browse?tag=programming">programming</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://kitties.neocities.org" class="neo-Screen-Shot" title="prr">
+            <span class="img-Holder" style="background:url(/site_screenshots/11/68/kitties/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="prr" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://kitties.neocities.org" title="prr">prr</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/kitties" title="Profile">
+                <i class="fa fa-user"><i class="fa fa-heart"></i></i>kitties
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/kitties">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  106,636<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=3d">3d</a>,
+                  <a class="" href="/browse?tag=javascript">javascript</a>,
+                  <a class="" href="/browse?tag=programming">programming</a>,
+                  <a class="" href="/browse?tag=art">art</a>,
+                  <a class="" href="/browse?tag=webgl">webgl</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://mebious.neocities.org" class="neo-Screen-Shot" title="wired.entry.neocities">
+            <span class="img-Holder" style="background:url(/site_screenshots/13/78/mebious/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="wired.entry.neocities" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://mebious.neocities.org" title="wired.entry.neocities">wired.entry.neocities</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/mebious" title="Profile">
+                <i class="fa fa-user"></i>mebious
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/mebious">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  1,328,738<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=lain">lain</a>,
+                  <a class="" href="/browse?tag=hacking">hacking</a>,
+                  <a class="" href="/browse?tag=serial">serial</a>,
+                  <a class="" href="/browse?tag=experiments">experiments</a>,
+                  <a class="" href="/browse?tag=mebious">mebious</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://solum.neocities.org" class="neo-Screen-Shot" title="Solüm was here.">
+            <span class="img-Holder" style="background:url(/site_screenshots/99/94/solum/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="Solüm was here." />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://solum.neocities.org" title="Solüm was here.">Solüm was here.</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/solum" title="Profile">
+                <i class="fa fa-user"></i>solum
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/solum">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  19,481<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=hack">hack</a>,
+                  <a class="" href="/browse?tag=hacking">hacking</a>,
+                  <a class="" href="/browse?tag=hacked">hacked</a>,
+                  <a class="" href="/browse?tag=solum">solum</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://wonderbreath.neocities.org" class="neo-Screen-Shot" title="An unnamed story">
+            <span class="img-Holder" style="background:url(/site_screenshots/13/18/wonderbreath/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="An unnamed story" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://wonderbreath.neocities.org" title="An unnamed story">An unnamed story</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/wonderbreath" title="Profile">
+                <i class="fa fa-user"></i>wonderbreath
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/wonderbreath">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  19,299<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=writing">writing</a>,
+                  <a class="" href="/browse?tag=games">games</a>,
+                  <a class="" href="/browse?tag=art">art</a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="https://kool.tools" class="neo-Screen-Shot" title="candle's website">
+            <span class="img-Holder" style="background:url(/site_screenshots/42/15/candle/index.html.540x405.jpg) no-repeat;">
+              <img src="/img/placeholder.png" alt="candle's website" />
+            </span>
+          </a>
+          <div class="title">
+            <a href="https://kool.tools" title="candle's website">candle's website</a>
+          </div>
+          <div class="site-info">
+            <div class="username">
+              <a href="/site/candle" title="Profile">
+                <i class="fa fa-user"><i class="fa fa-heart"></i></i>candle
+              </a>
+            </div>
+            <div class="site-stats">
+              <a href="/site/candle">
+                <span class="show-on-mobile">
+                  <i class="fa fa-eye"></i>
+                </span>
+                  96,830<span class="hide-on-mobile">&nbsp;views</span>
+
+              </a>
+            </div>
+            <div class="site-tags">
+                <i class="fa fa-tag"></i>
+                  <a class="" href="/browse?tag=zone">zone</a>,
+                  <a class="" href="/browse?tag=tools">tools</a>,
+                  <a class="" href="/browse?tag=lowtech">lowtech</a>,
+                  <a class="" href="/browse?tag=bitsy">bitsy</a>
+            </div>
+          </div>
+        </li>
+    </ul>
+</div>
+
+    </div>
+    <footer class="footer-Base">
+      <aside class="footer-Outro">
+  <div class="footer-Content">
+
+    <div class="row">
+      <p class="tiny col credits">
+        <a href="https://neocities.org" title="Neocities.org" style="text-decoration:none;">Neocities</a> is <a href="https://github.com/neocities" title="Neocities on GitHub">open source</a>. Follow us on <a href="https://twitter.com/neocities">Twitter</a> or <a href="https://www.facebook.com/neocities">Facebook</a>
+      </p>
+
+      <nav class="footer-Nav col">
+        <ul class="tiny h-Nav">
+          <li><a href="/about">About</a></li>
+          <li><a href="/donate">Donate</a></li>
+          <li><a href="/cli">CLI</a></li>
+            <li><a href="//blog.neocities.org">Blog</a></li>
+            <li><a href="/api">API</a></li>
+            <li><a href="/press">Press</a></li>
+          <li><a href="http://status.neocitiesops.net/">Status</a></li>
+          <li><a href="/terms" rel="nofollow">Terms</a></li>
+          <li><a href="/contact" rel="nofollow">Contact</a></li>
+        </ul>
+      </nav>
+
+    </div> <!-- end .row -->
+
+  </div>
+</aside>
+
+    </footer>
+
+    <script src="/js/underscore-min.js"></script>
+    <script src="/js/nav.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/typeahead.bundle.js"></script>
+
+    <script>
+      $("a#like").tooltip({html: true})
+      $("a.comment_like").tooltip({html: true})
+      $('#shareButton').popover({html: true})
+      $('#tipButton').popover({html: true})
+
+      $('.typeahead').typeahead({
+        minLength: 2,
+        highlight: true
+      }, {
+        name: 'tags',
+        source: function(query, callback) {
+          $.get('/tags/autocomplete/'+query+'.json', function(data) {
+            var suggestions = JSON.parse(data)
+            var suggestionObjects = []
+            for(var i=0; i<suggestions.length; i++)
+              suggestionObjects.push({value: suggestions[i]})
+
+            callback(suggestionObjects)
+          })
+        }
+      }).on('typeahead:selected', function(e) {
+        e.target.form.submit()
+      })
+    </script>
+  </body>
+</html>
