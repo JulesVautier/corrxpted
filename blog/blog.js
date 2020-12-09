@@ -37,3 +37,10 @@ window.onclick = function(event) {
         closeModal()
     }
 }
+
+var el = document.getElementsByClassName("appear");
+for (let i = 0; i < el.length; i++){
+    el[i].addEventListener("mouseover", function(e){
+        el[i].classList.remove('censored')
+    });
+}
