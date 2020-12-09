@@ -24,9 +24,9 @@ function redirectToStrangeWebsite() {
 }
 
 var modal = document.getElementById("myModal");
-function displayModal(pic) {
-    let img = modal.firstElementChild.firstElementChild
-    img.src = pic
+function displayImgModal(img) {
+    let imgModal = modal.firstElementChild.firstElementChild
+    imgModal.src = img.src
     modal.style.display = "block";
 }
 function closeModal() {

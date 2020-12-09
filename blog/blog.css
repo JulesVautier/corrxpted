@@ -20,6 +20,21 @@ body {
     margin-top: 100px;
 }
 
+.blog-entry img {
+    display: block;
+    margin: auto;
+    max-height: 50%;
+    max-width: 50%;
+    border: 0.5px solid yellow;
+    cursor: pointer;
+}
+
+.blog-entry img:hover {
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 30px #ccc;
+}
+
 .blog-title {
 
 }
