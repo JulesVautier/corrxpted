@@ -35,3 +35,8 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.modal-img {
+    max-width:100%;
+    max-height:100%;
+}
