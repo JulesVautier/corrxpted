@@ -23,6 +23,8 @@ body {
 .blog-entry img {
     display: block;
     margin: auto;
+    margin-top: 50px;
+    margin-bottom: 80px;
     max-height: 100%;
     max-width: 100%;
     border: 0.5px solid yellow;
