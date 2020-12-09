@@ -112,7 +112,6 @@ class CorruptionModule {
         this.x = x
         this.y = y
         corruptions.push(new Corruption(this.x, this.y, "#190a23", 1, 1, 1, 4))
-        setInterval(this.reset.bind(this), 20000)
     }
 
 

@@ -4,6 +4,7 @@ if (window.innerWidth > window.innerHeight)
     module.start(window.innerWidth / 4, window.innerHeight / 2)
 else
     module.start(window.innerWidth / 2, window.innerHeight / 2)
+setInterval(module.reset.bind(module), 20000)
 
 window.onload = function () {
     let limit = 1
