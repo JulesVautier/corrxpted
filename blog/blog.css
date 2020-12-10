@@ -87,14 +87,15 @@ body {
 .tv {
     position: relative;
     border: 0.5px solid yellow;
-    transition: all .4s ease;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
     box-shadow: 20px 20px yellow;
     left: -20px;
     top: -20px;
     margin-bottom: 20px;
     margin-right: 20px;
+    transition: all .4s ease;
 }
+
 .tv:hover {
     box-shadow: none;
     border: none;
@@ -108,5 +109,4 @@ body {
     background-color: #c10c0c;
     display: none;
     border: 1px solid yellow;
-    transition: all .10s ease;
 }
