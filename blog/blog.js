@@ -48,15 +48,30 @@ function initAppear() {
     }
 }
 
-function initHoverModal() {
+var imgPopUp = document.getElementById("imgPopUp");
+function displayImgPopUp(img) {
+    let imgModal = imgPopUp.firstElementChild.firstElementChild
+    imgModal.src = img.src || img
+    imgPopUp.style.display = "block";
+}
+
+function initImgPopUp() {
     let el = document.getElementsByClassName("hoverModal");
     for (let i = 0; i < el.length; i++){
         el[i].addEventListener("mouseover", function(e){
+            // el[i].style.left = "100px"
+            // el[i].style.top = "100px"
+            imgPopUp.style.top = e.pageY
+            imgPopUp.style.left = e.pageX
             el[i].onclick()
         });
+        el[i].onmouseout = function(e){
+            console.log("mouse out")
+            imgPopUp.style.display = "none"
+        };
     }
 }
 
 initFollowedSites()
 initAppear()
-initHoverModal()
+initImgPopUp()

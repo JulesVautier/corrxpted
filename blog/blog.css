@@ -101,3 +101,10 @@ body {
     left: 0px;
     top: 0px;
 }
+
+.img-popup {
+    position: absolute;
+    /*margin: auto;*/
+    background-color: #c10c0c;
+    display: none;
+}
