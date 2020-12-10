@@ -52,7 +52,7 @@ function initHoverModal() {
     let el = document.getElementsByClassName("hoverModal");
     for (let i = 0; i < el.length; i++){
         el[i].addEventListener("mouseover", function(e){
-            el[i].classList.remove('censored')
+            el[i].onclick()
         });
     }
 }

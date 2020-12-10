@@ -87,12 +87,17 @@ body {
 .tv {
     position: relative;
     border: 0.5px solid yellow;
-    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
     transition: all .4s ease;
-    box-shadow: 20px 20px rgba(255, 255, 0, 1);
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+    box-shadow: 20px 20px yellow;
+    left: -20px;
+    top: -20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
 }
 .tv:hover {
     box-shadow: none;
     border: none;
-
+    left: 0px;
+    top: 0px;
 }
