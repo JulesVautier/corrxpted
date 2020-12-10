@@ -14,7 +14,7 @@ function parseFollow(text) {
 
 var followedSites = undefined
 
-httpGet("follows", function () {
+httpGet("./follows.txt", function () {
     followedSites = parseFollow(this.responseText)
 })
 
