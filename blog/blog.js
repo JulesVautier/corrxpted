@@ -13,10 +13,11 @@ function parseFollow(text) {
 }
 
 var followedSites = undefined
-
-httpGet("./follows.txt", function () {
-    followedSites = parseFollow(this.responseText)
-})
+function initFollowedSites() {
+    httpGet("./follows.txt", function () {
+        followedSites = parseFollow(this.responseText)
+    })
+}
 
 function redirectToStrangeWebsite() {
     let site = followedSites[randomInt(0, followedSites.length - 1)]
@@ -26,7 +27,7 @@ function redirectToStrangeWebsite() {
 var modal = document.getElementById("myModal");
 function displayImgModal(img) {
     let imgModal = modal.firstElementChild.firstElementChild
-    imgModal.src = img.src
+    imgModal.src = img.src || img
     modal.style.display = "block";
 }
 function closeModal() {
@@ -38,9 +39,24 @@ window.onclick = function(event) {
     }
 }
 
-var el = document.getElementsByClassName("appear");
-for (let i = 0; i < el.length; i++){
-    el[i].addEventListener("mouseover", function(e){
-        el[i].classList.remove('censored')
-    });
+function initAppear() {
+    let el = document.getElementsByClassName("appear");
+    for (let i = 0; i < el.length; i++){
+        el[i].addEventListener("mouseover", function(e){
+            el[i].classList.remove('censored')
+        });
+    }
 }
+
+function initHoverModal() {
+    let el = document.getElementsByClassName("hoverModal");
+    for (let i = 0; i < el.length; i++){
+        el[i].addEventListener("mouseover", function(e){
+            el[i].classList.remove('censored')
+        });
+    }
+}
+
+initFollowedSites()
+initAppear()
+initHoverModal()
