@@ -81,11 +81,12 @@ function createText(scene, text) {
         context1.clearRect(0, 0, canvas1.width, canvas1.height)
         writeText("Try to think outside the box", context1, "rgb(134,102,21)")
         texture1.needsUpdate = true
-    }, 100)
+    }, 10000)
 }
 
 function writeText(initialText, ctx, color) {
-    let fonts = ["Times New Roman", "Ubuntu", "Arial", "Times", "Courier New", "Verdana", "Georgia", "Palantino", "Garamond", "Ani", "aakar", "FreeMono", "DialogInput", "DejaVu Sans", "Doird Sans"]
+    // let fonts = ["Times New Roman", "Ubuntu", "Arial", "Times", "Courier New", "Verdana", "Georgia", "Palantino", "Garamond", "Ani", "aakar", "FreeMono", "DialogInput", "DejaVu Sans", "Doird Sans"]
+    let fonts = ["Ubuntu"]
     let font = fonts[randomInt(0, fonts.length)]
     let px = randomInt(20, 40).toString() + "px"
     ctx.clearRect(0, 0, ctx.width, ctx.height)
@@ -109,7 +110,6 @@ function init() {
     controls.addEventListener('change', renderer);
     createSkybox(scene, 'polluted_earth/polluted_earth', ".jpg", 4000, false)
     createSkybox(scene, 'ulukai/corona', '.png', 300000, false)
-    // createSkybox(scene, 'ulukai/redeclipse', '.png', 400000, false)
     createText(scene, "Try to think outside the BOX")
     animate();
 }
