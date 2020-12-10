@@ -59,9 +59,8 @@ function initImgPopUp() {
     let el = document.getElementsByClassName("hoverModal");
     for (let i = 0; i < el.length; i++){
         el[i].addEventListener("mouseover", function(e){
-            console.log(imgPopUp)
             el[i].onclick()
-            imgPopUp.style.top = (e.pageY - (imgPopUp.style.height) - imgPopUp.offsetHeight - 50) + "px"
+            imgPopUp.style.top = (e.pageY - (imgPopUp.style.height) - imgPopUp.offsetHeight - 50 - document.documentElement.scrollTop) + "px"
             imgPopUp.style.left = (e.pageX - (imgPopUp.style.width / 2) - (imgPopUp.offsetWidth / 2)) + "px"
         });
         el[i].onmouseout = function(e){

@@ -108,4 +108,5 @@ body {
     background-color: #c10c0c;
     display: none;
     border: 1px solid yellow;
+    transition: all .10s ease;
 }
