@@ -103,8 +103,9 @@ body {
 }
 
 .img-popup {
-    position: absolute;
-    /*margin: auto;*/
+    z-index: 1; /* Sit on top */
+    position: fixed;
     background-color: #c10c0c;
     display: none;
+    border: 1px solid yellow;
 }
