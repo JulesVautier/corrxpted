@@ -1,16 +1,19 @@
 
 
-#achievement {
-    width: 400px;
-    height: 100px;
-    background: #bf1919;
+.achievement {
+    width: 300px;
+    height: 90px;
+    background: rgba(86, 80, 80, 0.5);
     position: relative;
+    font-family: "Ubuntu";
     border-radius: 60px;
     /*box-shadow: 0 3px 20px #1E7195;*/
     display: block;
-    color: rebeccapurple;
-    transition: all 0.9s ease;
+    color: #ffffff;
     margin: 0 auto;
+    /*transition: all 0.9s ease;*/
+    overflow:hidden;
+    transition: all 1s ease;
 }
 
 .achievement-initial-pos {
@@ -18,7 +21,15 @@
 }
 .achievement-show-pos {
     top: 20px;
+    transition: all 1s ease;
 }
+
+.achievement-fade-away {
+    width: 120vw;
+    height: 0px;
+}
+
+
 .achievement-content {
     margin: 0;
     position: absolute;
