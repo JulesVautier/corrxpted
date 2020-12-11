@@ -102,9 +102,7 @@ function writeText(initialText, ctx, color) {
 
 function isInCube(mesh) {
     if (camera.position.distanceTo(mesh.position) > mesh.geometry.parameters.height) {
-        console.log("out")
-    } else {
-        console.log('in')
+        showAchievement()
     }
 }
 
@@ -123,7 +121,7 @@ function init() {
     let firstSkybox = createSkybox(scene, 'polluted_earth/polluted_earth', ".jpg", 4000, false)
     setInterval(isInCube.bind(this, firstSkybox), 500)
     createSkybox(scene, 'ulukai/corona', '.png', 300000, false)
-    // createText(scene, "Try to think outside the BOX")
+    createText(scene, "Try to think outside the BOX")
     animate();
 }
 
