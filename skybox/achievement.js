@@ -5,10 +5,10 @@ function showAchievement() {
         $('.achievement').css("display", "block")
         $('.achievement').addClass("achievement-show-pos")
         console.log("done")
-        setTimeout(function () {
-            $('.achievement').addClass("achievement-fade-away")
-            console.log($('.achievement').attr('class'))
-        }, 1000)
+        // setTimeout(function () {
+        //     $('.achievement').addClass("achievement-fade-away")
+        //     console.log($('.achievement').attr('class'))
+        // }, 10000)
         // setTimeout(function () {
         //     $('#achievement').addClass('widen');
         //     setTimeout(function () {
