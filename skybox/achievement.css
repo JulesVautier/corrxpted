@@ -1,0 +1,30 @@
+
+
+#achievement {
+    width: 400px;
+    height: 100px;
+    background: #bf1919;
+    position: relative;
+    border-radius: 60px;
+    /*box-shadow: 0 3px 20px #1E7195;*/
+    display: block;
+    color: rebeccapurple;
+    transition: all 0.9s ease;
+    margin: 0 auto;
+}
+
+.achievement-initial-pos {
+    top: -200px;
+}
+.achievement-show-pos {
+    top: 20px;
+}
+.achievement-content {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
