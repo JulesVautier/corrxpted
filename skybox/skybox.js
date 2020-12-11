@@ -53,6 +53,7 @@ function createSkybox(scene, fileName, extension, geometry, invert) {
     let skyboxGeo = new THREE.BoxGeometry(geometry, geometry, geometry);
     let skybox = new THREE.Mesh(skyboxGeo, materialArray);
     scene.add(skybox);
+    return skybox
 }
 
 function createText(scene, text) {
@@ -77,12 +78,14 @@ function createText(scene, text) {
     mesh1.position.set(0, 0, 200);
     scene.add(mesh1);
 
+
     setInterval(function () {
         context1.clearRect(0, 0, canvas1.width, canvas1.height)
         writeText("Try to think outside the box", context1, "rgb(134,102,21)")
         texture1.needsUpdate = true
     }, 10000)
 }
+
 
 function writeText(initialText, ctx, color) {
     // let fonts = ["Times New Roman", "Ubuntu", "Arial", "Times", "Courier New", "Verdana", "Georgia", "Palantino", "Garamond", "Ani", "aakar", "FreeMono", "DialogInput", "DejaVu Sans", "Doird Sans"]
@@ -94,6 +97,29 @@ function writeText(initialText, ctx, color) {
     ctx.fillStyle = color;
     ctx.fillText(initialText, 0, 40);
     ctx.needsUpdate = true
+}
+//
+//
+// function isInCube(mesh) {
+//     console.log(mesh, camera)
+//     let raycaster = new THREE.Raycaster()
+//     let point = new THREE.Vector3(0,0,0)
+//     // raycaster.set(camera.position, new THREE.Vector3(0,0,1))
+//     raycaster.set(point, new THREE.Vector3(0,0,1))
+//     const intersects = raycaster.intersectObject(mesh)
+//     if( intersects.length %2 === 1) { // Points is in objet
+//         console.log(`Point is in object`, intersects)
+//     } else {
+//         console.log('not', intersects)
+//     }
+// }
+
+function isInCube(mesh) {
+    if (camera.position.distanceTo(mesh.position) > mesh.geometry.parameters.height) {
+        console.log("out")
+    } else {
+        console.log('in')
+    }
 }
 
 function init() {
@@ -108,9 +134,11 @@ function init() {
     controls.maxDistance = 40000
 
     controls.addEventListener('change', renderer);
-    createSkybox(scene, 'polluted_earth/polluted_earth', ".jpg", 4000, false)
-    createSkybox(scene, 'ulukai/corona', '.png', 300000, false)
-    createText(scene, "Try to think outside the BOX")
+    let firstSkybox = createSkybox(scene, 'polluted_earth/polluted_earth', ".jpg", 4000, false)
+    // isInCube()
+    setInterval(isInCube.bind(this, firstSkybox), 500)
+    // createSkybox(scene, 'ulukai/corona', '.png', 300000, false)
+    // createText(scene, "Try to think outside the BOX")
     animate();
 }
 
