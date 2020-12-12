@@ -16,7 +16,6 @@ class Particle {
         for (let i = 0; i < 4 * particleSize * particleSize; i++)
             this.imageData.data[i] = color[i]
         this.enable = enable
-
     }
 
     setInitialPos() {
@@ -37,13 +36,8 @@ class Particle {
             this.x = this.initialx
             this.y = this.initialy
         } else {
-            // let forceDirectionX = dx / distance
-            // let forceDirectionY = dy / distance
-
             let forceDirectionX = dx
             let forceDirectionY = dy
-
-            // let force = distance / 300
             let force = 1 / 300
             let directionX = forceDirectionX * force * this.density
             let directionY = forceDirectionY * force * this.density
@@ -60,13 +54,7 @@ class Particle {
     }
 }
 
-
 var update = function () {
-    // if (enableParticles.length === 0)
-    //     ctx1.fillStyle = "rgba(0,0,0)";
-    // else
-    //     ctx1.fillStyle = "rgba(0,0,0, 0.02)";
-    // ctx1.fillRect(0, 0, synthetisedCanvas1.width, synthetisedCanvas1.height);
     for (let i = 0; i < enableParticles.length; i++) {
         enableParticles[i].draw();
         enableParticles[i].update();
@@ -74,32 +62,7 @@ var update = function () {
     requestAnimationFrame(update);
 }
 
-// setInterval(function () {
-//     let nbParticulesOnClick = 100
-//     if (particles.length > 0) {
-//         for (let counter = 0; counter < nbParticulesOnClick; counter++) {
-//             let i = randomInt(0, particles.length)
-//             // console.log(i, particles.length)
-//             particles[i].enable = true
-//             particles[i].setInitialPos()
-//             enableParticles.push(particles[i])
-//             particles.splice(i, 1)
-//         }
-//     }
-// }, 100)
-
-function createParticlesOnMousePos() {
-
-    for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
-        particles[i].enable = true
-        particles[i].x = mouse.x
-        particles[i].y = mouse.y
-        enableParticles.push(particles[i])
-    }
-    particles = particles.slice(nbParticulesOnClick)
-}
-
-function createLetters(text) {
+function createParticlesFromImage(text) {
     drawing = new Image()
     drawing.src = "./blackhole.jpg"
     drawing.onload = function () {
@@ -107,15 +70,12 @@ function createLetters(text) {
         const data = synthetisedCTX.getImageData(0, 0, drawing.width, drawing.height)
         convertImagesToParticles(data)
         synthetisedCTX.fillStyle = "rgba(0,0,0)";
-        synthetisedCTX.fillRect(0,0, synthetisedCanvas1.width, synthetisedCanvas1.height)
+        synthetisedCTX.fillRect(0, 0, synthetisedCanvas1.width, synthetisedCanvas1.height)
     }
 }
 
-function scaleToFit(ctx, img){
-    // get the scale
+function scaleToFit(ctx, img) {
     var scale = Math.max(synthetisedCanvas1.width / img.width, synthetisedCanvas1.height / img.height);
-    console.log(scale)
-    // get the top left position of the image
     var x = (synthetisedCanvas1.width / 2) - (img.width / 2) * scale;
     var y = (synthetisedCanvas1.height / 2) - (img.height / 2) * scale;
     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
@@ -159,7 +119,10 @@ function convertImagesToParticles(imageData) {
     enableParticles = particles.filter(x => x.enable)
 }
 
+var particles = []
+var enableParticles = []
 
+var topCanvas = undefined
 
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
@@ -171,11 +134,6 @@ function setCanvasSize(canvas) {
     canvas.width = parent.offsetWidth - left * 2
     canvas.height = parent.offsetHeight - top * 2
 }
-
-var particles = []
-var enableParticles = []
-
-var topCanvas = undefined
 
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
@@ -190,6 +148,16 @@ function createCanvas() {
     synthetisedCTX = synthetisedCanvas1.getContext('2d')
 
     topCanvas = synthetisedCanvas1
+}
+
+function createParticlesOnMousePos() {
+    for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+        particles[i].enable = true
+        particles[i].x = mouse.x
+        particles[i].y = mouse.y
+        enableParticles.push(particles[i])
+    }
+    particles = particles.slice(nbParticulesOnClick)
 }
 
 function createPariclesByUser() {
@@ -208,7 +176,7 @@ function createPariclesByUser() {
     topCanvas.ontouchend = function () {
         mouse.down = false
     }
-    createLetters("ABCDE")
+    createParticlesFromImage("ABCDE")
     setInterval(function () {
         if (mouse.down)
             createParticlesOnMousePos()
@@ -220,7 +188,7 @@ function init() {
     setCanvasSize(synthetisedCanvas1)
     setCanvasSize(synthetisedCanvas2)
     update()
-    createPariclesByUser()
+    // createPariclesByUser()
 }
 
 init()
