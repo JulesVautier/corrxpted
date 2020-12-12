@@ -31,6 +31,12 @@ class Particle {
             synthetisedCTX.putImageData(this.imageData, this.x, this.y)
     }
 
+    getDistance(x, y) {
+        let dx = x - this.x
+        let dy = y - this.y
+        return  Math.sqrt(dx * dx + dy * dy)
+    }
+
     update() {
         // let dx = this.initialx - Math.round(this.x)
         // let dy = this.initialy - Math.round(this.y)
@@ -44,8 +50,8 @@ class Particle {
         } else {
             let forceDirectionX = dx / distance
             let forceDirectionY = dy / distance
-            let issouX = -forceDirectionY + (forceDirectionX / 1)
-            let issouY = forceDirectionX + (forceDirectionY / 1)
+            let issouX = -forceDirectionY + (forceDirectionX)
+            let issouY =  forceDirectionX + (forceDirectionY)
             forceDirectionX = issouX
             forceDirectionY = issouY
             // forceDirectionx = Math.cos(90) - Math.sin(90)
@@ -195,10 +201,10 @@ function createPariclesByUser() {
 }
 
 function compare( a, b ) {
-    if ( a.last_nom < b.last_nom ){
+    if ( a.getDistance(center.x, center.y) < b.getDistance(center.x, center.y) ){
         return -1;
     }
-    if ( a.last_nom > b.last_nom ){
+    if ( a.getDistance(center.x, center.y) > b.getDistance(center.x, center.y) ){
         return 1;
     }
     return 0;
@@ -207,23 +213,18 @@ function compare( a, b ) {
 
 function createParticlesByScript() {
     setTimeout(function () {
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].enable = true
-            enableParticles.push(particles[i])
-        }
-        particles = []
+        particles = particles.sort(compare)
+        setInterval(function () {
+            nbParticulesOnClick = 1
+            for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+                particles[i].enable = true
+                enableParticles.push(particles[i])
+            }
+            particles = particles.slice(nbParticulesOnClick)
+            console.log(enableParticles.length)
+        }, 10)
     }, 500)
 
-    setInterval(function () {
-        // nbParticulesOnClick = 100
-        // for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
-        //     particles[i].enable = true
-        //     enableParticles.push(particles[i])
-        // }
-        // particles = particles.slice(nbParticulesOnClick)
-        console.log(enableParticles.length)
-        // console.log(particles.length, enableParticles.length)
-    }, 10)
 }
 
 function init() {
