@@ -1,4 +1,4 @@
-var particleSize = 7
+var particleSize = 10
 var nbParticulesOnClick = 500
 
 class Particle {
