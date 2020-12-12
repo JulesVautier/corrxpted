@@ -1,6 +1,7 @@
-var particleSize = 10
-var nbParticulesOnClick = 500
-var center = {x: 0, y: 0}
+var particleSize = 50
+var nbParticulesOnClick = 1
+var creationRefreshRate = 500
+var center = {x: 770, y: 640}
 
 class Particle {
     constructor(x, y, color, size, enable) {
@@ -19,8 +20,10 @@ class Particle {
     }
 
     setInitialPos() {
-        this.x = randomInt(0, synthetisedCanvas1.width)
-        this.y = randomInt(0, synthetisedCanvas1.height)
+        this.x = this.initialx
+        this.y = this.initialy
+        // this.x = randomInt(0, synthetisedCanvas1.width)
+        // this.y = randomInt(0, synthetisedCanvas1.height)
     }
 
     draw() {
@@ -29,16 +32,20 @@ class Particle {
     }
 
     update() {
-        let dx = this.initialx - Math.round(this.x)
-        let dy = this.initialy - Math.round(this.y)
+        // let dx = this.initialx - Math.round(this.x)
+        // let dy = this.initialy - Math.round(this.y)
+        // go center
+        let dx = center.x - Math.round(this.x)
+        let dy = center.y - Math.round(this.y)
         let distance = Math.sqrt(dx * dx + dy * dy)
+        // console.log(distance)
         if ((distance > 0 && distance < 10) || (distance < 0 && distance > -10)) {
-            this.x = this.initialx
-            this.y = this.initialy
+            ctx2.putImageData(this.imageData, this.x, this.y)
+            enableParticles.splice(enableParticles.indexOf(this), 1);
         } else {
             let forceDirectionX = dx
             let forceDirectionY = dy
-            let force = 1 / 300
+            let force = 1 / 500
             let directionX = forceDirectionX * force * this.density
             let directionY = forceDirectionY * force * this.density
             this.x += directionX
@@ -47,10 +54,14 @@ class Particle {
             this.y = Math.round(this.y)
         }
 
-        if (this.x === this.initialx && this.y === this.initialy) {
-            ctx2.putImageData(this.imageData, this.x, this.y)
-            enableParticles.splice(enableParticles.indexOf(this), 1);
-        }
+        // if (this.x === this.initialx && this.y === this.initialy) {
+        //     ctx2.putImageData(this.imageData, this.x, this.y)
+        //     enableParticles.splice(enableParticles.indexOf(this), 1);
+        // }
+        // if (this.x === center.x && this.y === center.y) {
+        //     ctx2.putImageData(this.imageData, this.x, this.y)
+        //     enableParticles.splice(enableParticles.indexOf(this), 1);
+        // }
     }
 }
 
@@ -101,7 +112,7 @@ function getPixels(imageData, x, y, size) {
 }
 
 function convertImagesToParticles(imageData) {
-    let squareSize = 100
+    let squareSize = particleSize
     for (let y = 0; y < imageData.height; y += squareSize) {
         for (let x = 0; x < imageData.width; x += squareSize) {
             for (let squareY = y; squareY < imageData.height && squareY < y + squareSize; squareY += particleSize) {
@@ -180,13 +191,31 @@ function createPariclesByUser() {
     }, 100)
 }
 
+function createParticlesByScript() {
+    // setTimeout(function () {
+    //     particles[0].enable = true
+    //     enableParticles.push(particles[0])
+    // }, 500)
+
+    setInterval(function () {
+        nbParticulesOnClick = 100
+        for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+            particles[i].enable = true
+            enableParticles.push(particles[i])
+        }
+        particles = particles.slice(nbParticulesOnClick)
+        console.log(particles.length, enableParticles.length)
+    }, creationRefreshRate)
+}
+
 function init() {
     createCanvas()
     setCanvasSize(synthetisedCanvas1)
     setCanvasSize(synthetisedCanvas2)
-    createParticlesFromImage()
     update()
+    createParticlesFromImage()
     // createPariclesByUser()
+    createParticlesByScript()
 }
 
 init()
