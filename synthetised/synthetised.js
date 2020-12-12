@@ -49,7 +49,7 @@ class Particle {
         } else {
             let forceDirectionX = dx
             let forceDirectionY = dy
-            let force = 1 / 500
+            let force = 1 / (distance * 10)
             let directionX = forceDirectionX * force * this.density
             let directionY = forceDirectionY * force * this.density
             this.x += directionX
