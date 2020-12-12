@@ -1,18 +1,5 @@
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function randomFloat(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-var mouse = {
-    x: 0,
-    y: 0,
-    down: false,
-}
-
-particleSize = 3
+var particleSize = 7
+var nbParticulesOnClick = 500
 
 class Particle {
     constructor(x, y, color, size, enable) {
@@ -101,7 +88,7 @@ var update = function () {
 // }, 100)
 
 function createParticlesOnMousePos() {
-    let nbParticulesOnClick = 1000
+
     for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
         particles[i].enable = true
         particles[i].x = mouse.x
@@ -113,14 +100,24 @@ function createParticlesOnMousePos() {
 
 function createLetters(text) {
     drawing = new Image()
-    drawing.src = "../pics/trou.jpg"
+    drawing.src = "./blackhole.jpg"
     drawing.onload = function () {
-        synthetisedCTX.drawImage(drawing, 0, 0);
-        const data = synthetisedCTX.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
+        scaleToFit(synthetisedCTX, drawing)
+        const data = synthetisedCTX.getImageData(0, 0, drawing.width, drawing.height)
         convertImagesToParticles(data)
         synthetisedCTX.fillStyle = "rgba(0,0,0)";
         synthetisedCTX.fillRect(0,0, synthetisedCanvas1.width, synthetisedCanvas1.height)
     }
+}
+
+function scaleToFit(ctx, img){
+    // get the scale
+    var scale = Math.max(synthetisedCanvas1.width / img.width, synthetisedCanvas1.height / img.height);
+    console.log(scale)
+    // get the top left position of the image
+    var x = (synthetisedCanvas1.width / 2) - (img.width / 2) * scale;
+    var y = (synthetisedCanvas1.height / 2) - (img.height / 2) * scale;
+    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 }
 
 function getPixel(imageData, x, y) {
