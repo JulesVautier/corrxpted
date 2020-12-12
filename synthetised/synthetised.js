@@ -161,10 +161,6 @@ function convertImagesToParticles(imageData) {
     enableParticles = particles.filter(x => x.enable)
 }
 
-function getMousePos(evt) {
-    mouse.x = evt.clientX
-    mouse.y = evt.clientY
-}
 
 
 function setCanvasSize(canvas) {
@@ -204,11 +200,18 @@ function init() {
     setCanvasSize(synthetisedCanvas1)
     setCanvasSize(synthetisedCanvas2)
     topCanvas.onclick = createParticlesOnMousePos
+    topCanvas.ontouchmove = getMouvePos
     topCanvas.onmousemove = getMousePos
     topCanvas.onmousedown = function () {
         mouse.down = true
     }
     topCanvas.onmouseup = function () {
+        mouse.down = false
+    }
+    topCanvas.ontouchstart = function () {
+        mouse.down = true
+    }
+    topCanvas.ontouchend = function () {
         mouse.down = false
     }
     createLetters("ABCDE")
