@@ -1,5 +1,6 @@
 var particleSize = 10
 var nbParticulesOnClick = 500
+var center = {x: 0, y: 0}
 
 class Particle {
     constructor(x, y, color, size, enable) {
@@ -191,12 +192,8 @@ function createCanvas() {
     topCanvas = synthetisedCanvas1
 }
 
-
-function init() {
-    createCanvas()
-    setCanvasSize(synthetisedCanvas1)
-    setCanvasSize(synthetisedCanvas2)
-    topCanvas.onclick = createParticlesOnMousePos
+function createPariclesByUser() {
+    // topCanvas.onclick = createParticlesOnMousePos
     topCanvas.ontouchmove = getMouvePos
     topCanvas.onmousemove = getMousePos
     topCanvas.onmousedown = function () {
@@ -216,7 +213,14 @@ function init() {
         if (mouse.down)
             createParticlesOnMousePos()
     }, 100)
+}
+
+function init() {
+    createCanvas()
+    setCanvasSize(synthetisedCanvas1)
+    setCanvasSize(synthetisedCanvas2)
     update()
+    createPariclesByUser()
 }
 
 init()
