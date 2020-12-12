@@ -1,5 +1,5 @@
-var particleSize = 50
-var nbParticulesOnClick = 1
+var particleSize = 10
+var nbParticulesOnClick = 2000
 var creationRefreshRate = 500
 var center = {x: 770, y: 640}
 
@@ -44,7 +44,7 @@ class Particle {
         let dx = center.x - this.x
         let dy = center.y - this.y
         let distance = Math.sqrt(dx * dx + dy * dy)
-        if (distance < 50) {
+        if (distance < 5) {
             ctx2.putImageData(this.imageData, this.x, this.y)
             enableParticles.splice(enableParticles.indexOf(this), 1);
         } else {
@@ -52,8 +52,8 @@ class Particle {
             let forceDirectionY = dy / distance
             let issouX = -forceDirectionY + (forceDirectionX)
             let issouY =  forceDirectionX + (forceDirectionY)
-            forceDirectionX = issouX
-            forceDirectionY = issouY
+            forceDirectionX = issouX / 10
+            forceDirectionY = issouY / 10
             // forceDirectionx = Math.cos(90) - Math.sin(90)
             // | sin(a) cos(a)|
             let force = 1
@@ -215,13 +215,11 @@ function createParticlesByScript() {
     setTimeout(function () {
         particles = particles.sort(compare)
         setInterval(function () {
-            nbParticulesOnClick = 1
             for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
                 particles[i].enable = true
                 enableParticles.push(particles[i])
             }
             particles = particles.slice(nbParticulesOnClick)
-            console.log(enableParticles.length)
         }, 10)
     }, 500)
 
