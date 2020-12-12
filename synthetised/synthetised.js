@@ -62,15 +62,13 @@ var update = function () {
     requestAnimationFrame(update);
 }
 
-function createParticlesFromImage(text) {
+function createParticlesFromImage() {
     drawing = new Image()
     drawing.src = "./blackhole.jpg"
     drawing.onload = function () {
         scaleToFit(synthetisedCTX, drawing)
         const data = synthetisedCTX.getImageData(0, 0, drawing.width, drawing.height)
         convertImagesToParticles(data)
-        synthetisedCTX.fillStyle = "rgba(0,0,0)";
-        synthetisedCTX.fillRect(0, 0, synthetisedCanvas1.width, synthetisedCanvas1.height)
     }
 }
 
@@ -176,7 +174,6 @@ function createPariclesByUser() {
     topCanvas.ontouchend = function () {
         mouse.down = false
     }
-    createParticlesFromImage("ABCDE")
     setInterval(function () {
         if (mouse.down)
             createParticlesOnMousePos()
@@ -187,6 +184,7 @@ function init() {
     createCanvas()
     setCanvasSize(synthetisedCanvas1)
     setCanvasSize(synthetisedCanvas2)
+    createParticlesFromImage()
     update()
     // createPariclesByUser()
 }
