@@ -38,15 +38,14 @@ class Particle {
         let dx = center.x - this.x
         let dy = center.y - this.y
         let distance = Math.sqrt(dx * dx + dy * dy)
-        if (distance < 15) {
+        if (distance < 50) {
             ctx2.putImageData(this.imageData, this.x, this.y)
             enableParticles.splice(enableParticles.indexOf(this), 1);
         } else {
-            console.log(distance)
-            let forceDirectionX = dx / (distance * 2)
-            let forceDirectionY = dy / (distance * 2)
-            let issouX = - forceDirectionY
-            let issouY = forceDirectionX
+            let forceDirectionX = dx / distance
+            let forceDirectionY = dy / distance
+            let issouX = -forceDirectionY + (forceDirectionX / 1)
+            let issouY = forceDirectionX + (forceDirectionY / 1)
             forceDirectionX = issouX
             forceDirectionY = issouY
             // forceDirectionx = Math.cos(90) - Math.sin(90)
@@ -215,15 +214,16 @@ function createParticlesByScript() {
         particles = []
     }, 500)
 
-    // setInterval(function () {
-    //     nbParticulesOnClick = 100
-    //     for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
-    //         particles[i].enable = true
-    //         enableParticles.push(particles[i])
-    //     }
-    //     particles = particles.slice(nbParticulesOnClick)
-    //     console.log(particles.length, enableParticles.length)
-    // }, creationRefreshRate)
+    setInterval(function () {
+        // nbParticulesOnClick = 100
+        // for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+        //     particles[i].enable = true
+        //     enableParticles.push(particles[i])
+        // }
+        // particles = particles.slice(nbParticulesOnClick)
+        console.log(enableParticles.length)
+        // console.log(particles.length, enableParticles.length)
+    }, 10)
 }
 
 function init() {
