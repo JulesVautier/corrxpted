@@ -45,6 +45,12 @@ class Particle {
             console.log(distance)
             let forceDirectionX = dx / (distance * 2)
             let forceDirectionY = dy / (distance * 2)
+            let issouX = - forceDirectionY
+            let issouY = forceDirectionX
+            forceDirectionX = issouX
+            forceDirectionY = issouY
+            // forceDirectionx = Math.cos(90) - Math.sin(90)
+            // | sin(a) cos(a)|
             let force = 1
             let directionX = forceDirectionX * force * this.density
             let directionY = forceDirectionY * force * this.density
