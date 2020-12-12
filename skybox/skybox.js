@@ -143,7 +143,6 @@ var wind_frame_enabled = false
 var space_frame_enabled = false
 
 function initAudio() {
-    console.log('initaudio')
     if (wind_frame_enabled === false) {
         $('body').append(wind_iframe)
         wind_frame_enabled = true
