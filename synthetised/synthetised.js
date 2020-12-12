@@ -31,15 +31,19 @@ class Particle {
             synthetisedCTX.putImageData(this.imageData, this.x, this.y)
     }
 
+    getDistanceFrom(x, y) {
+        let dx = center.x - Math.round(this.x)
+        let dy = center.y - Math.round(this.y)
+        return Math.sqrt(dx * dx + dy * dy)    }
+
     update() {
         // let dx = this.initialx - Math.round(this.x)
         // let dy = this.initialy - Math.round(this.y)
         // go center
-        let dx = center.x - Math.round(this.x)
-        let dy = center.y - Math.round(this.y)
+        let dx = center.x - this.x
+        let dy = center.y - this.y
         let distance = Math.sqrt(dx * dx + dy * dy)
-        // console.log(distance)
-        if ((distance > 0 && distance < 10) || (distance < 0 && distance > -10)) {
+        if (distance < 15) {
             ctx2.putImageData(this.imageData, this.x, this.y)
             enableParticles.splice(enableParticles.indexOf(this), 1);
         } else {
@@ -190,6 +194,17 @@ function createPariclesByUser() {
             createParticlesOnMousePos()
     }, 100)
 }
+
+function compare( a, b ) {
+    if ( a.last_nom < b.last_nom ){
+        return -1;
+    }
+    if ( a.last_nom > b.last_nom ){
+        return 1;
+    }
+    return 0;
+}
+
 
 function createParticlesByScript() {
     // setTimeout(function () {
