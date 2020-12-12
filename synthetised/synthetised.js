@@ -31,11 +31,6 @@ class Particle {
             synthetisedCTX.putImageData(this.imageData, this.x, this.y)
     }
 
-    getDistanceFrom(x, y) {
-        let dx = center.x - Math.round(this.x)
-        let dy = center.y - Math.round(this.y)
-        return Math.sqrt(dx * dx + dy * dy)    }
-
     update() {
         // let dx = this.initialx - Math.round(this.x)
         // let dy = this.initialy - Math.round(this.y)
@@ -47,15 +42,14 @@ class Particle {
             ctx2.putImageData(this.imageData, this.x, this.y)
             enableParticles.splice(enableParticles.indexOf(this), 1);
         } else {
-            let forceDirectionX = dx
-            let forceDirectionY = dy
-            let force = 1 / (distance * 10)
+            console.log(distance)
+            let forceDirectionX = dx / (distance * 2)
+            let forceDirectionY = dy / (distance * 2)
+            let force = 1
             let directionX = forceDirectionX * force * this.density
             let directionY = forceDirectionY * force * this.density
             this.x += directionX
             this.y += directionY
-            this.x = Math.round(this.x)
-            this.y = Math.round(this.y)
         }
 
         // if (this.x === this.initialx && this.y === this.initialy) {
@@ -207,20 +201,23 @@ function compare( a, b ) {
 
 
 function createParticlesByScript() {
-    // setTimeout(function () {
-    //     particles[0].enable = true
-    //     enableParticles.push(particles[0])
-    // }, 500)
-
-    setInterval(function () {
-        nbParticulesOnClick = 100
-        for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+    setTimeout(function () {
+        for (let i = 0; i < particles.length; i++) {
             particles[i].enable = true
             enableParticles.push(particles[i])
         }
-        particles = particles.slice(nbParticulesOnClick)
-        console.log(particles.length, enableParticles.length)
-    }, creationRefreshRate)
+        particles = []
+    }, 500)
+
+    // setInterval(function () {
+    //     nbParticulesOnClick = 100
+    //     for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+    //         particles[i].enable = true
+    //         enableParticles.push(particles[i])
+    //     }
+    //     particles = particles.slice(nbParticulesOnClick)
+    //     console.log(particles.length, enableParticles.length)
+    // }, creationRefreshRate)
 }
 
 function init() {
