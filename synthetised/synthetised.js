@@ -34,7 +34,7 @@ class Particle {
     getDistance(x, y) {
         let dx = x - this.x
         let dy = y - this.y
-        return  Math.sqrt(dx * dx + dy * dy)
+        return Math.sqrt(dx * dx + dy * dy)
     }
 
     update() {
@@ -51,7 +51,7 @@ class Particle {
             let forceDirectionX = dx / distance
             let forceDirectionY = dy / distance
             let issouX = -forceDirectionY + (forceDirectionX)
-            let issouY =  forceDirectionX + (forceDirectionY)
+            let issouY = forceDirectionX + (forceDirectionY)
             forceDirectionX = issouX / 10
             forceDirectionY = issouY / 10
             // forceDirectionx = Math.cos(90) - Math.sin(90)
@@ -182,29 +182,31 @@ function createPariclesByUser() {
     // topCanvas.onclick = createParticlesOnMousePos
     topCanvas.ontouchmove = getMouvePos
     topCanvas.onmousemove = getMousePos
-    topCanvas.onmousedown = function () {
-        mouse.down = true
+    // topCanvas.onmousedown = function () {
+    //     mouse.down = true
+    // }
+    // topCanvas.onmouseup = function () {
+    //     mouse.down = false
+    // }
+    // topCanvas.ontouchstart = function () {
+    //     mouse.down = true
+    // }
+    // topCanvas.ontouchend = function () {
+    //     mouse.down = false
+    // }
+    topCanvas.onclick = function () {
+        // if (mouse.down)
+        center = mouse
+        createParticlesByScript()
+        // createParticlesOnMousePos()
     }
-    topCanvas.onmouseup = function () {
-        mouse.down = false
-    }
-    topCanvas.ontouchstart = function () {
-        mouse.down = true
-    }
-    topCanvas.ontouchend = function () {
-        mouse.down = false
-    }
-    setInterval(function () {
-        if (mouse.down)
-            createParticlesOnMousePos()
-    }, 100)
 }
 
-function compare( a, b ) {
-    if ( a.getDistance(center.x, center.y) < b.getDistance(center.x, center.y) ){
+function compare(a, b) {
+    if (a.getDistance(center.x, center.y) < b.getDistance(center.x, center.y)) {
         return -1;
     }
-    if ( a.getDistance(center.x, center.y) > b.getDistance(center.x, center.y) ){
+    if (a.getDistance(center.x, center.y) > b.getDistance(center.x, center.y)) {
         return 1;
     }
     return 0;
@@ -212,16 +214,14 @@ function compare( a, b ) {
 
 
 function createParticlesByScript() {
-    setTimeout(function () {
-        particles = particles.sort(compare)
-        setInterval(function () {
-            for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
-                particles[i].enable = true
-                enableParticles.push(particles[i])
-            }
-            particles = particles.slice(nbParticulesOnClick)
-        }, 10)
-    }, 500)
+    particles = particles.sort(compare)
+    setInterval(function () {
+        for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+            particles[i].enable = true
+            enableParticles.push(particles[i])
+        }
+        particles = particles.slice(nbParticulesOnClick)
+    }, 10)
 
 }
 
@@ -231,8 +231,8 @@ function init() {
     setCanvasSize(synthetisedCanvas2)
     update()
     createParticlesFromImage()
-    // createPariclesByUser()
-    createParticlesByScript()
+    createPariclesByUser()
+    // createParticlesByScript()
 }
 
 init()
