@@ -1,7 +1,5 @@
 var particleSize = 10
 var nbParticulesOnClick = 2000
-var creationRefreshRate = 500
-var center = {x: 770, y: 640}
 
 class Particle {
     constructor(x, y, color, size, enable) {
@@ -22,8 +20,6 @@ class Particle {
     setInitialPos() {
         this.x = this.initialx
         this.y = this.initialy
-        // this.x = randomInt(0, synthetisedCanvas1.width)
-        // this.y = randomInt(0, synthetisedCanvas1.height)
     }
 
     draw() {
@@ -38,14 +34,10 @@ class Particle {
     }
 
     update() {
-        // let dx = this.initialx - Math.round(this.x)
-        // let dy = this.initialy - Math.round(this.y)
-        // go center
-        let dx = center.x - this.x
-        let dy = center.y - this.y
+        let dx = mouse.x - this.x
+        let dy = mouse.y - this.y
         let distance = Math.sqrt(dx * dx + dy * dy)
         if (distance < 5) {
-            ctx2.putImageData(this.imageData, this.x, this.y)
             enableParticles.splice(enableParticles.indexOf(this), 1);
         } else {
             let forceDirectionX = dx / distance
@@ -54,23 +46,12 @@ class Particle {
             let issouY = forceDirectionX + (forceDirectionY)
             forceDirectionX = issouX / 10
             forceDirectionY = issouY / 10
-            // forceDirectionx = Math.cos(90) - Math.sin(90)
-            // | sin(a) cos(a)|
             let force = 1
             let directionX = forceDirectionX * force * this.density
             let directionY = forceDirectionY * force * this.density
             this.x += directionX
             this.y += directionY
         }
-
-        // if (this.x === this.initialx && this.y === this.initialy) {
-        //     ctx2.putImageData(this.imageData, this.x, this.y)
-        //     enableParticles.splice(enableParticles.indexOf(this), 1);
-        // }
-        // if (this.x === center.x && this.y === center.y) {
-        //     ctx2.putImageData(this.imageData, this.x, this.y)
-        //     enableParticles.splice(enableParticles.indexOf(this), 1);
-        // }
     }
 }
 
@@ -82,14 +63,20 @@ var update = function () {
     requestAnimationFrame(update);
 }
 
-function createParticlesFromImage() {
+function imgToCtx(src) {
+    synthetisedCTX.clearRect(0, 0, topCanvas.width, topCanvas.height)
     drawing = new Image()
-    drawing.src = "./blackhole.jpg"
+    drawing.src = src
     drawing.onload = function () {
         scaleToFit(synthetisedCTX, drawing)
-        const data = synthetisedCTX.getImageData(0, 0, drawing.width, drawing.height)
-        convertImagesToParticles(data)
     }
+}
+
+function createParticlesFromImage() {
+    enableParticles = []
+    particles = []
+    const data = synthetisedCTX.getImageData(0, 0, drawing.width, drawing.height)
+    convertImagesToParticles(data)
 }
 
 function scaleToFit(ctx, img) {
@@ -156,7 +143,6 @@ function setCanvasSize(canvas) {
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
 
-
     synthetisedCanvas2 = document.createElement("CANVAS");
     canvasContainer.appendChild(synthetisedCanvas2)
     ctx2 = synthetisedCanvas2.getContext('2d')
@@ -179,34 +165,18 @@ function createParticlesOnMousePos() {
 }
 
 function createPariclesByUser() {
-    // topCanvas.onclick = createParticlesOnMousePos
     topCanvas.ontouchmove = getMouvePos
     topCanvas.onmousemove = getMousePos
-    // topCanvas.onmousedown = function () {
-    //     mouse.down = true
-    // }
-    // topCanvas.onmouseup = function () {
-    //     mouse.down = false
-    // }
-    // topCanvas.ontouchstart = function () {
-    //     mouse.down = true
-    // }
-    // topCanvas.ontouchend = function () {
-    //     mouse.down = false
-    // }
     topCanvas.onclick = function () {
-        // if (mouse.down)
-        center = mouse
         createParticlesByScript()
-        // createParticlesOnMousePos()
     }
 }
 
 function compare(a, b) {
-    if (a.getDistance(center.x, center.y) < b.getDistance(center.x, center.y)) {
+    if (a.getDistance(mouse.x, mouse.y) < b.getDistance(mouse.x, mouse.y)) {
         return -1;
     }
-    if (a.getDistance(center.x, center.y) > b.getDistance(center.x, center.y)) {
+    if (a.getDistance(mouse.x, mouse.y) > b.getDistance(mouse.x, mouse.y)) {
         return 1;
     }
     return 0;
@@ -214,14 +184,16 @@ function compare(a, b) {
 
 
 function createParticlesByScript() {
+    createParticlesFromImage()
     particles = particles.sort(compare)
-    setInterval(function () {
-        for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
-            particles[i].enable = true
-            enableParticles.push(particles[i])
-        }
-        particles = particles.slice(nbParticulesOnClick)
-    }, 10)
+    enableParticles = [...particles]
+    // setInterval(function () {
+    //     for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+    //         particles[i].enable = true
+    //         enableParticles.push(particles[i])
+    //     }
+    //     particles = particles.slice(nbParticulesOnClick)
+    // }, 10)
 
 }
 
@@ -230,9 +202,8 @@ function init() {
     setCanvasSize(synthetisedCanvas1)
     setCanvasSize(synthetisedCanvas2)
     update()
-    createParticlesFromImage()
+    imgToCtx("./blackhole.jpg")
     createPariclesByUser()
-    // createParticlesByScript()
 }
 
 init()
