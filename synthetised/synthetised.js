@@ -64,7 +64,7 @@ var update = function () {
 }
 
 function imgToCtx(src) {
-    synthetisedCTX.clearRect(0, 0, topCanvas.width, topCanvas.height)
+    synthetisedCTX.clearRect(0, 0, synthetisedCanvas.width, synthetisedCanvas.height)
     drawing = new Image()
     drawing.src = src
     drawing.onload = function () {
@@ -80,9 +80,9 @@ function createParticlesFromImage() {
 }
 
 function scaleToFit(ctx, img) {
-    var scale = Math.max(synthetisedCanvas1.width / img.width, synthetisedCanvas1.height / img.height);
-    var x = (synthetisedCanvas1.width / 2) - (img.width / 2) * scale;
-    var y = (synthetisedCanvas1.height / 2) - (img.height / 2) * scale;
+    var scale = Math.max(synthetisedCanvas.width / img.width, synthetisedCanvas.height / img.height);
+    var x = (synthetisedCanvas.width / 2) - (img.width / 2) * scale;
+    var y = (synthetisedCanvas.height / 2) - (img.height / 2) * scale;
     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 }
 
@@ -121,13 +121,12 @@ function convertImagesToParticles(imageData) {
             }
         }
     }
-    enableParticles = particles.filter(x => x.enable)
 }
 
 var particles = []
 var enableParticles = []
 
-var topCanvas = undefined
+var synthetisedCanvas = undefined
 
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
@@ -143,15 +142,9 @@ function setCanvasSize(canvas) {
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
 
-    synthetisedCanvas2 = document.createElement("CANVAS");
-    canvasContainer.appendChild(synthetisedCanvas2)
-    ctx2 = synthetisedCanvas2.getContext('2d')
-
-    synthetisedCanvas1 = document.createElement("CANVAS");
-    canvasContainer.appendChild(synthetisedCanvas1)
-    synthetisedCTX = synthetisedCanvas1.getContext('2d')
-
-    topCanvas = synthetisedCanvas1
+    synthetisedCanvas = document.createElement("CANVAS");
+    canvasContainer.appendChild(synthetisedCanvas)
+    synthetisedCTX = synthetisedCanvas.getContext('2d')
 }
 
 function createParticlesOnMousePos() {
@@ -165,9 +158,9 @@ function createParticlesOnMousePos() {
 }
 
 function createPariclesByUser() {
-    topCanvas.ontouchmove = getMouvePos
-    topCanvas.onmousemove = getMousePos
-    topCanvas.onclick = function () {
+    synthetisedCanvas.ontouchmove = getMouvePos
+    synthetisedCanvas.onmousemove = getMousePos
+    synthetisedCanvas.onclick = function () {
         createParticlesByScript()
     }
 }
@@ -187,20 +180,11 @@ function createParticlesByScript() {
     createParticlesFromImage()
     particles = particles.sort(compare)
     enableParticles = [...particles]
-    // setInterval(function () {
-    //     for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
-    //         particles[i].enable = true
-    //         enableParticles.push(particles[i])
-    //     }
-    //     particles = particles.slice(nbParticulesOnClick)
-    // }, 10)
-
 }
 
 function init() {
     createCanvas()
-    setCanvasSize(synthetisedCanvas1)
-    setCanvasSize(synthetisedCanvas2)
+    setCanvasSize(synthetisedCanvas)
     update()
     imgToCtx("./blackhole.jpg")
     createPariclesByUser()
