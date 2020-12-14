@@ -187,6 +187,7 @@ function init() {
     setCanvasSize(synthetisedCanvas)
     update()
     imgToCtx("./blackhole.jpg")
+    // imgToCtx("../blog/blog-pics/little-dot-pics/blue-little-dot.png")
     createPariclesByUser()
 }
 
