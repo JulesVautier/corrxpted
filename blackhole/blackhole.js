@@ -11,7 +11,7 @@ class Particle {
         this.size = size
         this.color = color
         this.setInitialPos()
-        this.imageData = synthetisedCTX.createImageData(particleSize, particleSize)
+        this.imageData = blackHoleCTX.createImageData(particleSize, particleSize)
         for (let i = 0; i < 4 * particleSize * particleSize; i++)
             this.imageData.data[i] = color[i]
         this.enable = enable
@@ -24,7 +24,7 @@ class Particle {
 
     draw() {
         if (this.x && this.y)
-            synthetisedCTX.putImageData(this.imageData, this.x, this.y)
+            blackHoleCTX.putImageData(this.imageData, this.x, this.y)
     }
 
     getDistance(x, y) {
@@ -60,29 +60,30 @@ var update = function () {
         enableParticles[i].draw();
         enableParticles[i].update();
     }
+    // blackHoleCTX.clearRect(0, 0, blackHoleCanvas.width, blackHoleCanvas.height)
     requestAnimationFrame(update);
 }
 
 function imgToCtx(src) {
-    synthetisedCTX.clearRect(0, 0, synthetisedCanvas.width, synthetisedCanvas.height)
+    blackHoleCTX.clearRect(0, 0, blackHoleCanvas.width, blackHoleCanvas.height)
     drawing = new Image()
     drawing.src = src
     drawing.onload = function () {
-        scaleToFit(synthetisedCTX, drawing)
+        scaleToFit(blackHoleCTX, drawing)
     }
 }
 
 function createParticlesFromImage() {
     enableParticles = []
     particles = []
-    const data = synthetisedCTX.getImageData(0, 0, drawing.width, drawing.height)
+    const data = blackHoleCTX.getImageData(0, 0, drawing.width, drawing.height)
     convertImagesToParticles(data)
 }
 
 function scaleToFit(ctx, img) {
-    var scale = Math.max(synthetisedCanvas.width / img.width, synthetisedCanvas.height / img.height);
-    var x = (synthetisedCanvas.width / 2) - (img.width / 2) * scale;
-    var y = (synthetisedCanvas.height / 2) - (img.height / 2) * scale;
+    var scale = Math.max(blackHoleCanvas.width / img.width, blackHoleCanvas.height / img.height);
+    var x = (blackHoleCanvas.width / 2) - (img.width / 2) * scale;
+    var y = (blackHoleCanvas.height / 2) - (img.height / 2) * scale;
     ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 }
 
@@ -126,7 +127,8 @@ function convertImagesToParticles(imageData) {
 var particles = []
 var enableParticles = []
 
-var synthetisedCanvas = undefined
+var blackHoleCanvas = undefined
+var blackHoleCTX = undefined
 
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
@@ -142,9 +144,9 @@ function setCanvasSize(canvas) {
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
 
-    synthetisedCanvas = document.createElement("CANVAS");
-    canvasContainer.appendChild(synthetisedCanvas)
-    synthetisedCTX = synthetisedCanvas.getContext('2d')
+    blackHoleCanvas = document.createElement("CANVAS");
+    canvasContainer.appendChild(blackHoleCanvas)
+    blackHoleCTX = blackHoleCanvas.getContext('2d')
 }
 
 function createParticlesOnMousePos() {
@@ -158,9 +160,9 @@ function createParticlesOnMousePos() {
 }
 
 function createPariclesByUser() {
-    synthetisedCanvas.ontouchmove = getMouvePos
-    synthetisedCanvas.onmousemove = getMousePos
-    synthetisedCanvas.onclick = function () {
+    blackHoleCanvas.ontouchmove = getMouvePos
+    blackHoleCanvas.onmousemove = getMousePos
+    blackHoleCanvas.onclick = function () {
         createParticlesByScript()
     }
 }
@@ -184,10 +186,9 @@ function createParticlesByScript() {
 
 function init() {
     createCanvas()
-    setCanvasSize(synthetisedCanvas)
+    setCanvasSize(blackHoleCanvas)
     update()
-    imgToCtx("./blackhole.jpg")
-    // imgToCtx("../blog/blog-pics/little-dot-pics/blue-little-dot.png")
+    imgToCtx("./pics/irl3.jpg")
     createPariclesByUser()
 }
 
