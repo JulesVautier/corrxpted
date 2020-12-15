@@ -76,7 +76,7 @@ function imgToCtx(src) {
 function createParticlesFromImage() {
     enableParticles = []
     particles = []
-    const data = blackHoleCTX.getImageData(0, 0, drawing.width, drawing.height)
+    const data = blackHoleCTX.getImageData(0, 0, blackHoleCanvas.width, blackHoleCanvas.height)
     convertImagesToParticles(data)
 }
 
@@ -139,6 +139,8 @@ function setCanvasSize(canvas) {
 
     canvas.width = parent.offsetWidth - left * 2
     canvas.height = parent.offsetHeight - top * 2
+    // canvas.width = 0
+    // canvas.height = 0
 }
 
 function createCanvas() {
@@ -191,5 +193,9 @@ function init() {
     imgToCtx("./pics/irl3.jpg")
     createPariclesByUser()
 }
+
+document.getElementById('inp').onchange = function(e) {
+    imgToCtx(URL.createObjectURL(this.files[0]));
+};
 
 init()
