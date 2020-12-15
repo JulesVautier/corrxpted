@@ -190,7 +190,7 @@ function init() {
     createCanvas()
     setCanvasSize(blackHoleCanvas)
     update()
-    imgToCtx("./pics/irl3.jpg")
+    imgToCtx("./blackhole.jpg")
     createPariclesByUser()
 }
 
