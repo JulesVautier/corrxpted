@@ -17,3 +17,11 @@ window.onload = function () {
     }
 }
 module.update()
+
+function openUrl(url) {
+    if (window.event.ctrlKey) {
+        window.open(url, '_blank')
+    } else {
+        location.href = url
+    }
+}
