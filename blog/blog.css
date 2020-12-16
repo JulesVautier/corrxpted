@@ -19,7 +19,10 @@ body {
     background-color: #000000;
     margin-top: 100px;
 }
-
+.border-dotted {
+    border-style: dotted;
+    border-width: 4px;
+}
 .blog-title {
 
 }
