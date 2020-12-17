@@ -25,3 +25,14 @@ function openUrl(url) {
         location.href = url
     }
 }
+
+var repeater = false
+var dotSpan = document.getElementById("dotSpan")
+setInterval(function () {
+    if (repeater === true) {
+        dotSpan.innerText += " ."
+    } else if (dotSpan.innerText.length > "Dot: . . .".length) {
+        dotSpan.innerText =dotSpan.innerText.slice(0, -2)
+        console.log(dotSpan.innerText.slice(0, -2))
+    }
+}, 100)
