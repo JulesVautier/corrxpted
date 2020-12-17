@@ -33,6 +33,5 @@ setInterval(function () {
         dotSpan.innerText += " ."
     } else if (dotSpan.innerText.length > "Dot: . . .".length) {
         dotSpan.innerText =dotSpan.innerText.slice(0, -2)
-        console.log(dotSpan.innerText.slice(0, -2))
     }
 }, 100)
