@@ -1,4 +1,4 @@
-particleSize = 10
+particleSize = 7
 
 class Particle {
     constructor(x, y, imgData, size, enable) {
