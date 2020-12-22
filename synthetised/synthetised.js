@@ -68,20 +68,6 @@ var update = function () {
     requestAnimationFrame(update);
 }
 
-// setInterval(function () {
-//     let nbParticulesOnClick = 100
-//     if (particles.length > 0) {
-//         for (let counter = 0; counter < nbParticulesOnClick; counter++) {
-//             let i = randomInt(0, particles.length)
-//             // console.log(i, particles.length)
-//             particles[i].enable = true
-//             particles[i].setInitialPos()
-//             enableParticles.push(particles[i])
-//             particles.splice(i, 1)
-//         }
-//     }
-// }, 100)
-
 function createParticlesOnMousePos() {
     let nbParticulesOnClick = 1000
     for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
@@ -93,9 +79,9 @@ function createParticlesOnMousePos() {
     particles = particles.slice(nbParticulesOnClick)
 }
 
-function createLetters(text) {
+function imgToCtx(src) {
     drawing = new Image()
-    drawing.src = "../pics/trou.jpg"
+    drawing.src = src
     drawing.onload = function () {
         synthetisedCTX.drawImage(drawing, 0, 0);
         const data = synthetisedCTX.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
@@ -187,7 +173,7 @@ function init() {
     topCanvas.onmouseup = function () {
         mouse.down = false
     }
-    createLetters("ABCDE")
+    imgToCtx("../pics/trou.jpg")
     setInterval(function () {
         if (mouse.down)
             createParticlesOnMousePos()
