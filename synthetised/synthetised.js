@@ -2,18 +2,15 @@
 particleSize = 3
 
 class Particle {
-    constructor(x, y, color, size, enable) {
+    constructor(x, y, imgData, size, enable) {
         this.initialx = x
         this.initialy = y
 
         this.density = Math.random() * 20 + 30
 
         this.size = size
-        this.color = color
         this.setInitialPos()
-        this.imageData = synthetisedCTX.createImageData(particleSize, particleSize)
-        for (let i = 0; i < 4 * particleSize * particleSize; i++)
-            this.imageData.data[i] = color[i]
+        this.imageData = imgData
         this.enable = enable
 
     }
@@ -48,7 +45,6 @@ class Particle {
         }
 
         if (this.x === this.initialx && this.y === this.initialy) {
-            ctx2.putImageData(this.imageData, this.x, this.y)
             enableParticles.splice(enableParticles.indexOf(this), 1);
         }
     }
@@ -82,15 +78,11 @@ function convertImagesToParticles(imageData) {
         for (let x = 0; x < imageData.width; x += squareSize) {
             for (let squareY = y; squareY < imageData.height && squareY < y + squareSize; squareY += particleSize) {
                 for (let squareX = x; squareX < imageData.width && squareX < x + squareSize; squareX += particleSize) {
-                    let pixels = getPixels(imageData, squareX, squareY, particleSize)
-                    if (pixels.reduce((a, b) => a + b) > 0) {
-                        particles.push(new Particle(squareX, squareY, pixels, 1, false))
-                    }
+                    particles.push(new Particle(squareX, squareY, synthetisedCTX.getImageData(squareX, squareY, particleSize, particleSize), 1, false))
                 }
             }
         }
     }
-    enableParticles = particles.filter(x => x.enable)
 }
 
 var update = function () {
@@ -147,19 +139,19 @@ function createCanvas() {
     synthetisedCanvas2 = document.createElement("CANVAS");
     canvasContainer.appendChild(synthetisedCanvas2)
     ctx2 = synthetisedCanvas2.getContext('2d')
+    setCanvasSize(synthetisedCanvas2)
 
     synthetisedCanvas1 = document.createElement("CANVAS");
     canvasContainer.appendChild(synthetisedCanvas1)
     synthetisedCTX = synthetisedCanvas1.getContext('2d')
 
+    setCanvasSize(synthetisedCanvas1)
     topCanvas = synthetisedCanvas1
 }
 
 
 function init() {
     createCanvas()
-    setCanvasSize(synthetisedCanvas1)
-    setCanvasSize(synthetisedCanvas2)
     topCanvas.onclick = createParticlesOnMousePos
     topCanvas.onmousemove = getMousePos
     topCanvas.onmousedown = function () {
