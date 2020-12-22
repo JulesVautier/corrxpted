@@ -1,5 +1,4 @@
-
-particleSize = 4
+particleSize = 10
 
 class Particle {
     constructor(x, y, imgData, size, enable) {
@@ -112,11 +111,12 @@ function imgToCtx(src) {
             let data = synthetisedCTX.getImageData(0, 0, synthetisedCanvas1.width, synthetisedCanvas1.height)
             scaleToFit(synthetisedCTX, drawing)
             convertImagesToParticles(synthetisedCTX, synthetisedCanvas1.width, synthetisedCanvas1.height)
-            synthetisedCTX.putImageData(data, 0 , 0)
+            synthetisedCTX.putImageData(data, 0, 0)
             resolve()
         }
     })
 }
+
 function scaleToFit(ctx, img) {
     var scale = Math.max(synthetisedCanvas1.width / img.width, synthetisedCanvas1.height / img.height);
     var x = (synthetisedCanvas1.width / 2) - (img.width / 2) * scale;
@@ -165,16 +165,20 @@ async function init() {
     topCanvas.onmouseup = function () {
         mouse.down = false
     }
-    await imgToCtx("./pics/vaporwave.jpg")
-    await imgToCtx("./pics/trou.jpg")
     setInterval(function () {
         if (mouse.down)
             createParticlesOnMousePos()
     }, 100)
     update()
+    const images = ["lake.jpg", "battle.jpg", "peinture.jpg", "roma.jpg", "trafalgar.jpg", "vercingetorix.jpg",
+        "citynight.jpg", "deadhorse.jpg", "jesus.jpg", "allaitement.jpg", "navire.jpg", "spectre.jpg", "eye.jpg", "waaaa.jpg"
+    ]
+    for (const img of images) {
+        await imgToCtx("./pics/" + img)
+    }
 }
 
-document.getElementById('inp').onchange = async function(e) {
+document.getElementById('inp').onchange = async function (e) {
     await imgToCtx(URL.createObjectURL(this.files[0]));
 };
 
