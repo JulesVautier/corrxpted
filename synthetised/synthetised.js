@@ -83,7 +83,6 @@ function convertImagesToParticles(ctx, width, height) {
             }
         }
     }
-    console.log(particles.length)
 }
 
 var update = function () {
@@ -166,18 +165,17 @@ async function init() {
     topCanvas.onmouseup = function () {
         mouse.down = false
     }
-    await imgToCtx("../pics/trou.jpg")
-    await imgToCtx("../blog/blog-pics/little-dot-pics/blue-little-dot.png")
+    await imgToCtx("./pics/vaporwave.jpg")
+    await imgToCtx("./pics/trou.jpg")
     setInterval(function () {
         if (mouse.down)
             createParticlesOnMousePos()
-        console.log(enableParticles.length)
     }, 100)
     update()
 }
 
-document.getElementById('inp').onchange = function(e) {
-    imgToCtx(URL.createObjectURL(this.files[0]));
+document.getElementById('inp').onchange = async function(e) {
+    await imgToCtx(URL.createObjectURL(this.files[0]));
 };
 
 init()
