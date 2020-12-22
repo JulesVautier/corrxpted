@@ -1,16 +1,3 @@
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
-
-function randomFloat(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-var mouse = {
-    x: 0,
-    y: 0,
-    down: false,
-}
 
 particleSize = 3
 
@@ -42,20 +29,15 @@ class Particle {
     }
 
     update() {
-        let dx = this.initialx - Math.round(this.x)
-        let dy = this.initialy - Math.round(this.y)
+        let dx = this.initialx - this.x
+        let dy = this.initialy - this.y
         let distance = Math.sqrt(dx * dx + dy * dy)
         if ((distance > 0 && distance < 10) || (distance < 0 && distance > -10)) {
             this.x = this.initialx
             this.y = this.initialy
         } else {
-            // let forceDirectionX = dx / distance
-            // let forceDirectionY = dy / distance
-
             let forceDirectionX = dx
             let forceDirectionY = dy
-
-            // let force = distance / 300
             let force = 1 / 300
             let directionX = forceDirectionX * force * this.density
             let directionY = forceDirectionY * force * this.density
@@ -161,12 +143,6 @@ function convertImagesToParticles(imageData) {
     enableParticles = particles.filter(x => x.enable)
 }
 
-function getMousePos(evt) {
-    mouse.x = evt.clientX
-    mouse.y = evt.clientY
-}
-
-
 function setCanvasSize(canvas) {
     var parent = document.getElementById("canvas-container")
 
@@ -218,5 +194,9 @@ function init() {
     }, 100)
     update()
 }
+
+document.getElementById('inp').onchange = function(e) {
+    imgToCtx(URL.createObjectURL(this.files[0]));
+};
 
 init()

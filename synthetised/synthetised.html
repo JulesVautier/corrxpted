@@ -15,16 +15,26 @@
     <meta charset="UTF-8">
     <title>s y n t h e s i s</title>
     <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="../utils/uploadButton.css" rel="stylesheet" type="text/css" media="all">
     <link href="synthetised.css" rel="stylesheet" type="text/css" media="all">
     <link rel="shortcut icon" type="image/jpg" href="../favicon/favicon.ico"/>
 </head>
 
 <body>
+
+<div class="uploadButton">
+    <input class="uploadButton" style="color: #832ad0" type="file"
+           id="inp" name="avatar"
+           accept="image/png, image/jpeg">
+</div>
+
 <div class="clicableP returnButton" onclick="location.href='../menu.html';"><p>x</p></div>
 
 <div id="canvas-container" class="canvas-container">
 </div>
 
+<script src="../utils/utils.js"></script>
+<script src="../utils/mouse.js"></script>
 <script src="synthetised.js"></script>
 </body>
 </html>
