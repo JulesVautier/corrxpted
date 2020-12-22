@@ -72,17 +72,18 @@ function getPixels(imageData, x, y, size) {
     return pixels
 }
 
-function convertImagesToParticles(imageData) {
+function convertImagesToParticles(ctx, width, height) {
     let squareSize = 100
-    for (let y = 0; y < imageData.height; y += squareSize) {
-        for (let x = 0; x < imageData.width; x += squareSize) {
-            for (let squareY = y; squareY < imageData.height && squareY < y + squareSize; squareY += particleSize) {
-                for (let squareX = x; squareX < imageData.width && squareX < x + squareSize; squareX += particleSize) {
-                    particles.push(new Particle(squareX, squareY, synthetisedCTX.getImageData(squareX, squareY, particleSize, particleSize), 1, false))
+    for (let y = 0; y < height; y += squareSize) {
+        for (let x = 0; x < width; x += squareSize) {
+            for (let squareY = y; squareY < height && squareY < y + squareSize; squareY += particleSize) {
+                for (let squareX = x; squareX < width && squareX < x + squareSize; squareX += particleSize) {
+                    particles.push(new Particle(squareX, squareY, ctx.getImageData(squareX, squareY, particleSize, particleSize), 1, false))
                 }
             }
         }
     }
+    console.log(particles.length)
 }
 
 var update = function () {
@@ -107,13 +108,21 @@ function createParticlesOnMousePos() {
 function imgToCtx(src) {
     drawing = new Image()
     drawing.src = src
-    drawing.onload = function () {
-        synthetisedCTX.drawImage(drawing, 0, 0);
-        const data = synthetisedCTX.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
-        convertImagesToParticles(data)
-        synthetisedCTX.fillStyle = "rgba(0,0,0)";
-        synthetisedCTX.fillRect(0,0, synthetisedCanvas1.width, synthetisedCanvas1.height)
-    }
+    return new Promise(resolve => {
+        drawing.onload = function () {
+            let data = synthetisedCTX.getImageData(0, 0, synthetisedCanvas1.width, synthetisedCanvas1.height)
+            scaleToFit(synthetisedCTX, drawing)
+            convertImagesToParticles(synthetisedCTX, synthetisedCanvas1.width, synthetisedCanvas1.height)
+            synthetisedCTX.putImageData(data, 0 , 0)
+            resolve()
+        }
+    })
+}
+function scaleToFit(ctx, img) {
+    var scale = Math.max(synthetisedCanvas1.width / img.width, synthetisedCanvas1.height / img.height);
+    var x = (synthetisedCanvas1.width / 2) - (img.width / 2) * scale;
+    var y = (synthetisedCanvas1.height / 2) - (img.height / 2) * scale;
+    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
 }
 
 function setCanvasSize(canvas) {
@@ -135,22 +144,19 @@ var topCanvas = undefined
 function createCanvas() {
     let canvasContainer = document.getElementById('canvas-container')
 
-
-    synthetisedCanvas2 = document.createElement("CANVAS");
-    canvasContainer.appendChild(synthetisedCanvas2)
-    ctx2 = synthetisedCanvas2.getContext('2d')
-    setCanvasSize(synthetisedCanvas2)
-
     synthetisedCanvas1 = document.createElement("CANVAS");
     canvasContainer.appendChild(synthetisedCanvas1)
     synthetisedCTX = synthetisedCanvas1.getContext('2d')
-
     setCanvasSize(synthetisedCanvas1)
+
     topCanvas = synthetisedCanvas1
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-function init() {
+async function init() {
     createCanvas()
     topCanvas.onclick = createParticlesOnMousePos
     topCanvas.onmousemove = getMousePos
@@ -160,10 +166,12 @@ function init() {
     topCanvas.onmouseup = function () {
         mouse.down = false
     }
-    imgToCtx("../pics/trou.jpg")
+    await imgToCtx("../pics/trou.jpg")
+    await imgToCtx("../blog/blog-pics/little-dot-pics/blue-little-dot.png")
     setInterval(function () {
         if (mouse.down)
             createParticlesOnMousePos()
+        console.log(enableParticles.length)
     }, 100)
     update()
 }
