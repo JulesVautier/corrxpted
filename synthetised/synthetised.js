@@ -55,42 +55,6 @@ class Particle {
 }
 
 
-var update = function () {
-    // if (enableParticles.length === 0)
-    //     ctx1.fillStyle = "rgba(0,0,0)";
-    // else
-    //     ctx1.fillStyle = "rgba(0,0,0, 0.02)";
-    // ctx1.fillRect(0, 0, synthetisedCanvas1.width, synthetisedCanvas1.height);
-    for (let i = 0; i < enableParticles.length; i++) {
-        enableParticles[i].draw();
-        enableParticles[i].update();
-    }
-    requestAnimationFrame(update);
-}
-
-function createParticlesOnMousePos() {
-    let nbParticulesOnClick = 1000
-    for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
-        particles[i].enable = true
-        particles[i].x = mouse.x
-        particles[i].y = mouse.y
-        enableParticles.push(particles[i])
-    }
-    particles = particles.slice(nbParticulesOnClick)
-}
-
-function imgToCtx(src) {
-    drawing = new Image()
-    drawing.src = src
-    drawing.onload = function () {
-        synthetisedCTX.drawImage(drawing, 0, 0);
-        const data = synthetisedCTX.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
-        convertImagesToParticles(data)
-        synthetisedCTX.fillStyle = "rgba(0,0,0)";
-        synthetisedCTX.fillRect(0,0, synthetisedCanvas1.width, synthetisedCanvas1.height)
-    }
-}
-
 function getPixel(imageData, x, y) {
     let index = imageData.width * y * 4 + (x * 4)
     if (index >= imageData.data.length - 4)
@@ -127,6 +91,37 @@ function convertImagesToParticles(imageData) {
         }
     }
     enableParticles = particles.filter(x => x.enable)
+}
+
+var update = function () {
+    for (let i = 0; i < enableParticles.length; i++) {
+        enableParticles[i].draw();
+        enableParticles[i].update();
+    }
+    requestAnimationFrame(update);
+}
+
+function createParticlesOnMousePos() {
+    let nbParticulesOnClick = 1000
+    for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
+        particles[i].enable = true
+        particles[i].x = mouse.x
+        particles[i].y = mouse.y
+        enableParticles.push(particles[i])
+    }
+    particles = particles.slice(nbParticulesOnClick)
+}
+
+function imgToCtx(src) {
+    drawing = new Image()
+    drawing.src = src
+    drawing.onload = function () {
+        synthetisedCTX.drawImage(drawing, 0, 0);
+        const data = synthetisedCTX.getImageData(0, 0, drawing.width - drawing.width % particleSize, drawing.height - drawing.height % particleSize)
+        convertImagesToParticles(data)
+        synthetisedCTX.fillStyle = "rgba(0,0,0)";
+        synthetisedCTX.fillRect(0,0, synthetisedCanvas1.width, synthetisedCanvas1.height)
+    }
 }
 
 function setCanvasSize(canvas) {
