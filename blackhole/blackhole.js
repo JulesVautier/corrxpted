@@ -2,18 +2,15 @@ var particleSize = 10
 var nbParticulesOnClick = 2000
 
 class Particle {
-    constructor(x, y, color, size, enable) {
+    constructor(x, y, imageData, size, enable) {
         this.initialx = x
         this.initialy = y
 
         this.density = Math.random() * 20 + 30
 
         this.size = size
-        this.color = color
         this.setInitialPos()
-        this.imageData = blackHoleCTX.createImageData(particleSize, particleSize)
-        for (let i = 0; i < 4 * particleSize * particleSize; i++)
-            this.imageData.data[i] = color[i]
+        this.imageData = imageData
         this.enable = enable
     }
 
@@ -109,15 +106,12 @@ function getPixels(imageData, x, y, size) {
 }
 
 function convertImagesToParticles(imageData) {
-    let squareSize = particleSize
+    let squareSize = 100
     for (let y = 0; y < imageData.height; y += squareSize) {
         for (let x = 0; x < imageData.width; x += squareSize) {
             for (let squareY = y; squareY < imageData.height && squareY < y + squareSize; squareY += particleSize) {
                 for (let squareX = x; squareX < imageData.width && squareX < x + squareSize; squareX += particleSize) {
-                    let pixels = getPixels(imageData, squareX, squareY, particleSize)
-                    if (pixels.reduce((a, b) => a + b) > 0) {
-                        particles.push(new Particle(squareX, squareY, pixels, 1, false))
-                    }
+                    particles.push(new Particle(squareX, squareY, blackHoleCTX.getImageData(squareX, squareY, particleSize, particleSize), 1, false))
                 }
             }
         }
