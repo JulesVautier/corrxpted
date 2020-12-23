@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+    color: #aaaaaa;
+    font-size: 50px;
+}
+
+.glitch {
+    position: relative;
+}
+
+
+.glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    /* variation */
+    text-shadow: -1px 0 red;
+    color: red;
+    top: 10px;
+    left: 10px;
+}
+
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    /* variation */
+    top: 20px;
+    left: 20px;
+    text-shadow: -1px 0 blue;
+    color: blue;
+}
