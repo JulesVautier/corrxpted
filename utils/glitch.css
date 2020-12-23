@@ -1,8 +1,7 @@
 .glitch-1 {
 }
 
-
-.glitch-1:hover::before {
+.glitch-1::before {
     content: attr(data-text);
     position: absolute;
     /* variation */
@@ -12,7 +11,31 @@
     animation: noise-anim-1 2s infinite linear alternate-reverse;
 }
 
-.glitch-1:hover::after {
+.glitch-1::after {
+    content: attr(data-text);
+    position: absolute;
+    /* variation */
+    left: 2px;
+    text-shadow: 2px 0 blue, -5px 0 black;
+    clip: rect(20px, 450px, 40px, 0);
+    animation: noise-anim-2 2s infinite linear alternate-reverse;
+}
+
+.glitch-hover-1 {
+}
+
+
+.glitch-hover-1:hover::before {
+    content: attr(data-text);
+    position: absolute;
+    /* variation */
+    text-shadow: -2px 0 red, 5px 0 black;
+    left: -2px;
+    clip: rect(0px, 450px, 30px, 0);
+    animation: noise-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-hover-1:hover::after {
     content: attr(data-text);
     position: absolute;
     /* variation */
@@ -61,5 +84,91 @@
     }
     100% {
         clip-path: inset(54% 0 7% 0);
+    }
+}
+
+.glitch-hover-2 {
+}
+
+
+.glitch-hover-2:hover::before {
+    content: attr(data-text);
+    position: absolute;
+    /* variation */
+    text-shadow: -2px 0 red, 5px 0 black;
+    left: -2px;
+    clip: rect(0px, 450px, 20px, 0);
+    animation: noise-anim-3 2s infinite linear alternate-reverse;
+}
+
+.glitch-hover-2:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    /* variation */
+    left: 2px;
+    text-shadow: 2px 0 blue, -5px 0 black;
+    clip: rect(10px, 450px, 45px, 0);
+    animation: noise-anim-2 2s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-1 {
+    0% {
+        clip-path: inset(40% 0 61% 0);
+    }
+    20% {
+        clip-path: inset(92% 0 1% 0);
+    }
+    40% {
+        clip-path: inset(43% 0 1% 0);
+    }
+    60% {
+        clip-path: inset(25% 0 58% 0);
+    }
+    80% {
+        clip-path: inset(54% 0 7% 0);
+    }
+    100% {
+        clip-path: inset(58% 0 43% 0);
+    }
+}
+
+@keyframes noise-anim-2 {
+    0% {
+        clip-path: inset(92% 0 1% 0);
+    }
+    20% {
+        clip-path: inset(40% 0 61% 0);
+    }
+    40% {
+        clip-path: inset(43% 0 1% 0);
+    }
+    60% {
+        clip-path: inset(58% 0 43% 0);
+    }
+    80% {
+        clip-path: inset(25% 0 58% 0);
+    }
+    100% {
+        clip-path: inset(54% 0 7% 0);
+    }
+}
+@keyframes noise-anim-3 {
+    0% {
+        clip-path: inset(23% 0 61% 0);
+    }
+    20% {
+        clip-path: inset(40% 0 11% 0);
+    }
+    40% {
+        clip-path: inset(87% 0 10% 0);
+    }
+    60% {
+        clip-path: inset(58% 0 43% 0);
+    }
+    80% {
+        clip-path: inset(95% 0 8% 0);
+    }
+    100% {
+        clip-path: inset(14% 0 77% 0);
     }
 }
