@@ -1,4 +1,5 @@
 particleSize = 7
+particlesSpawnTime = 100
 
 window.mobileCheck = function() {
     let check = false;
@@ -7,8 +8,7 @@ window.mobileCheck = function() {
 };
 if (window.mobileCheck() === true) {
     particleSize = 12
-} else {
-    particleSize = 7
+    particlesSpawnTime = 300
 }
 console.log(particleSize)
 
@@ -201,7 +201,7 @@ async function init() {
         if (particles.length === 0) {
             showAchievement("achievement")
         }
-    }, 100)
+    }, particlesSpawnTime)
     update()
 
 }

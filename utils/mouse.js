@@ -1,7 +1,8 @@
 var mouse = {
     x: 0,
     y: 0,
-    down: false
+    down: false,
+    draging: false,
 }
 
 
@@ -17,4 +18,6 @@ function getMouvePos(touchEvent) {
     var touch = touchEvent.touches[0];
     mouse.y = touch.pageY - rect.top
     mouse.x = touch.pageX - rect.left
+    mouse.draging = true
+    mouse.down = true
 }
