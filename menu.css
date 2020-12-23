@@ -42,7 +42,7 @@
 
 .contactButton {
     position: absolute;
-    bottom: 0;
+    bottom: -200px;
 }
 
 .contactButton span {
