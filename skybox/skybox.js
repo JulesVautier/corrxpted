@@ -98,7 +98,6 @@ function writeText(initialText, ctx, color) {
     ctx.fillText(initialText, 0, 40);
     ctx.needsUpdate = true
 }
-showAchievement("achievement")
 
 
 function isInCube(mesh) {
