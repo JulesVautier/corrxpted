@@ -181,7 +181,10 @@ async function loadImages() {
         loading.innerText =  (i+1).toString() + "/" + images.length.toString()
         await imgToCtx("./pics/" + images[i])
     }
-    loading.style.display = "none"
+    loading.innerText = "- clic to synthetise human history -"
+    setTimeout(function () {
+        loading.style.display = "none"
+    }, 2000)
 }
 
 async function init() {

@@ -3,6 +3,7 @@ html, body {
 }
 
 .loading {
+    pointer-events: none;
     position: fixed;
     top: 50%;
     left: 50%;
