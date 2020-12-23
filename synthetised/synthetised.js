@@ -186,4 +186,3 @@ document.getElementById('inp').onchange = async function (e) {
 };
 
 init()
-x(URL.createObjectURL(file));

@@ -1,3 +1,17 @@
 html, body {
     height: 100%;
 }
+
+.loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+#loading {
+    font-family: SquareWave;
+    font-size: 40px;
+    color: #832ad0;
+}
