@@ -165,21 +165,25 @@ async function init() {
     topCanvas.onmouseup = function () {
         mouse.down = false
     }
-    setInterval(function () {
-        if (mouse.down)
-            createParticlesOnMousePos()
-    }, 100)
-    update()
     const images = ["lake.jpg", "battle.jpg", "peinture.jpg", "roma.jpg", "trafalgar.jpg", "vercingetorix.jpg",
         "citynight.jpg", "deadhorse.jpg", "jesus.jpg", "allaitement.jpg", "navire.jpg", "spectre.jpg", "eye.jpg", "waaaa.jpg"
     ]
     for (const img of images) {
         await imgToCtx("./pics/" + img)
     }
+    setInterval(function () {
+        if (mouse.down)
+            createParticlesOnMousePos()
+    }, 100)
+    update()
 }
 
 document.getElementById('inp').onchange = async function (e) {
-    await imgToCtx(URL.createObjectURL(this.files[0]));
+    particles = []
+    enableParticles = []
+    for (let i = 0; i < this.files.length; i++)
+        await imgToCtx(URL.createObjectURL(this.files[i]));
 };
 
 init()
+x(URL.createObjectURL(file));
