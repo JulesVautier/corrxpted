@@ -2,10 +2,12 @@
 
 .achievement {
     z-index: 100;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
     width: 400px;
     height: 80px;
     background: rgba(86, 80, 80, 0.5);
-    position: relative;
     font-family: SquareWave;
     font-size: 25px;
     border-radius: 60px;

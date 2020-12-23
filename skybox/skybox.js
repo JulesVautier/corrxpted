@@ -98,11 +98,12 @@ function writeText(initialText, ctx, color) {
     ctx.fillText(initialText, 0, 40);
     ctx.needsUpdate = true
 }
+showAchievement("achievement")
 
 
 function isInCube(mesh) {
     if (camera.position.distanceTo(mesh.position) > mesh.geometry.parameters.height) {
-        showAchievement()
+        showAchievement("achievement")
         $('#wind-audio').remove()
         if (space_frame_enabled === false) {
             $('body').append(space_iframe)
