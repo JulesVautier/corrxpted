@@ -151,8 +151,16 @@ function createCanvas() {
     topCanvas = synthetisedCanvas1
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+async function loadImages() {
+    const images = ["lake.jpg", "battle.jpg", "peinture.jpg", "roma.jpg", "trafalgar.jpg", "vercingetorix.jpg",
+        "citynight.jpg", "deadhorse.jpg", "jesus.jpg", "allaitement.jpg", "navire.jpg", "spectre.jpg", "eye.jpg", "waaaa.jpg"
+    ]
+    const loading = document.getElementById("loading")
+    for (let i = 0; i < images.length; i++) {
+        loading.innerText =  (i+1).toString() + "/" + images.length.toString()
+        await imgToCtx("./pics/" + images[i])
+    }
+    loading.style.display = "none"
 }
 
 async function init() {
@@ -165,12 +173,7 @@ async function init() {
     topCanvas.onmouseup = function () {
         mouse.down = false
     }
-    const images = ["lake.jpg", "battle.jpg", "peinture.jpg", "roma.jpg", "trafalgar.jpg", "vercingetorix.jpg",
-        "citynight.jpg", "deadhorse.jpg", "jesus.jpg", "allaitement.jpg", "navire.jpg", "spectre.jpg", "eye.jpg", "waaaa.jpg"
-    ]
-    for (const img of images) {
-        await imgToCtx("./pics/" + img)
-    }
+    await loadImages()
     setInterval(function () {
         if (mouse.down)
             createParticlesOnMousePos()
