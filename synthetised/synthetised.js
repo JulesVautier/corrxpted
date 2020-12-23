@@ -152,9 +152,10 @@ function createCanvas() {
 }
 
 async function loadImages() {
-    const images = ["lake.jpg", "battle.jpg", "peinture.jpg", "roma.jpg", "trafalgar.jpg", "vercingetorix.jpg",
-        "citynight.jpg", "deadhorse.jpg", "jesus.jpg", "allaitement.jpg", "navire.jpg", "spectre.jpg", "eye.jpg", "waaaa.jpg"
-    ]
+    // const images = ["lake.jpg", "battle.jpg", "peinture.jpg", "roma.jpg", "trafalgar.jpg", "vercingetorix.jpg",
+    //     "citynight.jpg", "deadhorse.jpg", "jesus.jpg", "allaitement.jpg", "navire.jpg", "spectre.jpg", "eye.jpg", "waaaa.jpg"
+    // ]
+    const images = ["lake.jpg", "battle.jpg"]
     const loading = document.getElementById("loading")
     for (let i = 0; i < images.length; i++) {
         loading.innerText =  (i+1).toString() + "/" + images.length.toString()
@@ -175,10 +176,15 @@ async function init() {
     }
     await loadImages()
     setInterval(function () {
-        if (mouse.down)
+        if (mouse.down) {
             createParticlesOnMousePos()
+        }
+        if (particles.length === 0) {
+            showAchievement()
+        }
     }, 100)
     update()
+
 }
 
 document.getElementById('inp').onchange = async function (e) {
@@ -187,5 +193,6 @@ document.getElementById('inp').onchange = async function (e) {
     for (let i = 0; i < this.files.length; i++)
         await imgToCtx(URL.createObjectURL(this.files[i]));
 };
+showAchievement("achievement")
 
-init()
+// init()
