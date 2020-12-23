@@ -1,24 +1,14 @@
-body {
-    background-color: black;
-    color: #aaaaaa;
-    font-size: 50px;
-}
-
 .glitch {
-    position: relative;
 }
-
 
 .glitch::before {
     content: attr(data-text);
     position: absolute;
     /* variation */
-    text-shadow: -1px 0 red;
-    color: red;
+    text-shadow: -2px 0 red, 5px 0 black;
     left: -2px;
     clip: rect(0px, 450px, 30px, 0);
     animation: noise-anim-1 2s infinite linear alternate-reverse;
-    background: black;
 }
 
 .glitch::after {
@@ -26,11 +16,29 @@ body {
     position: absolute;
     /* variation */
     left: 2px;
-    text-shadow: -1px 0 blue;
-    color: blue;
+    text-shadow: 2px 0 blue, -5px 0 black;
     clip: rect(20px, 450px, 40px, 0);
     animation: noise-anim-2 2s infinite linear alternate-reverse;
-    background: black;
+}
+
+.glitch:hover::before {
+    content: attr(data-text);
+    position: absolute;
+    /* variation */
+    text-shadow: -2px 0 red, 5px 0 black;
+    left: -2px;
+    clip: rect(0px, 450px, 30px, 0);
+    animation: noise-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch:hover::after {
+    content: attr(data-text);
+    position: absolute;
+    /* variation */
+    left: 2px;
+    text-shadow: 2px 0 blue, -5px 0 black;
+    clip: rect(20px, 450px, 40px, 0);
+    animation: noise-anim-2 2s infinite linear alternate-reverse;
 }
 
 @keyframes noise-anim-1 {
