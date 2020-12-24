@@ -167,14 +167,12 @@ async function loadImages() {
     const images = [
         "lake.jpg",
         "deadhorse.jpg",
-        // "peinture.jpg",
         "roma.jpg",
         "trafalgar.jpg",
         "vercingetorix.jpg",
         "jesus.jpg",
         "battle.jpg",
         "pandemonium.jpg",
-        "waaaa.jpg"
     ]
     const loading = document.getElementById("loading")
     for (let i = 0; i < images.length; i++) {
