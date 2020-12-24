@@ -1,16 +1,14 @@
-body {
-    /*background-color: #c10c0c;*/
+html {
+    overflow-x: hidden;
 }
 
 .blog-content {
     width: 800px;
     margin: 0 auto;
     font-family: SquareWave;
-    /*font-family: Ubuntu;*/
+    /*!*font-family: Ubuntu;*!*/
     font-size: 28px;
-    margin-top: 60px;
     position: relative;
-    background-color: black;
 }
 
 .blog-entry {
@@ -19,10 +17,12 @@ body {
     background-color: #000000;
     margin-top: 100px;
 }
+
 .border-dotted {
     border-style: dotted;
     border-width: 4px;
 }
+
 .blog-title {
 
 }
@@ -93,7 +93,7 @@ body {
 .tv {
     position: relative;
     border: 0.5px solid yellow;
-    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
     box-shadow: 20px 20px yellow;
     left: -20px;
     top: -20px;
