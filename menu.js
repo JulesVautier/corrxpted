@@ -29,7 +29,7 @@ function openUrl(url) {
 var repeater = false
 var dotSpan = document.getElementById("dotSpan")
 setInterval(function () {
-    if (repeater === true) {
+    if (repeater === true && dotSpan.innerText.length < 40) {
         dotSpan.innerText += " ."
     } else if (dotSpan.innerText.length > "Dot: . . .".length) {
         dotSpan.innerText =dotSpan.innerText.slice(0, -2)
