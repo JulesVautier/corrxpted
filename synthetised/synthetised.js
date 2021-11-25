@@ -1,5 +1,6 @@
 particleSize = 7
 particlesSpawnTime = 100
+displayLoading = true
 
 window.mobileCheck = function() {
     let check = false;
@@ -105,6 +106,10 @@ var update = function () {
 }
 
 function createParticlesOnMousePos() {
+    if (displayLoading === true) {
+        document.getElementById("loading").style.display = "none"
+        displayLoading = false
+    }
     let nbParticulesOnClick = 1000
     for (let i = 0; i < particles.length && i < nbParticulesOnClick; i++) {
         particles[i].enable = true
@@ -180,9 +185,6 @@ async function loadImages() {
         await imgToCtx("./pics/" + images[i])
     }
     loading.innerText = "- clic to synthetise human history -"
-    setTimeout(function () {
-        loading.style.display = "none"
-    }, 2000)
 }
 
 async function init() {
