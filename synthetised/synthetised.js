@@ -221,7 +221,6 @@ init()
 var audio_frame_enabled = false
 let audio_iframe = '<iframe width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/966226210&color=%23748c99&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>\n'
 function initAudio() {
-    console.log('bonjour lea')
     if (audio_frame_enabled === false) {
         $('body').append(audio_iframe)
         audio_frame_enabled = true
