@@ -176,7 +176,7 @@ async function loadImages() {
     ]
     const loading = document.getElementById("loading")
     for (let i = 0; i < images.length; i++) {
-        loading.innerText =  (i+1).toString() + "/" + images.length.toString()
+        loading.innerText =  "Data L0ading\nPls W4iT\n" + (i+1).toString() + "/" + images.length.toString()
         await imgToCtx("./pics/" + images[i])
     }
     loading.innerText = "- clic to synthetise human history -"
