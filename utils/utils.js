@@ -31,3 +31,7 @@ function getRGB(colorString) {
 function arrayToRGB(colorArray) {
     return `#${colorArray[0].toString(16).padStart(2, '0')}${colorArray[1].toString(16).padStart(2, '0')}${colorArray[2].toString(16).padStart(2, '0')}`
 }
+
+const delay = millis => new Promise((resolve, reject) => {
+   setTimeout(_ => resolve(), millis)
+});
