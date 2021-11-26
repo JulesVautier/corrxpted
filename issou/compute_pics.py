@@ -2,6 +2,11 @@ import json
 import os
 from colorthief import ColorThief
 
+"""
+Add pics in pics
+run the script
+"""
+
 IMG_DIR = "./pics"
 FILE_NAME = "img_colors.json"
 
