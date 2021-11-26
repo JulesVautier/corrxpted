@@ -28,11 +28,8 @@ async function init() {
         square.style.height = "100px"
         square.style.align = "right"
         li.appendChild(square)
-
-        console.log("hahha")
     }
 
 }
 
-console.log("hhahaha")
 init()
