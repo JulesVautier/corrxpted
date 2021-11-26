@@ -1,3 +1,59 @@
+var settings = {
+    background: '#000000',
+    color: '#ffffff',
+};
+
+let images_data = []
+let FILE_NAME = "img_colors.json"
+
+class Issou {
+    constructor(sprite) {
+        this.direction = 90
+        this.speed = 2
+        this.sprite = sprite
+        this.sprite.height = 100
+        this.sprite.width = 100
+    }
+
+    update() {
+        this.direction += randomInt(-10, 10) % 360
+        this.move()
+    }
+
+    move() {
+        if (this.x + this.sprite.width > ctx.width || this.y + this.sprite.height > ctx.height || this.x < 0 || this.y < 0)
+            this.direction += 180 % 360
+        let angle = this.direction * Math.PI / 180;
+        this.x += this.speed * Math.cos(angle)
+        this.y += this.speed * Math.sin(angle)
+
+    }
+}
+
+let issous = []
+
+async function initPics() {
+    let images_file = await fetch(FILE_NAME)
+    let file_data = await images_file.text()
+    images_data = JSON.parse(file_data);
+
+    for (let i = 0; i < images_data.length; i++) {
+    // for (let i = 0; i < 100; i++) {
+        var img = new Image(10, 10);
+        img.src = './pics/' + images_data[i].name
+        let issou = new Issou(img)
+        issou.name = images_data[i].name
+        issou.x = 100
+        issou.y = 100
+        issous.push(issou)
+    }
+
+    console.log("ok")
+    console.log(issous)
+
+
+}
+
 
 function setCanvasSize(evt) {
     let imageData = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
@@ -7,7 +63,11 @@ function setCanvasSize(evt) {
 }
 
 var update = function () {
-      requestAnimationFrame(update);
+    issous.forEach(el => {
+        el.update()
+        ctx.drawImage(el.sprite, el.x, el.y, el.sprite.width , el.sprite.height);
+    })
+    requestAnimationFrame(update);
 }
 
 var ctx = undefined
@@ -20,18 +80,15 @@ function createCanvas() {
     ctx = canvas1.getContext('2d')
 }
 
-function init() {
+async function init() {
     createCanvas()
     setCanvasSize(canvas1)
     canvas1.onmousemove = getMousePos
     canvas1.ontouchmove = getMouvePos
+    await initPics()
     update()
     window.addEventListener('resize', setCanvasSize.bind(canvas1));
 }
 
-var settings = {
-    background: '#000000',
-    color: '#ffffff',
-};
 
 init()
