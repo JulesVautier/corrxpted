@@ -13,6 +13,8 @@ class Issou {
         this.sprite = sprite
         this.sprite.height = 100
         this.sprite.width = 100
+        this.x = mouse.x
+        this.y = mouse.y
     }
 
     update() {
@@ -37,23 +39,20 @@ async function initPics() {
     let file_data = await images_file.text()
     images_data = JSON.parse(file_data);
 
+}
+
+
+async function loadPics() {
     for (let i = 0; i < images_data.length; i++) {
     // for (let i = 0; i < 100; i++) {
+        await delay(50)
         var img = new Image(10, 10);
         img.src = './pics/' + images_data[i].name
         let issou = new Issou(img)
         issou.name = images_data[i].name
-        issou.x = 100
-        issou.y = 100
         issous.push(issou)
     }
-
-    console.log("ok")
-    console.log(issous)
-
-
 }
-
 
 function setCanvasSize(evt) {
     let imageData = ctx.getImageData(0, 0, canvas1.width, canvas1.height)
@@ -86,6 +85,7 @@ async function init() {
     canvas1.onmousemove = getMousePos
     canvas1.ontouchmove = getMouvePos
     await initPics()
+    loadPics()
     update()
     window.addEventListener('resize', setCanvasSize.bind(canvas1));
 }

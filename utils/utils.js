@@ -28,6 +28,10 @@ function getRGB(colorString) {
     return rgb
 }
 
+function rgb(values) {
+    return 'rgb(' + values.join(', ') + ')';
+}
+
 function arrayToRGB(colorArray) {
     return `#${colorArray[0].toString(16).padStart(2, '0')}${colorArray[1].toString(16).padStart(2, '0')}${colorArray[2].toString(16).padStart(2, '0')}`
 }
